@@ -1,0 +1,55 @@
+Client routes: 
+
+	/api/clients
+		
+		GET .../ (Retrieve a list of clients) BUNA 
+		GET .../:clientid (Retrieve data for a client by his id) BUNA 
+		POST .../signup (Create a new client) BUNA 
+		POST .../login (Log client in) BUNA 
+		PATCH .../subscription/:clientid (Create a subscription for a client or create it) BUNA
+		PATCH .../subscriptionDel/:clientid (Delete the subscription by the user id) BUNA
+		PATCH .../:clientid/trainer/:trainerid (Give a personal trainer to a client by the client id) (push to client and trainer) BUNA 
+		PATCH .../:clientid/trainerDel/:trainerid(Delete a personal trainer of a client by the client id) (pull from client and trainer)  BUNA 
+		PATCH .../:clientid/class/:classid (Give a client a class)  (push to client and class) BUNA 
+		PATCH .../:clientid/classDel/:classid(Delete class from client) (pull from client and class) BUNA 
+		
+
+Class routes:
+
+	/api/classes
+		
+		GET .../ (Retrieve a list of classes) BUNA 
+		GET .../:classid (Retrieve data for a class by its id) BUNA 
+		GET .../trainer/:trainerid (Get classes by the trainer id) BUNA 
+		POST .../ (Create a new gym class) BUNA 
+		DELETE .../:classid (Delete a gym class by id) (se va sterge si de la client si de la trainer) BUNA 
+		
+		
+
+Trainer routes:
+
+	/api/trainers
+
+		GET .../ (Retrieve a list of all trainers) BUNA 
+		GET .../client/:clientid (Retrieve the personal trainer by the client id) BUNA 
+		POST .../login (Log trainer in) BUNA 
+		POST .../create (Insert the trainer into the database) BUNA 
+		GET .../:trainerid (Retrieve data from a trainer by his id) BUNA 
+		DELETE .../:trainerid (Delete a trainer by id) DONE (delete the class, delete from client) BUNA 
+		
+
+Hiring routes:
+
+	/api/hirings
+
+		GET .../ (Retrieve a list of all hiring requests) BUNA MERGE
+		POST .../ (Create a hiring request) BUNA MERGE
+		GET .../:hiringid (Retrieve data from a hiring request given by the id) BUNA MERGE
+		DELETE .../:hiringid (Delete a hiring request given by the id) BUNA MERGE
+
+Admin routes:
+
+	/api/admin
+	
+		POST .../login (Log admin in) BUNA UNDONE
+		
