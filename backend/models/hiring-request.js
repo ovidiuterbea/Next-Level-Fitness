@@ -7,6 +7,7 @@ const hiringSchema = new Schema({
   name: { type: String, required: true },
   surname: { type: String, required: true },
   address: { type: String, required: true },
+  description: { type: String, required: true },
   birthdate: { type: Date, required: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true, minlength: 6 },

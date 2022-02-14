@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const HttpError = require("../models/http-error");
 const Hiring = require("../models/hiring-request");
 
-//create hiring request for trainer
+// MERGE
 const createHiringRequest = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -21,6 +21,7 @@ const createHiringRequest = async (req, res, next) => {
     image,
     experience,
     password,
+    description,
   } = req.body;
 
   let existingHiringRequest;
@@ -31,6 +32,7 @@ const createHiringRequest = async (req, res, next) => {
       "Create hiring request failed, please try again later.",
       500
     );
+    console.log(err);
     return next(error);
   }
 
@@ -51,6 +53,7 @@ const createHiringRequest = async (req, res, next) => {
     address,
     birthdate,
     experience,
+    description,
   });
 
   try {
@@ -69,6 +72,7 @@ const createHiringRequest = async (req, res, next) => {
     .json({ hiring: createdHiringRequest.toObject({ getters: true }) });
 };
 
+// MERGE
 const getHiringRequests = async (req, res, next) => {
   let hiringRequests;
   try {
@@ -85,7 +89,7 @@ const getHiringRequests = async (req, res, next) => {
   });
 };
 
-//get hiring request by id
+// MERGE
 const getHiringRequestById = async (req, res, next) => {
   const hiringId = req.params.hiringid;
 
@@ -111,6 +115,7 @@ const getHiringRequestById = async (req, res, next) => {
   res.json({ hiringRequest: hiringRequest.toObject({ getters: true }) });
 };
 
+// MERGE
 const deleteHiringRequest = async (req, res, next) => {
   const hiringId = req.params.hiringid;
 
