@@ -8,7 +8,7 @@ const classSchema = new Schema({
   difficultyLevel: { type: String, required: true },
   startingDate: { type: Date, required: true },
   endingDate: { type: Date, required: true },
-  trainer: [{ type: mongoose.Types.ObjectId, required: true, ref: "Trainer" }],
+  trainer: { type: mongoose.Types.ObjectId, required: false, ref: "Trainer" },
   clients: [{ type: mongoose.Types.ObjectId, required: false, ref: "Client" }],
 });
 

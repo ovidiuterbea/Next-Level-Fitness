@@ -5,7 +5,7 @@ const HttpError = require("../models/http-error");
 const Trainer = require("../models/trainer");
 const Client = require("../models/client");
 
-//get a list of trainers
+//MERGE
 const getTrainers = async (req, res, next) => {
   let trainers;
   try {
@@ -22,6 +22,7 @@ const getTrainers = async (req, res, next) => {
   });
 };
 
+// MERGE
 const createTrainer = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -84,6 +85,7 @@ const createTrainer = async (req, res, next) => {
   res.status(201).json({ trainer: createdTrainer.toObject({ getters: true }) });
 };
 
+// MERGE
 const login = async (req, res, next) => {
   const { email, password } = req.body;
 
@@ -110,6 +112,7 @@ const login = async (req, res, next) => {
   res.json({ message: "Logged in!" });
 };
 
+// MERGE
 const getTrainerById = async (req, res, next) => {
   const trainerId = req.params.trainerid;
 
@@ -135,6 +138,7 @@ const getTrainerById = async (req, res, next) => {
   res.json({ trainer: trainer.toObject({ getters: true }) });
 };
 
+// MERGE
 const deleteTrainer = async (req, res, next) => {
   const trainerId = req.params.trainerid;
 
@@ -160,20 +164,28 @@ const deleteTrainer = async (req, res, next) => {
     const sess = await mongoose.startSession();
     sess.startTransaction();
     await trainer.remove({ session: sess });
-    trainer.clients.personalTrainer.pull(trainer);
-    await trainer.clients.save({ session: sess });
-    trainer.classes.trainer.pull(trainer);
+    for (let gymClass of trainer.classes) {
+      gymClass.trainer = null;
+      await gymClass.save({ session: sess });
+    }
+    for (let client of trainer.clients) {
+      await client.personalTrainer.pull(trainer);
+      await client.save({ session: sess });
+    }
+    await sess.commitTransaction();
   } catch (err) {
     const error = new HttpError(
       "Something went wrong, could not delete the trainer.",
       500
     );
+    console.log(err);
     return next(error);
   }
 
   res.status(200).json({ message: "Deleted the trainer." });
 };
 
+// MERGE
 const getTrainerByClientId = async (req, res, next) => {
   const clientId = req.params.clientid;
 
@@ -197,9 +209,9 @@ const getTrainerByClientId = async (req, res, next) => {
   }
 
   res.json({
-    personalTrainer: clientWithTrainer.personalTrainer.map((trainer) =>
-      trainer.toObject({ getters: true })
-    ),
+    personalTrainer: clientWithTrainer.personalTrainer.toObject({
+      getters: true,
+    }),
   });
 };
 

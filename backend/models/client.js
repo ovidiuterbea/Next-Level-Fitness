@@ -13,13 +13,12 @@ const clientSchema = new Schema({
   address: { type: String, required: true },
   subscription: { type: String, required: false },
   mustPay: { type: Boolean, required: false },
-  personalTrainer: [
-    {
-      type: mongoose.Types.ObjectId,
-      required: false,
-      ref: "Trainer",
-    },
-  ],
+  personalTrainer: {
+    type: mongoose.Types.ObjectId,
+    required: false,
+    ref: "Trainer",
+  },
+
   classes: [{ type: mongoose.Types.ObjectId, required: false, ref: "Class" }],
 });
 

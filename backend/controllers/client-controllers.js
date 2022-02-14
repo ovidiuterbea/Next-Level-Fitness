@@ -6,6 +6,7 @@ const Client = require("../models/client");
 const Trainer = require("../models/trainer");
 const Class = require("../models/gym-class");
 
+// MERGE
 const getClients = async (req, res, next) => {
   let clients;
   try {
@@ -22,6 +23,7 @@ const getClients = async (req, res, next) => {
   });
 }; // FULLY DONE
 
+// MERGE
 const getClientById = async (req, res, next) => {
   const clientId = req.params.clientid;
 
@@ -47,7 +49,7 @@ const getClientById = async (req, res, next) => {
   res.json({ client: client.toObject({ getters: true }) });
 }; // FULLY DONE
 
-//signup client
+// MERGE
 const signup = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -84,6 +86,9 @@ const signup = async (req, res, next) => {
     password,
     birthdate,
     address,
+    mustPay: false,
+    subscription: null,
+    personalTrainer: null,
   });
 
   try {
@@ -97,7 +102,7 @@ const signup = async (req, res, next) => {
   res.status(201).json({ client: createdClient.toObject({ getters: true }) });
 }; // FULLY DONE
 
-//login client
+// MERGE
 const login = async (req, res, next) => {
   const { email, password } = req.body;
 
@@ -122,7 +127,7 @@ const login = async (req, res, next) => {
   res.json({ message: "Logged in!" });
 }; // FULLY DONE
 
-//create subscription
+// MERGE
 const createSubscription = async (req, res, next) => {
   const { subscription } = req.body;
   const clientId = req.params.clientid;
@@ -139,6 +144,7 @@ const createSubscription = async (req, res, next) => {
   }
 
   client.subscription = subscription;
+  client.mustPay = true;
 
   try {
     await client.save();
@@ -153,6 +159,7 @@ const createSubscription = async (req, res, next) => {
   res.status(200).json({ client: client.toObject({ getters: true }) });
 }; //FULLY DONE
 
+// MERGE
 const deleteSubscription = async (req, res, next) => {
   const clientId = req.params.clientid;
 
@@ -167,7 +174,7 @@ const deleteSubscription = async (req, res, next) => {
     return next(error);
   }
 
-  client.subscription = "";
+  client.subscription = null;
 
   try {
     await client.save();
@@ -182,6 +189,7 @@ const deleteSubscription = async (req, res, next) => {
   res.status(200).json({ client: client.toObject({ getters: true }) });
 }; // FULLY DONE
 
+// MERGE
 const givePersonalTrainerByClientId = async (req, res, next) => {
   const clientId = req.params.clientid;
   const trainerId = req.params.trainerid;
@@ -213,25 +221,17 @@ const givePersonalTrainerByClientId = async (req, res, next) => {
     return next(error);
   }
 
-  if (client.personalTrainer.length === 0) {
-    try {
-      const sess = await mongoose.startSession();
-      sess.startTransaction();
-      await client.personalTrainer.push(trainer);
-      await client.save({ session: sess });
-      await trainer.clients.push(client);
-      await trainer.save({ session: sess });
-      await sess.commitTransaction();
-    } catch (err) {
-      const error = new HttpError(
-        "Something went wrong, could not give personal trainer to the client.",
-        500
-      );
-      return next(error);
-    }
-  } else {
+  try {
+    const sess = await mongoose.startSession();
+    sess.startTransaction();
+    client.personalTrainer = trainer.id;
+    await client.save({ session: sess });
+    await trainer.clients.push(client);
+    await trainer.save({ session: sess });
+    await sess.commitTransaction();
+  } catch (err) {
     const error = new HttpError(
-      "This client already has a personal trainer!",
+      "Something went wrong, could not give personal trainer to the client.",
       500
     );
     return next(error);
@@ -240,6 +240,7 @@ const givePersonalTrainerByClientId = async (req, res, next) => {
   res.status(200).json({ client: client.toObject({ getters: true }) });
 }; // DONE TESTED
 
+// MERGE
 const deleteTrainerByClientId = async (req, res, next) => {
   const clientId = req.params.clientid;
   const trainerId = req.params.trainerid;
@@ -279,7 +280,7 @@ const deleteTrainerByClientId = async (req, res, next) => {
   try {
     const sess = await mongoose.startSession();
     sess.startTransaction();
-    await client.personalTrainer.pull(client.personalTrainer[0]);
+    client.personalTrainer = null;
     await client.save({ session: sess });
     await trainer.clients.pull(client);
     await trainer.save({ session: sess });
@@ -295,6 +296,7 @@ const deleteTrainerByClientId = async (req, res, next) => {
   res.status(200).json({ client: client.toObject({ getters: true }) });
 }; // DONE TESTED
 
+// MERGE
 const giveClassByClientId = async (req, res, next) => {
   const clientId = req.params.clientid;
   const classId = req.params.classid;
@@ -345,6 +347,7 @@ const giveClassByClientId = async (req, res, next) => {
   res.status(200).json({ client: client.toObject({ getters: true }) });
 }; // DONE TESTED
 
+// MERGE
 const deleteClassByClientId = async (req, res, next) => {
   const clientId = req.params.clientid;
   const classId = req.params.classid;

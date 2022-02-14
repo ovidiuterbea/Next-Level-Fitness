@@ -5,6 +5,7 @@ const Trainer = require("../models/trainer");
 const mongoose = require("mongoose");
 const moment = require("moment");
 
+// MERGE
 const getClasses = async (req, res, next) => {
   let classes;
   try {
@@ -21,6 +22,7 @@ const getClasses = async (req, res, next) => {
   });
 }; // FULLY DONE
 
+// MERGE
 const createClass = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -72,25 +74,19 @@ const createClass = async (req, res, next) => {
     return next(error);
   }
 
-  if (gymClass.trainer.length === 0) {
-    try {
-      const sess = await mongoose.startSession();
-      sess.startTransaction();
-      await gymClass.trainer.push(searchedTrainer);
-      await gymClass.save({ session: sess });
-      await searchedTrainer.classes.push(gymClass);
-      await searchedTrainer.save({ session: sess });
-      await sess.commitTransaction();
-    } catch (err) {
-      const error = new HttpError(
-        "Creating gym class failed, please try again.",
-        500
-      );
-      console.log(err);
-      return next(error);
-    }
-  } else {
-    const error = new HttpError("This class already has a trainer!", 500);
+  try {
+    const sess = await mongoose.startSession();
+    sess.startTransaction();
+    await gymClass.save({ session: sess });
+    await searchedTrainer.classes.push(gymClass);
+    await searchedTrainer.save({ session: sess });
+    await sess.commitTransaction();
+  } catch (err) {
+    const error = new HttpError(
+      "Creating gym class failed, please try again.",
+      500
+    );
+    console.log(err);
     return next(error);
   }
 
@@ -100,6 +96,7 @@ const createClass = async (req, res, next) => {
   });
 };
 
+// MERGE
 const getClassById = async (req, res, next) => {
   const classId = req.params.classid;
 
@@ -125,6 +122,7 @@ const getClassById = async (req, res, next) => {
   res.json({ class: gymClass.toObject({ getters: true }) });
 }; // FULLY DONE
 
+// MERGE
 const getClassesByTrainerId = async (req, res, next) => {
   const trainerId = req.params.trainerid;
 
@@ -152,6 +150,7 @@ const getClassesByTrainerId = async (req, res, next) => {
   });
 };
 
+// MERGE
 const deleteClass = async (req, res, next) => {
   const classId = req.params.classid;
 
@@ -177,21 +176,19 @@ const deleteClass = async (req, res, next) => {
     const sess = await mongoose.startSession();
     sess.startTransaction();
     await gymClass.remove({ session: sess });
-    gymClass.trainer.classes.pull(gymClass);
+    await gymClass.trainer.classes.pull(gymClass);
     await gymClass.trainer.save({ session: sess });
-    for (const client of gymClass.clients) {
-      client.classes.pull(gymClass);
-    }
-    for (const client of gymClass.clients) {
+    for (let client of gymClass.clients) {
+      await client.classes.pull(gymClass);
       await client.save({ session: sess });
     }
     await sess.commitTransaction();
   } catch (err) {
+    console.log(err);
     const error = new HttpError(
       "Something went wrong, could not delete the class.",
       500
     );
-    console.log(err);
     return next(error);
   }
 
