@@ -1,5 +1,49 @@
+import Activitati from "./unlogged/Activitati";
+import Tarife from "./unlogged/Tarife";
+import PersonalTraining from "./unlogged/PersonalTraining";
+import MainPage from "./unlogged/MainPage";
+import {
+  BrowserRouter as Router,
+  Route,
+  Redirect,
+  Switch,
+} from "react-router-dom";
+import { UserContext } from "./shared/context/user-context";
+import { useState, useCallback } from "react";
+import React from "react";
+
 const App = () => {
-  return <div>This is the front page</div>;
+  const [userisLoggedIn, setUserIsLoggedIn] = useState(false);
+
+  const loginUser = useCallback(() => {
+    setUserIsLoggedIn(true);
+  }, []);
+
+  const logoutUser = useCallback(() => {
+    setUserIsLoggedIn(false);
+  }, []);
+
+  let routes;
+
+  routes = (
+    <Switch>
+      <Route path="/mainpage" exact>
+        <MainPage />
+      </Route>
+      <Route path="/tarife" exact>
+        <Tarife />
+      </Route>
+      <Route path="/personaltraining" exact>
+        <PersonalTraining />
+      </Route>
+      <Route path="/activitati" exact>
+        <Activitati />
+      </Route>
+      <Redirect to="/mainpage" />
+    </Switch>
+  );
+
+  return <Router>{routes}</Router>;
 };
 
 export default App;
