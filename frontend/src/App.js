@@ -10,20 +10,20 @@ import {
   Redirect,
   Switch,
 } from "react-router-dom";
-import { UserContext } from "./shared/context/user-context";
-import { useState, useCallback } from "react";
+// import { UserContext } from "./shared/context/user-context";
+// import { useState, useCallback } from "react";
 import React from "react";
 
 const App = () => {
-  const [userIsLoggedIn, setUserIsLoggedIn] = useState(false);
+  // const [userIsLoggedIn, setUserIsLoggedIn] = useState(false);
 
-  const loginUser = useCallback(() => {
-    setUserIsLoggedIn(true);
-  }, []);
+  // const loginUser = useCallback(() => {
+  //   setUserIsLoggedIn(true);
+  // }, []);
 
-  const logoutUser = useCallback(() => {
-    setUserIsLoggedIn(false);
-  }, []);
+  // const logoutUser = useCallback(() => {
+  //   setUserIsLoggedIn(false);
+  // }, []);
 
   let routes;
 

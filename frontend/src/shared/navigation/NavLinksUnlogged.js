@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import { NavLink } from "react-router-dom";
 
 // import { AuthContext } from "../../context/auth-context";
@@ -12,7 +12,7 @@ const NavLinksUnlogged = (props) => {
     <div className="main-navigation">
       <NavLink to="/mainpage">
         <h2>
-          Next-<span style={{ color: "#FFFF66" }}>Level</span> Fitness{" "}
+          Next-<span style={{ color: "#FFEF00" }}>Level</span> Fitness{" "}
         </h2>
       </NavLink>
       <ul className="nav-links">
