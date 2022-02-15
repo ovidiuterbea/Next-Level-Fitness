@@ -2,6 +2,8 @@ import Activitati from "./unlogged/Activitati";
 import Tarife from "./unlogged/Tarife";
 import PersonalTraining from "./unlogged/PersonalTraining";
 import MainPage from "./unlogged/MainPage";
+import HiringForm from "./unlogged/HiringForm";
+import NavLinksUnlogged from "./shared/navigation/NavLinksUnlogged";
 import {
   BrowserRouter as Router,
   Route,
@@ -13,7 +15,7 @@ import { useState, useCallback } from "react";
 import React from "react";
 
 const App = () => {
-  const [userisLoggedIn, setUserIsLoggedIn] = useState(false);
+  const [userIsLoggedIn, setUserIsLoggedIn] = useState(false);
 
   const loginUser = useCallback(() => {
     setUserIsLoggedIn(true);
@@ -39,11 +41,19 @@ const App = () => {
       <Route path="/activitati" exact>
         <Activitati />
       </Route>
+      <Route path="/hiring" exact>
+        <HiringForm />
+      </Route>
       <Redirect to="/mainpage" />
     </Switch>
   );
 
-  return <Router>{routes}</Router>;
+  return (
+    <Router>
+      <NavLinksUnlogged />
+      {routes}
+    </Router>
+  );
 };
 
 export default App;
