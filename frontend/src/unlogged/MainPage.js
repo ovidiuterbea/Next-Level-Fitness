@@ -27,7 +27,14 @@ const MainPage = () => {
         <div className="container-secundar2">
           <h3 className="abonament-pret">De la 150 de lei/luna</h3>
           <Link to="/tarife">
-            <Button id="muibtn">Vezi toate abonamentele</Button>
+            <Button
+              onClick={() => {
+                window.scrollTo(0, 0);
+              }}
+              id="muibtn"
+            >
+              Vezi toate abonamentele
+            </Button>
           </Link>
         </div>
       </div>
@@ -56,13 +63,17 @@ const MainPage = () => {
       </div>
       <div className="container-principal__black">
         <div className="container-secundar1">
-          <h3>Oferim diversitate in clasele noastre de fitness in grup</h3>
+          <h3 className="center">
+            Oferim diversitate in clasele noastre de fitness in grup
+          </h3>
           <Link to="/activitati">
             <Button id="muibtn">Vezi toate clasele de fitness</Button>
           </Link>
         </div>
         <div className="container-secundar2">
-          <h3>Oferim personal training facut special pentru tine</h3>
+          <h3 className="center">
+            Oferim personal training facut special pentru tine
+          </h3>
           <Link to="/personaltraining">
             <Button id="muibtn">Vezi despre antrenori</Button>
           </Link>
