@@ -35,8 +35,8 @@ const MainPage = () => {
         <div className="container-secundar1">
           <h2>De ce sa te alaturi comunitatii noastre?</h2>
           <h4>
-            Aparatura de ultima generatie, buna si niste oameni care te vor
-            ajuta sa integrezi foarte usor
+            Aparatura de ultima generatie, atmosfera buna si niste oameni care
+            te vor ajuta sa integrezi foarte usor
           </h4>
           <p>
             Intelegem faptul ca este greu la inceput, dar cu timpul, fitness-ul
@@ -44,7 +44,7 @@ const MainPage = () => {
           </p>
         </div>
         <div className="container-secundar2">
-          <h3>Antreneaza-te dupa stilul tau</h3>
+          <h3>Antreneaza-te dupa stilul tau!</h3>
           <ReactPlayer
             url="mainpage-video.mp4"
             playing={true}
@@ -52,6 +52,20 @@ const MainPage = () => {
             controls={false}
             loop={true}
           />
+        </div>
+      </div>
+      <div className="container-principal__black">
+        <div className="container-secundar1">
+          <h3>Oferim diversitate in clasele noastre de fitness in grup</h3>
+          <Link to="/activitati">
+            <Button id="muibtn">Vezi toate clasele de fitness</Button>
+          </Link>
+        </div>
+        <div className="container-secundar2">
+          <h3>Oferim personal training facut special pentru tine</h3>
+          <Link to="/personaltraining">
+            <Button id="muibtn">Vezi despre antrenori</Button>
+          </Link>
         </div>
       </div>
     </React.Fragment>

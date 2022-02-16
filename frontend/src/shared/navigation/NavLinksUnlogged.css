@@ -68,10 +68,6 @@
   cursor: pointer;
 }
 
-/* .main-navigation li a:hover {
-  cursor: pointer;
-} */
-
 .activeLink {
   border-bottom: 3px solid #ffef00;
   transition: border-bottom 0.5s ease-in-out;
