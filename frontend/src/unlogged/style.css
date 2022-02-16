@@ -1,5 +1,5 @@
 .hero {
-  background: url("../images/mainpage-photo.jpg") no-repeat center center/cover;
+  background: url("../media/mainpage-photo.jpg") no-repeat center center/cover;
   height: 92.4vh;
   position: relative;
   color: #fff;
@@ -35,7 +35,7 @@
   z-index: 10;
 }
 
-.container-principal {
+.container-principal__black {
   display: flex;
   flex-direction: row;
   width: 100;
@@ -43,7 +43,7 @@
   background-color: #0e1111;
 }
 
-.container-principal .container-secundar1 {
+.container-principal__black .container-secundar1 {
   display: flex;
   flex-direction: column;
   width: 50%;
@@ -53,7 +53,7 @@
   font-size: 2rem;
 }
 
-.container-principal .container-secundar2 {
+.container-principal__black .container-secundar2 {
   display: flex;
   flex-direction: column;
   width: 50%;
@@ -61,12 +61,62 @@
   align-items: center;
   color: #0e1111;
   font-size: 2rem;
+  background-color: #ffef00;
+}
+
+.container-principal__black .container-secundar2 button {
+  border: none;
+  background-color: #0e1111;
+  color: #f3f3f3;
+  height: 5rem;
+  width: fit-content;
+  border-radius: 10px;
+  transition: ease-out 1.2s;
+  font-size: 20px;
+  outline: none;
+  box-shadow: 0px 0px 10px -3px #19193d;
+}
+
+.container-principal__black .container-secundar2 button:hover {
+  color: #0e1111;
+  background-color: #f3f3f3;
+}
+
+.container-principal__white {
+  display: flex;
+  flex-direction: row;
+  width: 100;
+  height: 40rem;
+  background-color: #f3f3f3;
+}
+
+.container-principal__white .container-secundar1 {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  justify-content: center;
+  align-items: center;
+  color: #0e1111;
+  font-size: 2rem;
+  text-align: center;
+}
+
+.container-principal__white .container-secundar2 {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  justify-content: center;
+  align-items: center;
+  color: #ffef00;
+  font-size: 2rem;
+  background-color: #0e1111;
 }
 
 .abonament-pret {
-  background-color: #ffef00;
+  background-color: #0e1111;
   padding: 0.7rem 0.7rem 0.7rem 0.7rem;
   border-radius: 20px;
+  color: #f3f3f3;
 }
 
 a {
