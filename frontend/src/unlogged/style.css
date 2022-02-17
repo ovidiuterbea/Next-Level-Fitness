@@ -274,6 +274,68 @@ a {
 
 .container-galben .container-secundar2 img {
   height: 70%;
+}
+
+.container-principal__black .container-secundar__white {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  justify-content: center;
+  align-items: center;
+  color: #f3f3f3;
+  font-size: 2rem;
+}
+
+.container-principal__black .container-secundar1 img {
+  height: 80%;
+}
+
+/* Activitati */
+
+.container-activitati-photo {
+  background: url("../media/cycling-class.jpg") no-repeat center center/cover;
+  width: 100%;
+  height: 55rem;
+  position: relative;
+}
+
+.container-activitati-photo::before {
+  content: " ";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+}
+.container-activitati-photo * {
+  z-index: 10;
+}
+
+.container-activitati-photo .content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 100%;
+  padding: 0 20px;
+}
+.container-activitati-photo .content h1 {
+  font-size: 5rem;
+}
+
+.grid-wrapper-activitati {
+  display: grid;
+  grid-template-columns: 33.33% 33.33% 33.33%;
+  margin: 2rem auto;
+  width: 80%;
+  height: 50%;
+  gap: 4px;
+}
+
+.element {
   background-color: #ffef00;
-  background-blend-mode: multiply;
+  color: #0e1111;
+  font-size: 2.5rem;
 }

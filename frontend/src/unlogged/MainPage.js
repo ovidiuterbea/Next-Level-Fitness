@@ -67,7 +67,14 @@ const MainPage = () => {
             Oferim diversitate in clasele noastre de fitness in grup
           </h3>
           <Link to="/activitati">
-            <Button id="muibtn">Vezi toate clasele de fitness</Button>
+            <Button
+              onClick={() => {
+                window.scrollTo(0, 0);
+              }}
+              id="muibtn"
+            >
+              Vezi toate clasele de fitness
+            </Button>
           </Link>
         </div>
         <div className="container-secundar2">
@@ -75,7 +82,14 @@ const MainPage = () => {
             Oferim personal training facut special pentru tine
           </h3>
           <Link to="/personaltraining">
-            <Button id="muibtn">Vezi despre antrenori</Button>
+            <Button
+              onClick={() => {
+                window.scrollTo(0, 0);
+              }}
+              id="muibtn"
+            >
+              Vezi despre antrenori
+            </Button>
           </Link>
         </div>
       </div>
