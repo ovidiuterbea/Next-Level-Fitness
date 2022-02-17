@@ -14,7 +14,7 @@ import {
   ThemeProvider,
 } from "@mui/material";
 import { createTheme } from "@mui/material";
-import { grey, purple } from "@mui/material/colors";
+import { grey } from "@mui/material/colors";
 
 const HiringForm = () => {
   const [enteredName, setEnteredName] = useState("");
@@ -96,7 +96,14 @@ const HiringForm = () => {
         Trimite datele si te vom chema noi la interviu!
       </Typography>
       <Grid>
-        <Card style={{ maxWidth: 1000, padding: "20px 5px", margin: "0 auto" }}>
+        <Card
+          style={{
+            width: "50%",
+            padding: "20px 5px",
+            margin: "0 auto",
+            marginBottom: "2rem",
+          }}
+        >
           <CardContent>
             <form onSubmit={formHandler}>
               <Grid
