@@ -11,7 +11,10 @@ import {
   MenuItem,
   Select,
   FormControl,
+  ThemeProvider,
 } from "@mui/material";
+import { createTheme } from "@mui/material";
+import { grey, purple } from "@mui/material/colors";
 
 const HiringForm = () => {
   const [enteredName, setEnteredName] = useState("");
@@ -66,6 +69,12 @@ const HiringForm = () => {
     console.log(hiringRequest);
   };
 
+  const theme = createTheme({
+    palette: {
+      primary: grey,
+    },
+  });
+
   return (
     <React.Fragment>
       <Typography
@@ -96,110 +105,112 @@ const HiringForm = () => {
                 alignItems="center"
                 justifyContent="center"
               >
-                <Grid xs={10} item>
-                  <TextField
-                    placeholder="Enter your name"
-                    label="Name"
-                    variant="outlined"
-                    fullWidth
-                    required
-                    onChange={nameChangeHandler}
-                  />
-                </Grid>
-                <Grid xs={10} item>
-                  <TextField
-                    placeholder="Enter your surname"
-                    label="Surname"
-                    variant="outlined"
-                    fullWidth
-                    required
-                    onChange={surnameChangeHandler}
-                  />
-                </Grid>
-                <Grid xs={10} item>
-                  <TextField
-                    type="email"
-                    placeholder="Enter email"
-                    label="Email"
-                    variant="outlined"
-                    fullWidth
-                    required
-                    onChange={emailChangeHandler}
-                  />
-                </Grid>
-                <Grid xs={10} item>
-                  <TextField
-                    placeholder="Enter your address"
-                    label="Address"
-                    variant="outlined"
-                    fullWidth
-                    required
-                    onChange={addressChangeHandler}
-                  />
-                </Grid>
-                <Grid xs={10} item>
-                  <TextField
-                    id="date"
-                    label="Birthday"
-                    type="date"
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
-                    fullWidth
-                    onChange={birthdayChangeHandler}
-                  />
-                </Grid>
-                <Grid xs={10} item>
-                  <FormControl fullWidth>
-                    <InputLabel id="selectExperinceLabel">
-                      Experience
-                    </InputLabel>
-                    <Select
-                      labelId="selectExperienceLabel"
-                      id="selectExperience"
-                      label="Experience"
-                      onChange={experienceChangeHandler}
-                      value={enteredExperience}
-                      fullWidth
+                <ThemeProvider theme={theme}>
+                  <Grid xs={10} item>
+                    <TextField
+                      placeholder="Enter your name"
+                      label="Name"
                       variant="outlined"
+                      fullWidth
                       required
+                      onChange={nameChangeHandler}
+                    />
+                  </Grid>
+                  <Grid xs={10} item>
+                    <TextField
+                      placeholder="Enter your surname"
+                      label="Surname"
+                      variant="outlined"
+                      fullWidth
+                      required
+                      onChange={surnameChangeHandler}
+                    />
+                  </Grid>
+                  <Grid xs={10} item>
+                    <TextField
+                      type="email"
+                      placeholder="Enter email"
+                      label="Email"
+                      variant="outlined"
+                      fullWidth
+                      required
+                      onChange={emailChangeHandler}
+                    />
+                  </Grid>
+                  <Grid xs={10} item>
+                    <TextField
+                      placeholder="Enter your address"
+                      label="Address"
+                      variant="outlined"
+                      fullWidth
+                      required
+                      onChange={addressChangeHandler}
+                    />
+                  </Grid>
+                  <Grid xs={10} item>
+                    <TextField
+                      id="date"
+                      label="Birthday"
+                      type="date"
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                      fullWidth
+                      onChange={birthdayChangeHandler}
+                    />
+                  </Grid>
+                  <Grid xs={10} item>
+                    <FormControl fullWidth>
+                      <InputLabel id="selectExperinceLabel">
+                        Experience
+                      </InputLabel>
+                      <Select
+                        labelId="selectExperienceLabel"
+                        id="selectExperience"
+                        label="Experience"
+                        onChange={experienceChangeHandler}
+                        value={enteredExperience}
+                        fullWidth
+                        variant="outlined"
+                        required
+                      >
+                        <MenuItem value="Entry-Level">{`Entry-Level (<2 ani)`}</MenuItem>
+                        <MenuItem value="Middle-Level">{`Middle-Level (2-4 ani) `}</MenuItem>
+                        <MenuItem value="Senior-Level">{`Senior Level (4+ ani)`}</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </Grid>
+                  <Grid xs={10} item>
+                    <TextField
+                      placeholder="Enter your description"
+                      label="Description"
+                      variant="outlined"
+                      fullWidth
+                      required
+                      multiline
+                      rows={4}
+                      onChange={descriptionChangeHandler}
+                    />
+                  </Grid>
+                  <Grid item xs={4}>
+                    <Button
+                      type="submit"
+                      variant="contained"
+                      color="primary"
+                      fullWidth
+                      style={{
+                        backgroundColor: "#0e1111",
+                        height: "4rem",
+                        fontSize: "1.5rem",
+                        fontFamily: "inherit",
+                        color: "#ffef00",
+                        marginTop: "2rem",
+                      }}
                     >
-                      <MenuItem value="Entry-Level">{`Entry-Level (<2 ani)`}</MenuItem>
-                      <MenuItem value="Middle-Level">{`Middle-Level (2-4 ani) `}</MenuItem>
-                      <MenuItem value="Senior-Level">{`Senior Level (4+ ani)`}</MenuItem>
-                    </Select>
-                  </FormControl>
-                </Grid>
-                <Grid xs={10} item>
-                  <TextField
-                    placeholder="Enter your description"
-                    label="Description"
-                    variant="outlined"
-                    fullWidth
-                    required
-                    multiline
-                    rows={4}
-                    onChange={descriptionChangeHandler}
-                  />
-                </Grid>
-                <Grid item xs={4}>
-                  <Button
-                    type="submit"
-                    variant="contained"
-                    color="primary"
-                    fullWidth
-                    style={{
-                      backgroundColor: "#0e1111",
-                      height: "4rem",
-                      fontSize: "1.5rem",
-                      fontFamily: "inherit",
-                      color: "#ffef00",
-                      marginTop: "2rem",
-                    }}
-                  >
-                    Submit
-                  </Button>
-                </Grid>
+                      Submit
+                    </Button>
+                  </Grid>
+                </ThemeProvider>
               </Grid>
             </form>
           </CardContent>
