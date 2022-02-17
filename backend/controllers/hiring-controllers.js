@@ -20,7 +20,6 @@ const createHiringRequest = async (req, res, next) => {
     birthdate,
     image,
     experience,
-    password,
     description,
   } = req.body;
 
@@ -49,7 +48,7 @@ const createHiringRequest = async (req, res, next) => {
     surname,
     email,
     image: "https://live.staticflickr.com/7631/26849088292_36fc52ee90_b.jpg",
-    password,
+    password: null,
     address,
     birthdate,
     experience,

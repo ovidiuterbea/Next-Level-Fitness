@@ -10,7 +10,7 @@ const hiringSchema = new Schema({
   description: { type: String, required: true },
   birthdate: { type: Date, required: true },
   email: { type: String, required: true, unique: true },
-  password: { type: String, required: true, minlength: 6 },
+  password: { type: String, required: false, minlength: 6 },
   image: { type: String, required: true },
   experience: { type: String, required: true },
 });
