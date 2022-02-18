@@ -7,6 +7,9 @@
   color: #f3f3f3;
   box-shadow: 3px 3px 10px 1px rgba(0, 0, 0, 0.2);
   background-color: #0e1111;
+  position: sticky;
+  top: 0;
+  z-index: 20;
 }
 .main-navigation a {
   text-decoration: none;
