@@ -15,6 +15,15 @@ import {
 } from "@mui/material";
 import { createTheme } from "@mui/material";
 import { grey } from "@mui/material/colors";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import Slide from "@mui/material/Slide";
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 const HiringForm = () => {
   const [enteredName, setEnteredName] = useState("");
@@ -24,6 +33,11 @@ const HiringForm = () => {
   const [enteredBirthday, setEnteredBirthday] = useState("");
   const [enteredExperience, setEnteredExperience] = useState("");
   const [enteredDescription, setEnteredDescription] = useState("");
+  const [open, setOpen] = useState(false);
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const nameChangeHandler = (event) => {
     setEnteredName(event.target.value);
@@ -85,6 +99,16 @@ const HiringForm = () => {
       console.log(err);
     }
 
+    setEnteredName("");
+    setEnteredSurname("");
+    setEnteredAddress("");
+    setEnteredDescription("");
+    setEnteredBirthday("");
+    setEnteredEmail("");
+    setEnteredExperience("");
+
+    setOpen(true);
+
     // console.log(hiringRequest);
   };
 
@@ -96,6 +120,23 @@ const HiringForm = () => {
 
   return (
     <React.Fragment>
+      {open && (
+        <Dialog
+          open={open}
+          TransitionComponent={Transition}
+          onClose={handleClose}
+          aria-describedby="alert-dialog-slide-description"
+        >
+          <DialogContent>
+            <DialogContentText id="alert-dialog-slide-description">
+              Your hiring request has been sent to the administrator.
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose}>Ok</Button>
+          </DialogActions>
+        </Dialog>
+      )}
       <Typography
         padding="1rem"
         variant="h3"
@@ -140,6 +181,7 @@ const HiringForm = () => {
                       fullWidth
                       required
                       onChange={nameChangeHandler}
+                      value={enteredName}
                     />
                   </Grid>
                   <Grid xs={10} item>
@@ -150,6 +192,7 @@ const HiringForm = () => {
                       fullWidth
                       required
                       onChange={surnameChangeHandler}
+                      value={enteredSurname}
                     />
                   </Grid>
                   <Grid xs={10} item>
@@ -161,6 +204,7 @@ const HiringForm = () => {
                       fullWidth
                       required
                       onChange={emailChangeHandler}
+                      value={enteredEmail}
                     />
                   </Grid>
                   <Grid xs={10} item>
@@ -171,6 +215,7 @@ const HiringForm = () => {
                       fullWidth
                       required
                       onChange={addressChangeHandler}
+                      value={enteredAddress}
                     />
                   </Grid>
                   <Grid xs={10} item>
@@ -183,6 +228,7 @@ const HiringForm = () => {
                       }}
                       fullWidth
                       onChange={birthdayChangeHandler}
+                      value={enteredBirthday}
                     />
                   </Grid>
                   <Grid xs={10} item>
@@ -216,6 +262,7 @@ const HiringForm = () => {
                       multiline
                       rows={4}
                       onChange={descriptionChangeHandler}
+                      value={enteredDescription}
                     />
                   </Grid>
                   <Grid item xs={4}>
