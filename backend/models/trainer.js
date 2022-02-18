@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const uniqueValidator = require("mongoose-unique-validator");
 
 const Schema = mongoose.Schema;
 
@@ -15,7 +14,5 @@ const trainerSchema = new Schema({
   classes: [{ type: mongoose.Types.ObjectId, required: false, ref: "Class" }],
   clients: [{ type: mongoose.Types.ObjectId, required: false, ref: "Client" }],
 });
-
-trainerSchema.plugin(uniqueValidator);
 
 module.exports = mongoose.model("Trainer", trainerSchema);
