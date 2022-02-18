@@ -56,17 +56,36 @@ const HiringForm = () => {
   const formHandler = async (event) => {
     event.preventDefault();
 
-    const hiringRequest = {
-      name: enteredName,
-      surname: enteredSurname,
-      address: enteredAddress,
-      description: enteredDescription,
-      birthdate: enteredBirthday,
-      email: enteredEmail,
-      experience: enteredExperience,
-    };
+    // const hiringRequest = {
+    //   name: enteredName,
+    //   surname: enteredSurname,
+    //   address: enteredAddress,
+    //   description: enteredDescription,
+    //   birthdate: enteredBirthday,
+    //   email: enteredEmail,
+    //   experience: enteredExperience,
+    // };
+    try {
+      await fetch("http://localhost:8080/api/hiring/", {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: enteredName,
+          surname: enteredSurname,
+          address: enteredAddress,
+          description: enteredDescription,
+          birthdate: enteredBirthday,
+          email: enteredEmail,
+          experience: enteredExperience,
+        }),
+      });
+    } catch (err) {
+      console.log(err);
+    }
 
-    console.log(hiringRequest);
+    // console.log(hiringRequest);
   };
 
   const theme = createTheme({
