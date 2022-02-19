@@ -120,6 +120,10 @@
   text-align: center;
 }
 
+.container-principal__white .container-secundar1 h4 {
+  margin: 0;
+}
+
 .container-principal__white .container-secundar2 {
   display: flex;
   flex-direction: column;
