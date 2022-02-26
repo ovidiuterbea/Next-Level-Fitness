@@ -8,13 +8,13 @@ import {
   TextField,
   Typography,
   //   CircularProgress,
-  Stack,
-  Radio,
-  RadioGroup,
-  FormControl,
-  FormControlLabel,
-  FormLabel,
-  ThemeProvider,
+  // Stack,
+  // Radio,
+  // RadioGroup,
+  // FormControl,
+  // FormControlLabel,
+  // FormLabel,
+  // ThemeProvider,
   ButtonGroup,
   createTheme,
 } from "@mui/material";
@@ -57,10 +57,6 @@ const Auth = () => {
 
   const addressChangeHandler = (event) => {
     setEnteredAddress(event.target.value);
-  };
-
-  const loginTypeHandler = (event) => {
-    setLoginType(event.target.value);
   };
 
   const userLoginChangeHandler = () => {
@@ -145,7 +141,7 @@ const Auth = () => {
                   justifyContent="center"
                 >
                   <Grid item xs={12}>
-                    <ButtonGroup variant="contained" fullWidth>
+                    <ButtonGroup variant="contained" fullWidth color="inherit">
                       <Button
                         id="btnUser"
                         style={{
