@@ -9,9 +9,9 @@ const NavLinksUnlogged = (props) => {
   //   const userId = auth.userId;
 
   return (
-    <div className='main-navigation'>
+    <div className="main-navigation">
       <NavLink
-        to='/mainpage'
+        to="/mainpage"
         onClick={() => {
           window.scrollTo(0, 0);
         }}
@@ -20,10 +20,10 @@ const NavLinksUnlogged = (props) => {
           Next-<span style={{ color: "#FFEF00" }}>Level</span> Fitness{" "}
         </h2>
       </NavLink>
-      <ul className='nav-links'>
+      <ul className="nav-links">
         <li>
           <NavLink
-            activeClassName='activeLink'
+            activeClassName="activeLink"
             to={`/tarife`}
             onClick={() => {
               window.scrollTo(0, 0);
@@ -35,8 +35,8 @@ const NavLinksUnlogged = (props) => {
 
         <li>
           <NavLink
-            activeClassName='activeLink'
-            to='/personaltraining'
+            activeClassName="activeLink"
+            to="/personaltraining"
             onClick={() => {
               window.scrollTo(0, 0);
             }}
@@ -48,8 +48,8 @@ const NavLinksUnlogged = (props) => {
 
         <li>
           <NavLink
-            activeClassName='activeLink'
-            to='/activitati'
+            activeClassName="activeLink"
+            to="/activitati"
             onClick={() => {
               window.scrollTo(0, 0);
             }}
@@ -60,8 +60,8 @@ const NavLinksUnlogged = (props) => {
         </li>
         <li>
           <NavLink
-            activeClassName='activeLink'
-            to='/hiring'
+            activeClassName="activeLink"
+            to="/hiring"
             onClick={() => {
               window.scrollTo(0, 0);
             }}
@@ -71,9 +71,9 @@ const NavLinksUnlogged = (props) => {
           </NavLink>
         </li>
       </ul>
-      <div className='btn-auth'>
+      <div className="btn-auth">
         <NavLink
-          to='/mainpage'
+          to="/auth"
           onClick={() => {
             window.scrollTo(0, 0);
           }}

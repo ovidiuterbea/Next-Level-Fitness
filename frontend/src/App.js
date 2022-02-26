@@ -4,6 +4,7 @@ import PersonalTraining from "./unlogged/PersonalTraining";
 import MainPage from "./unlogged/MainPage";
 import HiringForm from "./unlogged/HiringForm";
 import NavLinksUnlogged from "./shared/navigation/NavLinksUnlogged";
+import Auth from "./unlogged/Auth";
 import {
   BrowserRouter as Router,
   Route,
@@ -43,6 +44,9 @@ const App = () => {
       </Route>
       <Route path="/hiring" exact>
         <HiringForm />
+      </Route>
+      <Route path="/auth" exact>
+        <Auth />
       </Route>
       <Redirect to="/mainpage" />
     </Switch>

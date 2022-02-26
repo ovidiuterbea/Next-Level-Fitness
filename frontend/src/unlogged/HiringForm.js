@@ -70,15 +70,6 @@ const HiringForm = () => {
   const formHandler = async (event) => {
     event.preventDefault();
 
-    // const hiringRequest = {
-    //   name: enteredName,
-    //   surname: enteredSurname,
-    //   address: enteredAddress,
-    //   description: enteredDescription,
-    //   birthdate: enteredBirthday,
-    //   email: enteredEmail,
-    //   experience: enteredExperience,
-    // };
     try {
       await fetch("http://localhost:8080/api/hiring/", {
         method: "post",
@@ -162,6 +153,7 @@ const HiringForm = () => {
             padding: "20px 5px",
             margin: "0 auto",
             marginBottom: "2rem",
+            borderRadius: "10px",
           }}
         >
           <CardContent>
