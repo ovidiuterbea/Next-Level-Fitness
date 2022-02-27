@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import {
   Button,
   Card,
@@ -18,13 +18,17 @@ import {
   ButtonGroup,
   createTheme,
 } from "@mui/material";
-// import { AuthContext } from "../../shared/context/auth-context";
+import { UserContext } from "../shared/context/user-context";
+import { TrainerContext } from "../shared/context/trainer-context";
+import { AdminContext } from "../shared/context/admin-context";
 // import { useHttpClient } from "../../shared/hooks/http-hook";
 import { grey } from "@mui/material/colors";
 
 const Auth = () => {
   const [isLoginMode, setIsLoginMode] = useState(true);
-  //   const auth = useContext(AuthContext);
+  const userAuth = useContext(UserContext);
+  const trainerAuth = useContext(TrainerContext);
+  const adminAuth = useContext(AdminContext);
   //   const { sendRequest, isLoading } = useHttpClient();
   const [enteredEmail, setEnteredEmail] = useState("");
   const [enteredPassword, setEnteredPassword] = useState("");
@@ -104,6 +108,15 @@ const Auth = () => {
     //     auth.login(responseData.userId, responseData.token);
     //   } catch (err) {}
     // }
+    if (loginType === "user") {
+      userAuth.login();
+    }
+    if (loginType === "trainer") {
+      trainerAuth.login();
+    }
+    if (loginType === "admin") {
+      adminAuth.login();
+    }
   };
 
   const theme = createTheme({
