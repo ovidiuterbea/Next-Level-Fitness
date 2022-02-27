@@ -16,13 +16,13 @@ import {
   // FormLabel,
   // ThemeProvider,
   ButtonGroup,
-  createTheme,
+  // createTheme,
 } from "@mui/material";
 import { UserContext } from "../shared/context/user-context";
 import { TrainerContext } from "../shared/context/trainer-context";
 import { AdminContext } from "../shared/context/admin-context";
 // import { useHttpClient } from "../../shared/hooks/http-hook";
-import { grey } from "@mui/material/colors";
+// import { grey } from "@mui/material/colors";
 
 const Auth = () => {
   const [isLoginMode, setIsLoginMode] = useState(true);
@@ -108,6 +108,14 @@ const Auth = () => {
     //     auth.login(responseData.userId, responseData.token);
     //   } catch (err) {}
     // }
+    console.log(
+      enteredAddress +
+        enteredBirthday +
+        enteredEmail +
+        enteredName +
+        enteredSurname +
+        enteredPassword
+    );
     if (loginType === "user") {
       userAuth.login();
     }
@@ -119,16 +127,16 @@ const Auth = () => {
     }
   };
 
-  const theme = createTheme({
-    palette: {
-      primary: grey,
-    },
-  });
+  // const theme = createTheme({
+  //   palette: {
+  //     primary: grey,
+  //   },
+  // });
 
   return (
     <React.Fragment>
-      <div className="App">
-        <Typography padding="1rem" variant="h3" align="center" color="#f3f3f3">
+      <div className='App'>
+        <Typography padding='1rem' variant='h3' align='center' color='#f3f3f3'>
           {isLoginMode && loginType === "user" && "Login"}
           {!isLoginMode && loginType === "user" && "Signup"}
           {loginType === "trainer" && "Login"}
@@ -150,13 +158,13 @@ const Auth = () => {
                 <Grid
                   container
                   spacing={2}
-                  alignItems="center"
-                  justifyContent="center"
+                  alignItems='center'
+                  justifyContent='center'
                 >
                   <Grid item xs={12}>
-                    <ButtonGroup variant="contained" fullWidth color="inherit">
+                    <ButtonGroup variant='contained' fullWidth color='inherit'>
                       <Button
-                        id="btnUser"
+                        id='btnUser'
                         style={{
                           fontFamily: "inherit",
                           fontSize: "1.2rem",
@@ -176,7 +184,7 @@ const Auth = () => {
                         User
                       </Button>
                       <Button
-                        id="btnTrainer"
+                        id='btnTrainer'
                         style={{
                           fontFamily: "inherit",
                           fontSize: "1.2rem",
@@ -197,7 +205,7 @@ const Auth = () => {
                         Trainer
                       </Button>
                       <Button
-                        id="btnAdmin"
+                        id='btnAdmin'
                         style={{
                           fontFamily: "inherit",
                           fontSize: "1.2rem",
@@ -222,11 +230,11 @@ const Auth = () => {
                   {!isLoginMode && loginType === "user" && (
                     <Grid item xs={12}>
                       <TextField
-                        className="textField"
-                        type="text"
-                        placeholder="Enter name"
-                        label="Name"
-                        variant="outlined"
+                        className='textField'
+                        type='text'
+                        placeholder='Enter name'
+                        label='Name'
+                        variant='outlined'
                         fullWidth
                         required
                         onChange={nameChangeHandler}
@@ -236,11 +244,11 @@ const Auth = () => {
                   {!isLoginMode && loginType === "user" && (
                     <Grid item xs={12}>
                       <TextField
-                        className="textField"
-                        type="text"
-                        placeholder="Enter surname"
-                        label="Surname"
-                        variant="outlined"
+                        className='textField'
+                        type='text'
+                        placeholder='Enter surname'
+                        label='Surname'
+                        variant='outlined'
                         fullWidth
                         required
                         onChange={surnameChangeHandler}
@@ -250,9 +258,9 @@ const Auth = () => {
                   {!isLoginMode && loginType === "user" && (
                     <Grid xs={12} item>
                       <TextField
-                        id="date"
-                        label="Birthday"
-                        type="date"
+                        id='date'
+                        label='Birthday'
+                        type='date'
                         InputLabelProps={{
                           shrink: true,
                         }}
@@ -264,9 +272,9 @@ const Auth = () => {
                   {!isLoginMode && loginType === "user" && (
                     <Grid xs={12} item>
                       <TextField
-                        placeholder="Enter your address"
-                        label="Address"
-                        variant="outlined"
+                        placeholder='Enter your address'
+                        label='Address'
+                        variant='outlined'
                         fullWidth
                         required
                         onChange={addressChangeHandler}
@@ -275,11 +283,11 @@ const Auth = () => {
                   )}
                   <Grid item xs={12} sm={6}>
                     <TextField
-                      className="textField"
-                      type="email"
-                      placeholder="Enter email"
-                      label="Email"
-                      variant="outlined"
+                      className='textField'
+                      type='email'
+                      placeholder='Enter email'
+                      label='Email'
+                      variant='outlined'
                       fullWidth
                       required
                       onChange={emailChangeHandler}
@@ -287,11 +295,11 @@ const Auth = () => {
                   </Grid>
                   <Grid xs={12} sm={6} item>
                     <TextField
-                      className="textField"
-                      type="password"
-                      placeholder="Enter password"
-                      label="Password"
-                      variant="outlined"
+                      className='textField'
+                      type='password'
+                      placeholder='Enter password'
+                      label='Password'
+                      variant='outlined'
                       fullWidth
                       required
                       onChange={passwordChangeHandler}
@@ -299,9 +307,9 @@ const Auth = () => {
                   </Grid>
                   <Grid item xs={4}>
                     <Button
-                      type="submit"
-                      variant="contained"
-                      color="primary"
+                      type='submit'
+                      variant='contained'
+                      color='primary'
                       fullWidth
                       style={{
                         backgroundColor: "#0e1111",
@@ -321,11 +329,11 @@ const Auth = () => {
           </Card>
 
           {loginType === "user" && (
-            <Typography align="center" style={{ marginTop: "1rem" }}>
+            <Typography align='center' style={{ marginTop: "1rem" }}>
               <Button
-                type=""
-                variant="contained"
-                color="primary"
+                type=''
+                variant='contained'
+                color='primary'
                 onClick={userLoginChangeHandler}
                 style={{ backgroundColor: "#ffef00", color: "#0e1111" }}
               >

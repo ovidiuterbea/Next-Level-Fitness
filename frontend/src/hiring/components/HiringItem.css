@@ -1,0 +1,46 @@
+.hiring-item {
+  display: flex;
+  flex-direction: column;
+  margin: 2.5rem auto;
+  width: 50%;
+  background-color: #a9a9a9;
+  padding: 1.2rem;
+  border-radius: 10px;
+}
+
+.hiring-item__buttons {
+  display: flex;
+  justify-content: flex-end;
+}
+
+a {
+  text-decoration: none;
+}
+
+.hiring-item__buttons button {
+  border: none;
+  background-color: #181d01;
+  color: #f3f3f3;
+  height: 3rem;
+  width: fit-content;
+  border-radius: 10px;
+  transition: ease-out 1.2s;
+  font-size: 16px;
+  outline: none;
+  box-shadow: 0px 0px 10px -3px #19193d;
+}
+
+.hiring-item__buttons button:hover {
+  cursor: pointer;
+  color: #181d01;
+  background-color: #f3f3f3;
+}
+
+.hiring-name {
+  color: #f3f3f3;
+  text-align: center;
+}
+
+.some-margin {
+  margin-bottom: 2rem;
+}

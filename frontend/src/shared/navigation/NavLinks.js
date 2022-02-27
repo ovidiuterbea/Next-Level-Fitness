@@ -12,12 +12,12 @@ const NavLinks = (props) => {
   const adminAuth = useContext(AdminContext);
 
   return (
-    <div className="main-navigation">
+    <div className='main-navigation'>
       {!userAuth.isLoggedIn &&
         !trainerAuth.isLoggedIn &&
         !adminAuth.isLoggedIn && (
           <NavLink
-            to="/mainpage"
+            to='/mainpage'
             onClick={() => {
               window.scrollTo(0, 0);
             }}
@@ -32,11 +32,11 @@ const NavLinks = (props) => {
       )}
       {trainerAuth.isLoggedIn && <h2 style={{ color: "#FFEF00" }}>Trainer</h2>}
       {userAuth.isLoggedIn && <h2 style={{ color: "#FFEF00" }}>User</h2>}
-      <ul className="nav-links">
+      <ul className='nav-links'>
         {userAuth.isLoggedIn && (
           <li>
             <NavLink
-              activeClassName="activeLink"
+              activeClassName='activeLink'
               to={`/:clientid/classes`}
               onClick={() => {
                 window.scrollTo(0, 0);
@@ -49,7 +49,7 @@ const NavLinks = (props) => {
         {trainerAuth.isLoggedIn && (
           <li>
             <NavLink
-              activeClassName="activeLink"
+              activeClassName='activeLink'
               to={`/:trainerid/classes`}
               onClick={() => {
                 window.scrollTo(0, 0);
@@ -62,7 +62,7 @@ const NavLinks = (props) => {
         {adminAuth.isLoggedIn && (
           <li>
             <NavLink
-              activeClassName="activeLink"
+              activeClassName='activeLink'
               to={`/classes`}
               onClick={() => {
                 window.scrollTo(0, 0);
@@ -72,12 +72,25 @@ const NavLinks = (props) => {
             </NavLink>
           </li>
         )}
+        {adminAuth.isLoggedIn && (
+          <li>
+            <NavLink
+              activeClassName='activeLink'
+              to={`/hiringrequests`}
+              onClick={() => {
+                window.scrollTo(0, 0);
+              }}
+            >
+              Hiring requests
+            </NavLink>
+          </li>
+        )}
         {!userAuth.isLoggedIn &&
           !trainerAuth.isLoggedIn &&
           !adminAuth.isLoggedIn && (
             <li>
               <NavLink
-                activeClassName="activeLink"
+                activeClassName='activeLink'
                 to={`/tarife`}
                 onClick={() => {
                   window.scrollTo(0, 0);
@@ -93,8 +106,8 @@ const NavLinks = (props) => {
           !adminAuth.isLoggedIn && (
             <li>
               <NavLink
-                activeClassName="activeLink"
-                to="/personaltraining"
+                activeClassName='activeLink'
+                to='/personaltraining'
                 onClick={() => {
                   window.scrollTo(0, 0);
                 }}
@@ -110,8 +123,8 @@ const NavLinks = (props) => {
           !adminAuth.isLoggedIn && (
             <li>
               <NavLink
-                activeClassName="activeLink"
-                to="/activitati"
+                activeClassName='activeLink'
+                to='/activitati'
                 onClick={() => {
                   window.scrollTo(0, 0);
                 }}
@@ -126,8 +139,8 @@ const NavLinks = (props) => {
           !adminAuth.isLoggedIn && (
             <li>
               <NavLink
-                activeClassName="activeLink"
-                to="/hiring"
+                activeClassName='activeLink'
+                to='/hiring'
                 onClick={() => {
                   window.scrollTo(0, 0);
                 }}
@@ -141,9 +154,9 @@ const NavLinks = (props) => {
       {!userAuth.isLoggedIn &&
         !trainerAuth.isLoggedIn &&
         !adminAuth.isLoggedIn && (
-          <div className="btn-auth">
+          <div className='btn-auth'>
             <NavLink
-              to="/auth"
+              to='/auth'
               onClick={() => {
                 window.scrollTo(0, 0);
               }}
@@ -153,9 +166,9 @@ const NavLinks = (props) => {
           </div>
         )}
       {userAuth.isLoggedIn && (
-        <div className="btn-auth">
+        <div className='btn-auth'>
           <NavLink
-            to="/"
+            to='/'
             onClick={() => {
               window.scrollTo(0, 0);
               userAuth.logout();
@@ -166,9 +179,9 @@ const NavLinks = (props) => {
         </div>
       )}
       {trainerAuth.isLoggedIn && (
-        <div className="btn-auth">
+        <div className='btn-auth'>
           <NavLink
-            to="/"
+            to='/'
             onClick={() => {
               window.scrollTo(0, 0);
               trainerAuth.logout();
@@ -179,9 +192,9 @@ const NavLinks = (props) => {
         </div>
       )}
       {adminAuth.isLoggedIn && (
-        <div className="btn-auth">
+        <div className='btn-auth'>
           <NavLink
-            to="/"
+            to='/'
             onClick={() => {
               window.scrollTo(0, 0);
               adminAuth.logout();

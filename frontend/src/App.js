@@ -15,6 +15,7 @@ import TrainerClasses from "./gym-classes/pages/TrainerClasses";
 
 // admin
 import Classes from "./gym-classes/pages/Classes";
+import HiringRequests from "./hiring/pages/HiringRequests";
 import {
   BrowserRouter as Router,
   Route,
@@ -61,7 +62,7 @@ const App = () => {
   if (userIsLoggedIn) {
     routes = (
       <Switch>
-        <Route path="/:clientid/classes" exact>
+        <Route path='/:clientid/classes' exact>
           <UserClasses />
         </Route>
       </Switch>
@@ -69,7 +70,7 @@ const App = () => {
   } else if (trainerIsLoggedIn) {
     routes = (
       <Switch>
-        <Route path="/:trainerid/classes" exact>
+        <Route path='/:trainerid/classes' exact>
           <TrainerClasses />
         </Route>
       </Switch>
@@ -77,33 +78,39 @@ const App = () => {
   } else if (adminIsLoggedIn) {
     routes = (
       <Switch>
-        <Route path="/classes" exact>
+        <Route path='/classes' exact>
           <Classes />
+        </Route>
+        <Route path='/hiringrequests' exact>
+          <HiringRequests />
+        </Route>
+        <Route path='/hiringrequests/:hiringrequestid' exact>
+          <HiringRequests />
         </Route>
       </Switch>
     );
   } else {
     routes = (
       <Switch>
-        <Route path="/mainpage" exact>
+        <Route path='/mainpage' exact>
           <MainPage />
         </Route>
-        <Route path="/tarife" exact>
+        <Route path='/tarife' exact>
           <Tarife />
         </Route>
-        <Route path="/personaltraining" exact>
+        <Route path='/personaltraining' exact>
           <PersonalTraining />
         </Route>
-        <Route path="/activitati" exact>
+        <Route path='/activitati' exact>
           <Activitati />
         </Route>
-        <Route path="/hiring" exact>
+        <Route path='/hiring' exact>
           <HiringForm />
         </Route>
-        <Route path="/auth" exact>
+        <Route path='/auth' exact>
           <Auth />
         </Route>
-        <Redirect to="/mainpage" />
+        <Redirect to='/mainpage' />
       </Switch>
     );
   }
