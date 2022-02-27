@@ -21,6 +21,7 @@ const createHiringRequest = async (req, res, next) => {
     image,
     experience,
     description,
+    phone,
   } = req.body;
 
   let existingHiringRequest;
@@ -53,6 +54,7 @@ const createHiringRequest = async (req, res, next) => {
     birthdate,
     experience,
     description,
+    phone,
   });
 
   try {

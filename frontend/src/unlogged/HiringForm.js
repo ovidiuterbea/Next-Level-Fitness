@@ -22,7 +22,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import Slide from "@mui/material/Slide";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
-  return <Slide direction="up" ref={ref} {...props} />;
+  return <Slide direction='up' ref={ref} {...props} />;
 });
 
 const HiringForm = () => {
@@ -33,6 +33,7 @@ const HiringForm = () => {
   const [enteredBirthday, setEnteredBirthday] = useState("");
   const [enteredExperience, setEnteredExperience] = useState("");
   const [enteredDescription, setEnteredDescription] = useState("");
+  const [enteredPhone, setEnteredPhone] = useState("");
   const [open, setOpen] = useState(false);
 
   const handleClose = () => {
@@ -67,6 +68,10 @@ const HiringForm = () => {
     setEnteredDescription(event.target.value);
   };
 
+  const phoneChangeHandler = (event) => {
+    setEnteredPhone(event.target.value);
+  };
+
   const formHandler = async (event) => {
     event.preventDefault();
 
@@ -84,6 +89,7 @@ const HiringForm = () => {
           birthdate: enteredBirthday,
           email: enteredEmail,
           experience: enteredExperience,
+          phone: enteredPhone,
         }),
       });
     } catch (err) {
@@ -97,6 +103,7 @@ const HiringForm = () => {
     setEnteredBirthday("");
     setEnteredEmail("");
     setEnteredExperience("");
+    setEnteredPhone("");
 
     setOpen(true);
 
@@ -116,10 +123,10 @@ const HiringForm = () => {
           open={open}
           TransitionComponent={Transition}
           onClose={handleClose}
-          aria-describedby="alert-dialog-slide-description"
+          aria-describedby='alert-dialog-slide-description'
         >
           <DialogContent>
-            <DialogContentText id="alert-dialog-slide-description">
+            <DialogContentText id='alert-dialog-slide-description'>
               Your hiring request has been sent to the administrator.
             </DialogContentText>
           </DialogContent>
@@ -129,19 +136,19 @@ const HiringForm = () => {
         </Dialog>
       )}
       <Typography
-        padding="1rem"
-        variant="h3"
-        align="center"
-        color="#f3f3f3"
+        padding='1rem'
+        variant='h3'
+        align='center'
+        color='#f3f3f3'
         style={{ fontFamily: "inherit", paddingTop: "5rem" }}
       >
         Vrei sa te alaturi ca antrenor?
       </Typography>
       <Typography
-        padding="1rem"
-        variant="h4"
-        align="center"
-        color="#f3f3f3"
+        padding='1rem'
+        variant='h4'
+        align='center'
+        color='#f3f3f3'
         style={{ fontFamily: "inherit", marginBottom: "1.5rem" }}
       >
         Trimite datele si te vom chema noi la interviu!
@@ -161,15 +168,15 @@ const HiringForm = () => {
               <Grid
                 container
                 spacing={2}
-                alignItems="center"
-                justifyContent="center"
+                alignItems='center'
+                justifyContent='center'
               >
                 <ThemeProvider theme={theme}>
                   <Grid xs={10} item>
                     <TextField
-                      placeholder="Enter your name"
-                      label="Name"
-                      variant="outlined"
+                      placeholder='Enter your name'
+                      label='Name'
+                      variant='outlined'
                       fullWidth
                       required
                       onChange={nameChangeHandler}
@@ -178,9 +185,9 @@ const HiringForm = () => {
                   </Grid>
                   <Grid xs={10} item>
                     <TextField
-                      placeholder="Enter your surname"
-                      label="Surname"
-                      variant="outlined"
+                      placeholder='Enter your surname'
+                      label='Surname'
+                      variant='outlined'
                       fullWidth
                       required
                       onChange={surnameChangeHandler}
@@ -189,10 +196,21 @@ const HiringForm = () => {
                   </Grid>
                   <Grid xs={10} item>
                     <TextField
-                      type="email"
-                      placeholder="Enter email"
-                      label="Email"
-                      variant="outlined"
+                      placeholder='Enter your phone number'
+                      label='Phone number'
+                      variant='outlined'
+                      fullWidth
+                      required
+                      onChange={phoneChangeHandler}
+                      value={enteredPhone}
+                    />
+                  </Grid>
+                  <Grid xs={10} item>
+                    <TextField
+                      type='email'
+                      placeholder='Enter email'
+                      label='Email'
+                      variant='outlined'
                       fullWidth
                       required
                       onChange={emailChangeHandler}
@@ -201,9 +219,9 @@ const HiringForm = () => {
                   </Grid>
                   <Grid xs={10} item>
                     <TextField
-                      placeholder="Enter your address"
-                      label="Address"
-                      variant="outlined"
+                      placeholder='Enter your address'
+                      label='Address'
+                      variant='outlined'
                       fullWidth
                       required
                       onChange={addressChangeHandler}
@@ -212,9 +230,9 @@ const HiringForm = () => {
                   </Grid>
                   <Grid xs={10} item>
                     <TextField
-                      id="date"
-                      label="Birthday"
-                      type="date"
+                      id='date'
+                      label='Birthday'
+                      type='date'
                       InputLabelProps={{
                         shrink: true,
                       }}
@@ -225,30 +243,30 @@ const HiringForm = () => {
                   </Grid>
                   <Grid xs={10} item>
                     <FormControl fullWidth>
-                      <InputLabel id="selectExperinceLabel">
+                      <InputLabel id='selectExperinceLabel'>
                         Experience
                       </InputLabel>
                       <Select
-                        labelId="selectExperienceLabel"
-                        id="selectExperience"
-                        label="Experience"
+                        labelId='selectExperienceLabel'
+                        id='selectExperience'
+                        label='Experience'
                         onChange={experienceChangeHandler}
                         value={enteredExperience}
                         fullWidth
-                        variant="outlined"
+                        variant='outlined'
                         required
                       >
-                        <MenuItem value="Entry-Level">{`Entry-Level (<2 ani)`}</MenuItem>
-                        <MenuItem value="Middle-Level">{`Middle-Level (2-4 ani) `}</MenuItem>
-                        <MenuItem value="Senior-Level">{`Senior Level (4+ ani)`}</MenuItem>
+                        <MenuItem value='Entry-Level'>{`Entry-Level (<2 ani)`}</MenuItem>
+                        <MenuItem value='Middle-Level'>{`Middle-Level (2-4 ani) `}</MenuItem>
+                        <MenuItem value='Senior-Level'>{`Senior Level (4+ ani)`}</MenuItem>
                       </Select>
                     </FormControl>
                   </Grid>
                   <Grid xs={10} item>
                     <TextField
-                      placeholder="Enter your description"
-                      label="Description"
-                      variant="outlined"
+                      placeholder='Enter your description'
+                      label='Description'
+                      variant='outlined'
                       fullWidth
                       required
                       multiline
@@ -259,9 +277,9 @@ const HiringForm = () => {
                   </Grid>
                   <Grid item xs={4}>
                     <Button
-                      type="submit"
-                      variant="contained"
-                      color="primary"
+                      type='submit'
+                      variant='contained'
+                      color='primary'
                       fullWidth
                       style={{
                         backgroundColor: "#0e1111",

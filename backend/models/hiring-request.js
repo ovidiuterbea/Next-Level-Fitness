@@ -12,6 +12,7 @@ const hiringSchema = new Schema({
   password: { type: String, required: false, minlength: 6 },
   image: { type: String, required: true },
   experience: { type: String, required: true },
+  phone: { type: String, required: true },
 });
 
 module.exports = mongoose.model("Hiring", hiringSchema);
