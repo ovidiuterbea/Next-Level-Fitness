@@ -1,0 +1,92 @@
+.hiring-detail {
+  display: flex;
+  flex-direction: column;
+  margin: 3rem auto;
+  width: 50%;
+  border-radius: 10px;
+  background-color: #f3f3f3;
+  padding: 1.2rem;
+  box-shadow: 3px 3px 10px 1px rgba(0, 0, 0, 0.3);
+  color: #181d01;
+}
+
+.hiring-flex-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.hiring-title {
+  font-size: 2rem;
+}
+
+.hiring-information {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+
+.hiring-information h3 {
+  margin: 0.5rem;
+}
+
+.hiring-experience__entry {
+  background-color: crimson;
+  border-radius: 10px;
+  padding: 0.5rem 0.8rem 0.5rem 0.8rem;
+}
+
+.hiring-experience__middle {
+  background-color: gold;
+  border-radius: 10px;
+  padding: 0.5rem 0.8rem 0.5rem 0.8rem;
+}
+
+.hiring-experience__senior {
+  background-color: green;
+  border-radius: 10px;
+  padding: 0.5rem 0.8rem 0.5rem 0.8rem;
+}
+
+.hiring-photo {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-center {
+  display: block;
+  width: 60%;
+  height: 85%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.hiring-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 10rem;
+}
+
+.hiring-buttons .btn-accept {
+  border: none;
+  background-color: green;
+  color: #181d01;
+  border-radius: 10px;
+  transition: ease-out 1.2s;
+  outline: none;
+  margin-top: 1.3rem;
+  font-size: large;
+}
+
+.hiring-buttons .btn-decline {
+  border: none;
+  background-color: crimson;
+  color: #181d01;
+  border-radius: 10px;
+  transition: ease-out 1.2s;
+  outline: none;
+  margin-top: 1.3rem;
+  font-size: large;
+}

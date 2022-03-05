@@ -256,9 +256,9 @@ const HiringForm = () => {
                         variant='outlined'
                         required
                       >
-                        <MenuItem value='Entry-Level'>{`Entry-Level (<2 ani)`}</MenuItem>
-                        <MenuItem value='Middle-Level'>{`Middle-Level (2-4 ani) `}</MenuItem>
-                        <MenuItem value='Senior-Level'>{`Senior Level (4+ ani)`}</MenuItem>
+                        <MenuItem value='Entry Level'>{`Entry Level (<2 ani)`}</MenuItem>
+                        <MenuItem value='Middle Level'>{`Middle Level (2-4 ani) `}</MenuItem>
+                        <MenuItem value='Senior Level'>{`Senior Level (4+ ani)`}</MenuItem>
                       </Select>
                     </FormControl>
                   </Grid>

@@ -27,6 +27,7 @@ import { TrainerContext } from "./shared/context/trainer-context";
 import { AdminContext } from "./shared/context/admin-context";
 import { useState, useCallback } from "react";
 import React from "react";
+import HiringRequestDetails from "./hiring/pages/HiringRequestDetails";
 
 const App = () => {
   const [userIsLoggedIn, setUserIsLoggedIn] = useState(false);
@@ -85,7 +86,7 @@ const App = () => {
           <HiringRequests />
         </Route>
         <Route path='/hiringrequests/:hiringrequestid' exact>
-          <HiringRequests />
+          <HiringRequestDetails />
         </Route>
       </Switch>
     );
