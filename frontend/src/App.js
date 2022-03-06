@@ -16,6 +16,8 @@ import TrainerClasses from "./gym-classes/pages/TrainerClasses";
 // admin
 import Classes from "./gym-classes/pages/Classes";
 import HiringRequests from "./hiring/pages/HiringRequests";
+import AddGymClass from "./gym-classes/pages/AddGymClass";
+
 import {
   BrowserRouter as Router,
   Route,
@@ -83,6 +85,9 @@ const App = () => {
       <Switch>
         <Route path='/classes' exact>
           <Classes />
+        </Route>
+        <Route path='/newclass' exact>
+          <AddGymClass />
         </Route>
         <Route path='/hiringrequests' exact>
           <HiringRequests />

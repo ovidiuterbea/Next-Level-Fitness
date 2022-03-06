@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Paper } from "@mui/material";
-import { ViewState, EditingState } from "@devexpress/dx-react-scheduler";
+import { Paper, Button, Stack } from "@mui/material";
+import { ViewState } from "@devexpress/dx-react-scheduler";
+import { Link } from "react-router-dom";
 import {
   Scheduler,
   WeekView,
@@ -9,10 +10,7 @@ import {
   DateNavigator,
   TodayButton,
   AppointmentTooltip,
-  AppointmentForm,
-  DayView,
 } from "@devexpress/dx-react-scheduler-material-ui";
-import { styled } from "@mui/material/styles";
 import { IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 
@@ -31,12 +29,6 @@ const Classes = (props) => {
     };
     getClasses();
   }, []);
-
-  // const deleteClassHandler = async () => {
-  //   await fetch(`http://localhost:8080/api/hiring/${hiringRequestId}`, {
-  //     method: "DELETE",
-  //   });
-  // };
 
   const Header = ({ children, appointmentData, ...restProps }) => (
     <AppointmentTooltip.Header {...restProps} appointmentData={appointmentData}>
@@ -65,16 +57,29 @@ const Classes = (props) => {
     <React.Fragment>
       {loadedClassesFetch && (
         <Paper>
+          <Stack alignItems='center'>
+            <Link to={"/newclass"}>
+              <Button
+                variant='outlined'
+                style={{
+                  marginTop: "1rem",
+                  height: "3rem",
+                  backgroundColor: "#0e1111",
+                  color: "#ffef00",
+                }}
+              >
+                Add a new class
+              </Button>
+            </Link>
+          </Stack>
           <Scheduler height='auto' data={loadedClassesFetch}>
             <ViewState />
-            <EditingState />
             <WeekView startDayHour={9} endDayHour={21} />
             <Toolbar />
             <DateNavigator />
             <TodayButton />
             <Appointments />
             <AppointmentTooltip showCloseButton headerComponent={Header} />
-            <AppointmentForm />
           </Scheduler>
         </Paper>
       )}
