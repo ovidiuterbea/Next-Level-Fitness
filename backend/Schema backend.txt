@@ -4,8 +4,8 @@ Client routes:
 		
 		GET .../ (Retrieve a list of clients) BUNA 
 		GET .../:clientid (Retrieve data for a client by his id) BUNA 
-		POST .../signup (Create a new client) BUNA 
-		POST .../login (Log client in) BUNA 
+		POST .../signup (Create a new client) BUNA CONECTATA
+		POST .../login (Log client in) BUNA CONECTATA
 		PATCH .../subscription/:clientid (Create a subscription for a client or create it) BUNA
 		PATCH .../subscriptionDel/:clientid (Delete the subscription by the user id) BUNA
 		PATCH .../:clientid/trainer/:trainerid (Give a personal trainer to a client by the client id) (push to client and trainer) BUNA 
@@ -33,7 +33,7 @@ Trainer routes:
 		GET .../ (Retrieve a list of all trainers) BUNA 
 		GET .../client/:clientid (Retrieve the personal trainer by the client id) BUNA 
 		POST .../login (Log trainer in) BUNA 
-		POST .../create (Insert the trainer into the database) BUNA 
+		POST .../create (Insert the trainer into the database) BUNA CONECTATA
 		GET .../:trainerid (Retrieve data from a trainer by his id) BUNA 
 		DELETE .../:trainerid (Delete a trainer by id) DONE (delete the class, delete from client) BUNA 
 		
@@ -42,10 +42,10 @@ Hiring routes:
 
 	/api/hirings
 
-		GET .../ (Retrieve a list of all hiring requests) BUNA MERGE
-		POST .../ (Create a hiring request) BUNA MERGE
-		GET .../:hiringid (Retrieve data from a hiring request given by the id) BUNA MERGE
-		DELETE .../:hiringid (Delete a hiring request given by the id) BUNA MERGE
+		GET .../ (Retrieve a list of all hiring requests) BUNA MERGE CONECTATA
+		POST .../ (Create a hiring request) BUNA MERGE CONECTATA
+		GET .../:hiringid (Retrieve data from a hiring request given by the id) BUNA MERGE CONECTATA
+		DELETE .../:hiringid (Delete a hiring request given by the id) BUNA MERGE CONECTATA
 
 Admin routes:
 
