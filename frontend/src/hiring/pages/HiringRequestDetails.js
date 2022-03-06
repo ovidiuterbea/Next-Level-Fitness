@@ -92,14 +92,28 @@ const HiringRequestDetails = (props) => {
             </div>
           </div>
           <div className='hiring-buttons'>
-            <Button className='btn-accept' variant='outlined' size='large'>
+            <Button
+              className='btn-accept'
+              variant='contained'
+              style={{
+                height: "3rem",
+                fontSize: "1.2rem",
+                fontFamily: "inherit",
+                marginTop: "1rem",
+              }}
+            >
               Accept
             </Button>
             <Button
               className='btn-decline'
-              variant='outlined'
-              size='large'
+              variant='contained'
               onClick={deleteHiringRequest}
+              style={{
+                height: "3rem",
+                fontSize: "1.2rem",
+                fontFamily: "inherit",
+                marginTop: "1rem",
+              }}
             >
               Decline
             </Button>

@@ -56,10 +56,13 @@
 
 .image-center {
   display: block;
-  width: 60%;
-  height: 85%;
+  width: 100%;
+  height: auto;
   border-radius: 50%;
   object-fit: cover;
+  transform: scale(0.7, 0.7);
+  -ms-transform: scale(0.7, 0.7);
+  -webkit-transform: scale(0.7, 0.7);
 }
 
 .hiring-buttons {
@@ -73,20 +76,26 @@
   border: none;
   background-color: green;
   color: #181d01;
-  border-radius: 10px;
   transition: ease-out 1.2s;
   outline: none;
   margin-top: 1.3rem;
-  font-size: large;
 }
 
 .hiring-buttons .btn-decline {
   border: none;
   background-color: crimson;
   color: #181d01;
-  border-radius: 10px;
   transition: ease-out 1.2s;
   outline: none;
   margin-top: 1.3rem;
-  font-size: large;
+}
+
+.hiring-buttons .btn-accept:hover {
+  background-color: #181d01;
+  color: green;
+}
+
+.hiring-buttons .btn-decline:hover {
+  background-color: #181d01;
+  color: crimson;
 }
