@@ -31,17 +31,17 @@ const createClass = async (req, res, next) => {
     );
   }
 
-  const { name, difficultyLevel, startingDate, endingDate, trainer } = req.body;
+  const { title, difficultyLevel, startDate, endDate, trainer } = req.body;
 
   let now = moment();
 
-  if (startingDate < now || startingDate > endingDate) {
+  if (startDate < now || startDate > endDate) {
     const error = new HttpError("Invalid date, please try again.", 404);
     return next(error);
   }
 
-  const sDate = new Date(startingDate);
-  const eDate = new Date(endingDate);
+  const sDate = new Date(startDate);
+  const eDate = new Date(endDate);
 
   const hours = Math.abs(eDate - sDate) / 36e5;
 
@@ -51,10 +51,10 @@ const createClass = async (req, res, next) => {
   }
 
   const gymClass = new Class({
-    name,
+    title,
     difficultyLevel,
-    startingDate: new Date(startingDate),
-    endingDate: new Date(endingDate),
+    startDate: new Date(startDate),
+    endDate: new Date(endDate),
     trainer,
   });
 

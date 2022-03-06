@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Paper } from "@mui/material";
 import { ViewState } from "@devexpress/dx-react-scheduler";
 import {
@@ -8,7 +8,30 @@ import {
 } from "@devexpress/dx-react-scheduler-material-ui";
 
 const Classes = (props) => {
-  return <React.Fragment>Aceasta este pagina de Classes</React.Fragment>;
+  const [loadedClassesFetch, setLoadedClassesFetch] = useState();
+
+  useEffect(() => {
+    const getClasses = async () => {
+      const response = await fetch(`http://localhost:8080/api/classes/`);
+      const data = await response.json();
+      setLoadedClassesFetch(data);
+    };
+    getClasses();
+  }, []);
+
+  return (
+    <React.Fragment>
+      {loadedClassesFetch && (
+        <Paper>
+          <Scheduler height='auto' data={loadedClassesFetch.classes}>
+            <ViewState />
+            <WeekView startDayHour={9} endDayHour={21} />
+            <Appointments />
+          </Scheduler>
+        </Paper>
+      )}
+    </React.Fragment>
+  );
 };
 
 export default Classes;
