@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Paper } from "@mui/material";
-import { ViewState } from "@devexpress/dx-react-scheduler";
+import { ViewState, EditingState } from "@devexpress/dx-react-scheduler";
 import {
   Scheduler,
   WeekView,
   Appointments,
+  Toolbar,
+  DateNavigator,
+  TodayButton,
+  AppointmentTooltip,
+  AppointmentForm,
 } from "@devexpress/dx-react-scheduler-material-ui";
 
 const Classes = (props) => {
@@ -24,9 +29,19 @@ const Classes = (props) => {
       {loadedClassesFetch && (
         <Paper>
           <Scheduler height='auto' data={loadedClassesFetch.classes}>
+            <EditingState allow />
             <ViewState />
             <WeekView startDayHour={9} endDayHour={21} />
+            <Toolbar />
+            <DateNavigator />
+            <TodayButton />
             <Appointments />
+            <AppointmentTooltip
+              showCloseButton
+              showOpenButton
+              showDeleteButton
+            />
+            <AppointmentForm />
           </Scheduler>
         </Paper>
       )}
