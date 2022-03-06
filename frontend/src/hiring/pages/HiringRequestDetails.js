@@ -4,12 +4,38 @@ import { useParams } from "react-router";
 import React, { useEffect, useState } from "react";
 import imgHolder from "../../media/trainer-bazat.jpeg";
 import { useHistory } from "react-router-dom";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import Slide from "@mui/material/Slide";
+
+function generatePassword() {
+  var length = 8,
+    charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
+    retVal = "";
+  for (var i = 0, n = charset.length; i < length; ++i) {
+    retVal += charset.charAt(Math.floor(Math.random() * n));
+  }
+  return retVal;
+}
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction='up' ref={ref} {...props} />;
+});
 
 const HiringRequestDetails = (props) => {
   const hiringRequestId = useParams().hiringrequestid;
   const [loadedHiringRequestFetch, setLoadedHiringRequestFetch] = useState();
   const [readableDate, setReadableDate] = useState("");
+  const [generatedPassword, setGeneratedPassword] = useState();
   const history = useHistory();
+  const [open, setOpen] = useState(false);
+
+  const handleClose = () => {
+    setOpen(false);
+    history.push("/hiringrequests");
+  };
 
   useEffect(() => {
     const getHiringRequest = async () => {
@@ -40,8 +66,48 @@ const HiringRequestDetails = (props) => {
     history.push("/hiringrequests");
   };
 
+  const createTrainerHandler = async () => {
+    const password = generatePassword();
+    setGeneratedPassword(password);
+    await fetch(`http://localhost:8080/api/trainers/create`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: loadedHiringRequestFetch.hiringRequest.name,
+        surname: loadedHiringRequestFetch.hiringRequest.surname,
+        email: loadedHiringRequestFetch.hiringRequest.email,
+        password: password,
+        address: loadedHiringRequestFetch.hiringRequest.address,
+        birthdate: loadedHiringRequestFetch.hiringRequest.birthdate,
+        experience: loadedHiringRequestFetch.hiringRequest.experience,
+      }),
+    });
+    setOpen(true);
+  };
+
   return (
     <React.Fragment>
+      {open && (
+        <Dialog
+          open={open}
+          TransitionComponent={Transition}
+          onClose={handleClose}
+          aria-describedby='alert-dialog-slide-description'
+        >
+          <DialogContent>
+            <DialogContentText id='alert-dialog-slide-description'>
+              The password for {loadedHiringRequestFetch.hiringRequest.name}{" "}
+              {loadedHiringRequestFetch.hiringRequest.surname} is{" "}
+              {generatedPassword}. Please inform him about this.
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose}>Ok</Button>
+          </DialogActions>
+        </Dialog>
+      )}
       {loadedHiringRequestFetch && (
         <div className='hiring-detail'>
           <div className='center'>
@@ -101,6 +167,7 @@ const HiringRequestDetails = (props) => {
                 fontFamily: "inherit",
                 marginTop: "1rem",
               }}
+              onClick={createTrainerHandler}
             >
               Accept
             </Button>
