@@ -99,7 +99,10 @@ const signup = async (req, res, next) => {
     return next(error);
   }
 
-  res.status(201).json({ client: createdClient.toObject({ getters: true }) });
+  res.status(201).json({
+    client: createdClient.toObject({ getters: true }),
+    clientId: createdClient.id,
+  });
 }; // FULLY DONE
 
 // MERGE
@@ -124,7 +127,7 @@ const login = async (req, res, next) => {
     return next(error);
   }
 
-  res.json({ message: "Logged in!" });
+  res.json({ clientId: existingClient.id });
 }; // FULLY DONE
 
 // MERGE

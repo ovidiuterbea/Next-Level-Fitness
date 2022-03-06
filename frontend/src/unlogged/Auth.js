@@ -29,7 +29,6 @@ const Auth = () => {
   const userAuth = useContext(UserContext);
   const trainerAuth = useContext(TrainerContext);
   const adminAuth = useContext(AdminContext);
-  //   const { sendRequest, isLoading } = useHttpClient();
   const [enteredEmail, setEnteredEmail] = useState("");
   const [enteredPassword, setEnteredPassword] = useState("");
   const [enteredName, setEnteredName] = useState("");
@@ -73,51 +72,37 @@ const Auth = () => {
 
   const authSubmitHandler = async (event) => {
     event.preventDefault();
-    console.log("submited");
-    console.log(loginType);
-    // if (!isLoginMode) {
-    //   try {
-    //     const responseData = await sendRequest(
-    //       "http://localhost:8000/api/users/signup",
-    //       "POST",
-    //       JSON.stringify({
-    //         name: enteredName,
-    //         surname: enteredSurname,
-    //         email: enteredEmail,
-    //         password: enteredPassword,
-    //       }),
-    //       {
-    //         "Content-Type": "application/json",
-    //       }
-    //     );
-    //     auth.login(responseData.userId, responseData.token);
-    //   } catch (err) {}
-    // } else {
-    //   try {
-    //     const responseData = await sendRequest(
-    //       "http://localhost:8000/api/users/login",
-    //       "POST",
-    //       JSON.stringify({
-    //         email: enteredEmail,
-    //         password: enteredPassword,
-    //       }),
-    //       {
-    //         "Content-Type": "application/json",
-    //       }
-    //     );
-    //     auth.login(responseData.userId, responseData.token);
-    //   } catch (err) {}
-    // }
-    console.log(
-      enteredAddress +
-        enteredBirthday +
-        enteredEmail +
-        enteredName +
-        enteredSurname +
-        enteredPassword
-    );
-    if (loginType === "user") {
-      userAuth.login();
+    if (loginType === "user" && isLoginMode === true) {
+      const response = await fetch(`http://localhost:8080/api/clients/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: enteredEmail,
+          password: enteredPassword,
+        }),
+      });
+      const data = await response.json();
+      userAuth.login(data.clientId);
+    }
+    if (loginType === "user" && isLoginMode === false) {
+      const response = await fetch(`http://localhost:8080/api/clients/signup`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: enteredName,
+          surname: enteredSurname,
+          email: enteredEmail,
+          password: enteredPassword,
+          birthdate: enteredBirthday,
+          address: enteredAddress,
+        }),
+      });
+      const data = await response.json();
+      userAuth.login(data.clientId);
     }
     if (loginType === "trainer") {
       trainerAuth.login();

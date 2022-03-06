@@ -33,9 +33,11 @@ const App = () => {
   const [userIsLoggedIn, setUserIsLoggedIn] = useState(false);
   const [trainerIsLoggedIn, setTrainerIsLoggedIn] = useState(false);
   const [adminIsLoggedIn, setAdminIsLoggedIn] = useState(false);
+  const [clientId, setClientId] = useState("");
 
-  const loginUser = useCallback(() => {
+  const loginUser = useCallback((cId) => {
     setUserIsLoggedIn(true);
+    setClientId(cId);
   }, []);
 
   const logoutUser = useCallback(() => {
@@ -136,6 +138,7 @@ const App = () => {
             isLoggedIn: userIsLoggedIn,
             login: loginUser,
             logout: logoutUser,
+            userId: clientId,
           }}
         >
           <Router>
