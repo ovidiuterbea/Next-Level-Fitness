@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Paper, Button, Stack } from "@mui/material";
+import React, { useState, useEffect, useMemo } from "react";
+import { Paper, Button, Stack, Grid } from "@mui/material";
 import { ViewState } from "@devexpress/dx-react-scheduler";
 import { Link } from "react-router-dom";
 import {
@@ -13,9 +13,11 @@ import {
 } from "@devexpress/dx-react-scheduler-material-ui";
 import { IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
+import PersonIcon from "@mui/icons-material/Person";
 
 const Classes = (props) => {
   const [loadedClassesFetch, setLoadedClassesFetch] = useState();
+  const [loadedTrainersFetch, setLoadedTrainersFetch] = useState();
 
   useEffect(() => {
     const getClasses = async () => {
@@ -28,6 +30,17 @@ const Classes = (props) => {
       setLoadedClassesFetch(data.classes);
     };
     getClasses();
+  }, []);
+
+  useEffect(() => {
+    const fetchTrainers = async () => {
+      try {
+        const response = await fetch(`http://localhost:8080/api/trainers/`);
+        const data = await response.json();
+        setLoadedTrainersFetch(data);
+      } catch (err) {}
+    };
+    fetchTrainers();
   }, []);
 
   const Header = ({ children, appointmentData, ...restProps }) => (
@@ -51,6 +64,35 @@ const Classes = (props) => {
         <DeleteIcon />
       </IconButton>
     </AppointmentTooltip.Header>
+  );
+
+  const Content = ({ children, appointmentData, ...restProps }) => (
+    <AppointmentTooltip.Content
+      {...restProps}
+      appointmentData={appointmentData}
+    >
+      <Grid container alignItems='center'>
+        <Grid item xs={2} textAlign='center'>
+          <PersonIcon />
+        </Grid>
+        <Grid item xs={10}>
+          {JSON.stringify(
+            loadedTrainersFetch.trainers.find(
+              (trainer) => trainer.id === appointmentData.trainer
+            )
+          )
+            .slice(42, 80)
+            .replace("address", "")
+            .replace("surname", "")
+            .replace(",", "")
+            .replace(",", "")
+            .replace('"""', " ")
+            .replace('""', "")
+            .replace(':"', "")
+            .replace('":', "")}
+        </Grid>
+      </Grid>
+    </AppointmentTooltip.Content>
   );
 
   return (
@@ -79,7 +121,11 @@ const Classes = (props) => {
             <DateNavigator />
             <TodayButton />
             <Appointments />
-            <AppointmentTooltip showCloseButton headerComponent={Header} />
+            <AppointmentTooltip
+              showCloseButton
+              headerComponent={Header}
+              contentComponent={Content}
+            />
           </Scheduler>
         </Paper>
       )}
