@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import { Paper, Button, Stack, Grid } from "@mui/material";
-import { ViewState } from "@devexpress/dx-react-scheduler";
+import { ViewState, EditingState } from "@devexpress/dx-react-scheduler";
 import { Link } from "react-router-dom";
 import {
   Scheduler,
@@ -10,9 +10,8 @@ import {
   DateNavigator,
   TodayButton,
   AppointmentTooltip,
+  ConfirmationDialog,
 } from "@devexpress/dx-react-scheduler-material-ui";
-import { IconButton } from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete";
 import PersonIcon from "@mui/icons-material/Person";
 
 const Classes = (props) => {
@@ -44,26 +43,20 @@ const Classes = (props) => {
   }, []);
 
   const Header = ({ children, appointmentData, ...restProps }) => (
-    <AppointmentTooltip.Header {...restProps} appointmentData={appointmentData}>
-      <IconButton
-        onClick={async () => {
-          await fetch(
-            `http://localhost:8080/api/classes/${appointmentData.id}`,
-            {
-              method: "DELETE",
-            }
-          );
-          setLoadedClassesFetch(
-            loadedClassesFetch.filter(
-              (gymClass) => gymClass.id !== appointmentData.id
-            )
-          );
-        }}
-        size='large'
-      >
-        <DeleteIcon />
-      </IconButton>
-    </AppointmentTooltip.Header>
+    <AppointmentTooltip.Header
+      {...restProps}
+      appointmentData={appointmentData}
+      onDeleteButtonClick={async () => {
+        await fetch(`http://localhost:8080/api/classes/${appointmentData.id}`, {
+          method: "DELETE",
+        });
+        setLoadedClassesFetch(
+          loadedClassesFetch.filter(
+            (gymClass) => gymClass.id !== appointmentData.id
+          )
+        );
+      }}
+    ></AppointmentTooltip.Header>
   );
 
   const Content = ({ children, appointmentData, ...restProps }) => (
@@ -116,6 +109,7 @@ const Classes = (props) => {
           </Stack>
           <Scheduler height='auto' data={loadedClassesFetch}>
             <ViewState />
+            <EditingState />
             <WeekView startDayHour={9} endDayHour={21} />
             <Toolbar />
             <DateNavigator />
@@ -123,9 +117,11 @@ const Classes = (props) => {
             <Appointments />
             <AppointmentTooltip
               showCloseButton
+              showDeleteButton
               headerComponent={Header}
               contentComponent={Content}
             />
+            <ConfirmationDialog />
           </Scheduler>
         </Paper>
       )}
