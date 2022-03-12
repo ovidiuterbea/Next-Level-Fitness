@@ -108,7 +108,12 @@ const Auth = () => {
       trainerAuth.login();
     }
     if (loginType === "admin") {
-      adminAuth.login();
+      if (
+        enteredEmail === "nextadmin@gmail.com" &&
+        enteredPassword === "admin123"
+      ) {
+        adminAuth.login();
+      }
     }
   };
 
