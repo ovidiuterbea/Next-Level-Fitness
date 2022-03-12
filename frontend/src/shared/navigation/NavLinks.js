@@ -37,7 +37,7 @@ const NavLinks = (props) => {
           <li>
             <NavLink
               activeClassName='activeLink'
-              to={`/:clientid/classes`}
+              to={`/${userAuth.userId}/classes`}
               onClick={() => {
                 window.scrollTo(0, 0);
               }}
@@ -50,7 +50,7 @@ const NavLinks = (props) => {
           <li>
             <NavLink
               activeClassName='activeLink'
-              to={`/:trainerid/classes`}
+              to={`/${trainerAuth.trainerId}/classes`}
               onClick={() => {
                 window.scrollTo(0, 0);
               }}

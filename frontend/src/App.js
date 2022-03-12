@@ -36,6 +36,7 @@ const App = () => {
   const [trainerIsLoggedIn, setTrainerIsLoggedIn] = useState(false);
   const [adminIsLoggedIn, setAdminIsLoggedIn] = useState(false);
   const [clientId, setClientId] = useState("");
+  const [trainerId, setTrainerId] = useState("");
 
   const loginUser = useCallback((cId) => {
     setUserIsLoggedIn(true);
@@ -46,8 +47,9 @@ const App = () => {
     setUserIsLoggedIn(false);
   }, []);
 
-  const loginTrainer = useCallback(() => {
+  const loginTrainer = useCallback((tId) => {
     setTrainerIsLoggedIn(true);
+    setTrainerId(tId);
   }, []);
 
   const logoutTrainer = useCallback(() => {
@@ -136,6 +138,7 @@ const App = () => {
           isLoggedIn: trainerIsLoggedIn,
           login: loginTrainer,
           logout: logoutTrainer,
+          trainerId: trainerId,
         }}
       >
         <UserContext.Provider

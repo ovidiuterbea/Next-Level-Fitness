@@ -73,18 +73,25 @@ const Auth = () => {
   const authSubmitHandler = async (event) => {
     event.preventDefault();
     if (loginType === "user" && isLoginMode === true) {
-      const response = await fetch(`http://localhost:8080/api/clients/login`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: enteredEmail,
-          password: enteredPassword,
-        }),
-      });
-      const data = await response.json();
-      userAuth.login(data.clientId);
+      try {
+        const response = await fetch(
+          `http://localhost:8080/api/clients/login`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              email: enteredEmail,
+              password: enteredPassword,
+            }),
+          }
+        );
+        const data = await response.json();
+        if (data.clientId) {
+          userAuth.login(data.clientId);
+        }
+      } catch (err) {}
     }
     if (loginType === "user" && isLoginMode === false) {
       const response = await fetch(`http://localhost:8080/api/clients/signup`, {
@@ -105,7 +112,25 @@ const Auth = () => {
       userAuth.login(data.clientId);
     }
     if (loginType === "trainer") {
-      trainerAuth.login();
+      try {
+        const response = await fetch(
+          `http://localhost:8080/api/trainers/login`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              email: enteredEmail,
+              password: enteredPassword,
+            }),
+          }
+        );
+        const data = await response.json();
+        if (data.trainerId) {
+          trainerAuth.login(data.trainerId);
+        }
+      } catch (err) {}
     }
     if (loginType === "admin") {
       if (
