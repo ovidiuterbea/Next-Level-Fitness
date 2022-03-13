@@ -42,7 +42,20 @@ const NavLinks = (props) => {
                 window.scrollTo(0, 0);
               }}
             >
-              Clase de fitness
+              Fitness classes
+            </NavLink>
+          </li>
+        )}
+        {userAuth.isLoggedIn && (
+          <li>
+            <NavLink
+              activeClassName='activeLink'
+              to={`/${userAuth.userId}/subscription`}
+              onClick={() => {
+                window.scrollTo(0, 0);
+              }}
+            >
+              My subscription
             </NavLink>
           </li>
         )}

@@ -1,0 +1,31 @@
+.subscription-detail {
+  display: flex;
+  flex-direction: column;
+  margin: 3rem auto;
+  width: 50%;
+  border-radius: 10px;
+  background-color: #f3f3f3;
+  padding: 1.2rem;
+  box-shadow: 3px 3px 10px 1px rgba(0, 0, 0, 0.3);
+  color: #181d01;
+  justify-content: center;
+  align-items: center;
+}
+
+.subscription-title {
+  font-size: 1.5rem;
+}
+
+.confirm-area {
+  display: flex;
+  flex-direction: column;
+  margin: 3rem auto;
+  width: 30%;
+  border-radius: 10px;
+  background-color: #ffef00;
+  padding: 1.2rem;
+  box-shadow: 3px 3px 10px 1px rgba(0, 0, 0, 0.3);
+  color: #181d01;
+  justify-content: center;
+  align-items: center;
+}

@@ -10,10 +10,6 @@ import {
   //   CircularProgress,
   // Stack,
   // Radio,
-  // RadioGroup,
-  // FormControl,
-  // FormControlLabel,
-  // FormLabel,
   // ThemeProvider,
   ButtonGroup,
   // createTheme,
@@ -21,7 +17,6 @@ import {
 import { UserContext } from "../shared/context/user-context";
 import { TrainerContext } from "../shared/context/trainer-context";
 import { AdminContext } from "../shared/context/admin-context";
-// import { useHttpClient } from "../../shared/hooks/http-hook";
 // import { grey } from "@mui/material/colors";
 
 const Auth = () => {
@@ -89,7 +84,7 @@ const Auth = () => {
         );
         const data = await response.json();
         if (data.clientId) {
-          userAuth.login(data.clientId);
+          userAuth.login(data.clientId, data.subscription);
         }
       } catch (err) {}
     }
@@ -109,7 +104,7 @@ const Auth = () => {
         }),
       });
       const data = await response.json();
-      userAuth.login(data.clientId);
+      userAuth.login(data.clientId, data.subscription);
     }
     if (loginType === "trainer") {
       try {

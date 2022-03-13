@@ -127,7 +127,10 @@ const login = async (req, res, next) => {
     return next(error);
   }
 
-  res.json({ clientId: existingClient.id });
+  res.json({
+    clientId: existingClient.id,
+    subscription: existingClient.subscription,
+  });
 }; // FULLY DONE
 
 // MERGE

@@ -9,6 +9,8 @@ import NavLinks from "./shared/navigation/NavLinks";
 
 // user
 import UserClasses from "./gym-classes/pages/UserClasses";
+import Subscription from "./users/pages/Subscription";
+import AddSubscription from "./users/pages/AddSubscription";
 
 // trainer
 import TrainerClasses from "./gym-classes/pages/TrainerClasses";
@@ -36,11 +38,17 @@ const App = () => {
   const [trainerIsLoggedIn, setTrainerIsLoggedIn] = useState(false);
   const [adminIsLoggedIn, setAdminIsLoggedIn] = useState(false);
   const [clientId, setClientId] = useState("");
+  const [clientSubScription, setClientSubscription] = useState(null);
   const [trainerId, setTrainerId] = useState("");
 
-  const loginUser = useCallback((cId) => {
+  const loginUser = useCallback((cId, subscription) => {
     setUserIsLoggedIn(true);
     setClientId(cId);
+    setClientSubscription(subscription);
+  }, []);
+
+  const updateSubscription = useCallback((subscription) => {
+    setClientSubscription(subscription);
   }, []);
 
   const logoutUser = useCallback(() => {
@@ -71,6 +79,12 @@ const App = () => {
       <Switch>
         <Route path='/:clientid/classes' exact>
           <UserClasses />
+        </Route>
+        <Route path='/:clientid/subscription' exact>
+          <Subscription />
+        </Route>
+        <Route path='/:clientid/addsubscription' exact>
+          <AddSubscription />
         </Route>
       </Switch>
     );
@@ -147,6 +161,8 @@ const App = () => {
             login: loginUser,
             logout: logoutUser,
             userId: clientId,
+            subscription: clientSubScription,
+            updateSubscription: updateSubscription,
           }}
         >
           <Router>
