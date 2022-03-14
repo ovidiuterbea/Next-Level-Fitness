@@ -33,4 +33,6 @@ router.patch(
   clientController.deleteClassByClientId
 );
 
+router.patch("/:clientid/payment", clientController.deletePayment);
+
 module.exports = router;

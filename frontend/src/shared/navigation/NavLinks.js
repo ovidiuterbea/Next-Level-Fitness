@@ -89,6 +89,19 @@ const NavLinks = (props) => {
           <li>
             <NavLink
               activeClassName='activeLink'
+              to={`/payments`}
+              onClick={() => {
+                window.scrollTo(0, 0);
+              }}
+            >
+              Payments
+            </NavLink>
+          </li>
+        )}
+        {adminAuth.isLoggedIn && (
+          <li>
+            <NavLink
+              activeClassName='activeLink'
               to={`/hiringrequests`}
               onClick={() => {
                 window.scrollTo(0, 0);

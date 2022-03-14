@@ -5,7 +5,7 @@ import "./HiringList.css";
 const HiringList = (props) => {
   if (props.items.hirings.length === 0) {
     return (
-      <div>
+      <div className='subscription-detail'>
         <h2>No Hiring Requests found!</h2>
       </div>
     );

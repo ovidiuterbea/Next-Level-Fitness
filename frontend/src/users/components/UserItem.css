@@ -1,0 +1,47 @@
+.user-item {
+  display: flex;
+  flex-direction: column;
+  margin: 2.5rem auto;
+  width: 100%;
+  background-color: #0e1111;
+  /* padding: 1.2rem; */
+  border-radius: 10px;
+}
+
+.user__buttons {
+  display: flex;
+  justify-content: center;
+}
+
+a {
+  text-decoration: none;
+}
+
+.user__buttons button {
+  border: none;
+  background-color: #181d01;
+  color: #f3f3f3;
+  height: 3rem;
+  width: fit-content;
+  border-radius: 10px;
+  transition: ease-out 1.2s;
+  font-size: 16px;
+  outline: none;
+  box-shadow: 0px 0px 10px -3px #19193d;
+  margin-bottom: 1.5rem;
+}
+
+.user__buttons button:hover {
+  cursor: pointer;
+  color: #181d01;
+  background-color: #f3f3f3;
+}
+
+.user-name {
+  color: #f3f3f3;
+  text-align: center;
+}
+
+.some-margin {
+  margin-bottom: 2rem;
+}

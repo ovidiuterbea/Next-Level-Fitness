@@ -415,6 +415,35 @@ const deleteClassByClientId = async (req, res, next) => {
   res.status(200).json({ client: client.toObject({ getters: true }) });
 };
 
+const deletePayment = async (req, res, next) => {
+  const clientId = req.params.clientid;
+
+  let client;
+  try {
+    client = await Client.findById(clientId);
+  } catch (err) {
+    const error = new HttpError(
+      "Something went wrong, could not create subscription",
+      500
+    );
+    return next(error);
+  }
+
+  client.mustPay = false;
+
+  try {
+    await client.save();
+  } catch (err) {
+    const error = new HttpError(
+      "Something went wrong, could not create the subscription.",
+      500
+    );
+    return next(error);
+  }
+
+  res.status(200).json({ client: client.toObject({ getters: true }) });
+};
+
 exports.signup = signup;
 exports.login = login;
 exports.getClients = getClients;
@@ -425,3 +454,4 @@ exports.givePersonalTrainerByClientId = givePersonalTrainerByClientId;
 exports.deleteTrainerByClientId = deleteTrainerByClientId;
 exports.giveClassByClientId = giveClassByClientId;
 exports.deleteClassByClientId = deleteClassByClientId;
+exports.deletePayment = deletePayment;
