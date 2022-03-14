@@ -26,7 +26,7 @@ router.patch(
   clientController.deleteTrainerByClientId
 );
 
-router.patch("/:clientid/class/:classid", clientController.giveClassByClientId);
+router.patch("/:clientid/class", clientController.giveClassByClientId);
 
 router.patch(
   "/:clientid/classDel/:classid",

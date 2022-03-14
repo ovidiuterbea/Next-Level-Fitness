@@ -305,7 +305,8 @@ const deleteTrainerByClientId = async (req, res, next) => {
 // MERGE
 const giveClassByClientId = async (req, res, next) => {
   const clientId = req.params.clientid;
-  const classId = req.params.classid;
+  // const classId = req.params.classid;
+  const { classId } = req.body;
 
   let client;
   try {
@@ -331,6 +332,11 @@ const giveClassByClientId = async (req, res, next) => {
 
   if (!gymClass) {
     const error = new HttpError("Could not find class for provided id", 404);
+    return next(error);
+  }
+
+  if (gymClass.clients.includes(client.id)) {
+    const error = new HttpError("Client already asigned to this class.", 404);
     return next(error);
   }
 
