@@ -11,6 +11,7 @@ import NavLinks from "./shared/navigation/NavLinks";
 import UserClasses from "./gym-classes/pages/UserClasses";
 import Subscription from "./users/pages/Subscription";
 import AddSubscription from "./users/pages/AddSubscription";
+import UserTrainer from "./trainers/pages/UserTrainer";
 
 // trainer
 import TrainerClasses from "./gym-classes/pages/TrainerClasses";
@@ -20,6 +21,7 @@ import Classes from "./gym-classes/pages/Classes";
 import HiringRequests from "./hiring/pages/HiringRequests";
 import AddGymClass from "./gym-classes/pages/AddGymClass";
 import UsersPayment from "./users/pages/UsersPayment";
+import PaymentConfirmation from "./users/pages/PaymentConfirmation";
 
 import {
   BrowserRouter as Router,
@@ -87,6 +89,9 @@ const App = () => {
         <Route path='/:clientid/addsubscription' exact>
           <AddSubscription />
         </Route>
+        <Route path='/:clientid/trainer' exact>
+          <UserTrainer />
+        </Route>
       </Switch>
     );
   } else if (trainerIsLoggedIn) {
@@ -114,6 +119,9 @@ const App = () => {
         </Route>
         <Route path='/payments' exact>
           <UsersPayment />
+        </Route>
+        <Route path='/payments/:clientid' exact>
+          <PaymentConfirmation />
         </Route>
       </Switch>
     );

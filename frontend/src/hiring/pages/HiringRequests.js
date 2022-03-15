@@ -15,8 +15,6 @@ const HiringRequests = (props) => {
     getHiringRequests();
   }, []);
 
-  console.log(loadedHiringRequestsFetch);
-
   return (
     <React.Fragment>
       {loadedHiringRequestsFetch && (

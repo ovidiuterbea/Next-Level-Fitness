@@ -165,11 +165,15 @@ const Auth = () => {
   return (
     <React.Fragment>
       <div className='App'>
-      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity='success' sx={{ width: "100%" }}>
-          Contul s-a creat cu succes!
-        </Alert>
-      </Snackbar>
+        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+          <Alert
+            onClose={handleClose}
+            severity='success'
+            sx={{ width: "100%" }}
+          >
+            Contul s-a creat cu succes!
+          </Alert>
+        </Snackbar>
         <Typography padding='1rem' variant='h3' align='center' color='#f3f3f3'>
           {isLoginMode && loginType === "user" && "Login"}
           {!isLoginMode && loginType === "user" && "Signup"}

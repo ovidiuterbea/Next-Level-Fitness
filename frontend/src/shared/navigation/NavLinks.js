@@ -33,16 +33,31 @@ const NavLinks = (props) => {
       {trainerAuth.isLoggedIn && <h2 style={{ color: "#FFEF00" }}>Trainer</h2>}
       {userAuth.isLoggedIn && <h2 style={{ color: "#FFEF00" }}>User</h2>}
       <ul className='nav-links'>
-        {userAuth.isLoggedIn && (
+        {userAuth.isLoggedIn &&
+          (userAuth.subscription === "gold" ||
+            userAuth.subscription === "platinum") && (
+            <li>
+              <NavLink
+                activeClassName='activeLink'
+                to={`/${userAuth.userId}/classes`}
+                onClick={() => {
+                  window.scrollTo(0, 0);
+                }}
+              >
+                Fitness classes
+              </NavLink>
+            </li>
+          )}
+        {userAuth.isLoggedIn && userAuth.subscription === "platinum" && (
           <li>
             <NavLink
               activeClassName='activeLink'
-              to={`/${userAuth.userId}/classes`}
+              to={`/${userAuth.userId}/trainer`}
               onClick={() => {
                 window.scrollTo(0, 0);
               }}
             >
-              Fitness classes
+              My trainer
             </NavLink>
           </li>
         )}

@@ -26,7 +26,7 @@ const UserItem = (props) => {
         }
       );
       handleClick();
-      history.push("/payments");
+      history.push(`/payments/${props.id}`);
     } catch (err) {}
   };
 

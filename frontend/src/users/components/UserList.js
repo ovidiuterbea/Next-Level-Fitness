@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import UserItem from "./UserItem";
 import "./UserList.css";
 
 const UserList = (props) => {
-  if (props.items.clients.length === 0) {
+  const [showPaymentList, setShowPaymentList] = useState(false);
+
+  for (let client of props.items.clients) {
+    if (client.mustPay === true) {
+      setShowPaymentList(true);
+    }
+  }
+  if (showPaymentList === false) {
     return (
       <div className='subscription-detail'>
         <h2>No Payments from clients found!</h2>

@@ -33,8 +33,7 @@ const HiringRequestDetails = (props) => {
   const [open, setOpen] = useState(false);
 
   const handleClose = () => {
-    setOpen(false);
-    history.push("/hiringrequests");
+    deleteHiringRequestWithoutRedirect();
   };
 
   useEffect(() => {
@@ -63,6 +62,14 @@ const HiringRequestDetails = (props) => {
     await fetch(`http://localhost:8080/api/hiring/${hiringRequestId}`, {
       method: "DELETE",
     });
+    history.push("/hiringrequests");
+  };
+
+  const deleteHiringRequestWithoutRedirect = async () => {
+    await fetch(`http://localhost:8080/api/hiring/${hiringRequestId}`, {
+      method: "DELETE",
+    });
+    setOpen(false);
     history.push("/hiringrequests");
   };
 
