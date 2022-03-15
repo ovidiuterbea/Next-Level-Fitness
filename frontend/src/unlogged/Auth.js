@@ -18,6 +18,12 @@ import { UserContext } from "../shared/context/user-context";
 import { TrainerContext } from "../shared/context/trainer-context";
 import { AdminContext } from "../shared/context/admin-context";
 // import { grey } from "@mui/material/colors";
+import MuiAlert from "@mui/material/Alert";
+import Snackbar from "@mui/material/Snackbar";
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant='filled' {...props} />;
+});
 
 const Auth = () => {
   const [isLoginMode, setIsLoginMode] = useState(true);
@@ -30,8 +36,20 @@ const Auth = () => {
   const [enteredSurname, setEnteredSurname] = useState("");
   const [enteredBirthday, setEnteredBirthday] = useState("");
   const [enteredAddress, setEnteredAddress] = useState("");
-
   const [loginType, setLoginType] = useState("user");
+  const [open, setOpen] = React.useState(false);
+
+  const handleClick = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
 
   const emailChangeHandler = (event) => {
     setEnteredEmail(event.target.value);
@@ -89,7 +107,7 @@ const Auth = () => {
       } catch (err) {}
     }
     if (loginType === "user" && isLoginMode === false) {
-      const response = await fetch(`http://localhost:8080/api/clients/signup`, {
+      await fetch(`http://localhost:8080/api/clients/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -103,8 +121,9 @@ const Auth = () => {
           address: enteredAddress,
         }),
       });
-      const data = await response.json();
-      userAuth.login(data.clientId, data.subscription);
+      // const data = await response.json();
+      handleClick();
+      setIsLoginMode(true);
     }
     if (loginType === "trainer") {
       try {
@@ -146,6 +165,11 @@ const Auth = () => {
   return (
     <React.Fragment>
       <div className='App'>
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity='success' sx={{ width: "100%" }}>
+          Contul s-a creat cu succes!
+        </Alert>
+      </Snackbar>
         <Typography padding='1rem' variant='h3' align='center' color='#f3f3f3'>
           {isLoginMode && loginType === "user" && "Login"}
           {!isLoginMode && loginType === "user" && "Signup"}
