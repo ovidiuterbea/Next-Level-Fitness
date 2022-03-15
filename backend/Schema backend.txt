@@ -2,15 +2,15 @@ Client routes:
 
 	/api/clients
 		
-		GET .../ (Retrieve a list of clients) BUNA 
-		GET .../:clientid (Retrieve data for a client by his id) BUNA 
+		GET .../ (Retrieve a list of clients) BUNA CONECTATA
+		GET .../:clientid (Retrieve data for a client by his id) BUNA CONECTATA
 		POST .../signup (Create a new client) BUNA CONECTATA
 		POST .../login (Log client in) BUNA CONECTATA
-		PATCH .../subscription/:clientid (Create a subscription for a client or create it) BUNA
+		PATCH .../subscription/:clientid (Create a subscription for a client or create it) BUNA CONECTATA
 		PATCH .../subscriptionDel/:clientid (Delete the subscription by the user id) BUNA
 		PATCH .../:clientid/trainer/:trainerid (Give a personal trainer to a client by the client id) (push to client and trainer) BUNA 
 		PATCH .../:clientid/trainerDel/:trainerid(Delete a personal trainer of a client by the client id) (pull from client and trainer)  BUNA 
-		PATCH .../:clientid/class/:classid (Give a client a class)  (push to client and class) BUNA 
+		PATCH .../:clientid/class/:classid (Give a client a class)  (push to client and class) BUNA CONECTATA
 		PATCH .../:clientid/classDel/:classid(Delete class from client) (pull from client and class) BUNA 
 		
 
@@ -18,11 +18,11 @@ Class routes:
 
 	/api/classes
 		
-		GET .../ (Retrieve a list of classes) BUNA 
+		GET .../ (Retrieve a list of classes) BUNA CONECTATA
 		GET .../:classid (Retrieve data for a class by its id) BUNA 
 		GET .../trainer/:trainerid (Get classes by the trainer id) BUNA 
-		POST .../ (Create a new gym class) BUNA 
-		DELETE .../:classid (Delete a gym class by id) (se va sterge si de la client si de la trainer) BUNA 
+		POST .../ (Create a new gym class) BUNA CONECTATA
+		DELETE .../:classid (Delete a gym class by id) (se va sterge si de la client si de la trainer) BUNA CONECTATA
 		
 		
 
@@ -30,9 +30,9 @@ Trainer routes:
 
 	/api/trainers
 
-		GET .../ (Retrieve a list of all trainers) BUNA 
+		GET .../ (Retrieve a list of all trainers) BUNA CONECTATA
 		GET .../client/:clientid (Retrieve the personal trainer by the client id) BUNA 
-		POST .../login (Log trainer in) BUNA 
+		POST .../login (Log trainer in) BUNA CONECTATA
 		POST .../create (Insert the trainer into the database) BUNA CONECTATA
 		GET .../:trainerid (Retrieve data from a trainer by his id) BUNA 
 		DELETE .../:trainerid (Delete a trainer by id) DONE (delete the class, delete from client) BUNA 
@@ -47,9 +47,4 @@ Hiring routes:
 		GET .../:hiringid (Retrieve data from a hiring request given by the id) BUNA MERGE CONECTATA
 		DELETE .../:hiringid (Delete a hiring request given by the id) BUNA MERGE CONECTATA
 
-Admin routes:
-
-	/api/admin
-	
-		POST .../login (Log admin in) BUNA UNDONE
-		
+Rute conectate cu frontend-ul: 16/25
