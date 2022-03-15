@@ -36,12 +36,14 @@ const Subscription = (props) => {
   } else if (userAuth.subscription === "bronze") {
     return (
       <div className='subscription-detail'>
+        <h1>Beneficiile tale | Abonament Bronze</h1>
         <h2>Aveti access in sala de forta si la sauna</h2>
       </div>
     );
   } else if (userAuth.subscription === "silver") {
     return (
       <div className='subscription-detail'>
+        <h1>Beneficiile tale | Abonament Silver</h1>
         <h2>Aveti access in sala de forta si la sauna</h2>
         <h2>Aveti access la piscina</h2>
       </div>
@@ -49,7 +51,7 @@ const Subscription = (props) => {
   } else if (userAuth.subscription === "gold") {
     return (
       <div className='subscription-detail'>
-        <h1>Beneficiile tale</h1>
+        <h1>Beneficiile tale | Abonament Gold</h1>
         <h2>Aveti access in sala de forta si la sauna</h2>
         <h2>Aveti access la piscina</h2>
         <h2>
@@ -71,6 +73,7 @@ const Subscription = (props) => {
   } else if (userAuth.subscription === "platinum") {
     return (
       <div className='subscription-detail'>
+        <h1>Beneficiile tale | Abonament Platinum</h1>
         <h2>Aveti access in sala de forta si la sauna</h2>
         <h2>Aveti access la piscina</h2>
         <h2>Aveti access la diversele clasele de fitness</h2>

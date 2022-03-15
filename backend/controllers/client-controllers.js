@@ -335,8 +335,16 @@ const giveClassByClientId = async (req, res, next) => {
     return next(error);
   }
 
+  if (gymClass.clients.length > 15) {
+    const error = new HttpError(
+      "Too many people in this fitness class, try another time.",
+      404
+    );
+    return next(error);
+  }
+
   if (gymClass.clients.includes(client.id)) {
-    const error = new HttpError("Client already asigned to this class.", 404);
+    const error = new HttpError("You are already asigned to this class.", 404);
     return next(error);
   }
 
@@ -362,7 +370,8 @@ const giveClassByClientId = async (req, res, next) => {
 // MERGE
 const deleteClassByClientId = async (req, res, next) => {
   const clientId = req.params.clientid;
-  const classId = req.params.classid;
+  // const classId = req.params.classid;
+  const { classId } = req.body;
 
   let client;
   try {
@@ -393,6 +402,11 @@ const deleteClassByClientId = async (req, res, next) => {
 
   if (!gymClass) {
     const error = new HttpError("Could not find class for provided id", 404);
+    return next(error);
+  }
+
+  if (!gymClass.clients.includes(client.id)) {
+    const error = new HttpError("You are not asigned to this class.", 404);
     return next(error);
   }
 

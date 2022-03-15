@@ -13,6 +13,7 @@ import {
 } from "@devexpress/dx-react-scheduler-material-ui";
 import PersonIcon from "@mui/icons-material/Person";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import RemoveIcon from "@mui/icons-material/Remove";
 import { useHttpClient } from "../../shared/hooks/http-hook";
 import { UserContext } from "../../shared/context/user-context";
 import MuiAlert from "@mui/material/Alert";
@@ -26,7 +27,9 @@ const UserClasses = (props) => {
   const [loadedClassesFetch, setLoadedClassesFetch] = useState();
   const [loadedTrainersFetch, setLoadedTrainersFetch] = useState();
   const [open, setOpen] = React.useState(false);
-  const { sendRequest } = useHttpClient();
+  const [mesaj, setMesaj] = useState("");
+  const [severity, setSeverity] = useState("success");
+  const { sendRequest, error } = useHttpClient();
   const userAuth = useContext(UserContext);
 
   const handleClick = () => {
@@ -80,11 +83,42 @@ const UserClasses = (props) => {
                 "Content-Type": "application/json",
               }
             );
+            setMesaj("V-ati alaturat cu succes la aceasta clasa de fitness!");
+            setSeverity("success");
             handleClick();
-          } catch (err) {}
+          } catch (err) {
+            setSeverity("error");
+            setMesaj(error);
+            handleClick();
+          }
         }}
       >
         <ArrowForwardIosIcon />
+      </IconButton>
+      <IconButton
+        onClick={async () => {
+          try {
+            await sendRequest(
+              `http://localhost:8080/api/clients/${userAuth.userId}/classDel`,
+              "PATCH",
+              JSON.stringify({
+                classId: appointmentData.id,
+              }),
+              {
+                "Content-Type": "application/json",
+              }
+            );
+            setMesaj("V-ati retras cu success din aceasta clasa de fitness.");
+            setSeverity("success");
+            handleClick();
+          } catch (err) {
+            setMesaj(error);
+            setSeverity("warning");
+            handleClick();
+          }
+        }}
+      >
+        <RemoveIcon />
       </IconButton>
     </AppointmentTooltip.Header>
   );
@@ -115,14 +149,24 @@ const UserClasses = (props) => {
             .replace('":', "")}
         </Grid>
       </Grid>
+      {JSON.stringify(appointmentData).includes(userAuth.userId) && (
+        <Grid container alignItems='center'>
+          <Grid item xs={2} textAlign='center'>
+            <PersonIcon />
+          </Grid>
+          <Grid item xs={10}>
+            Sunteti alocat acestei clase
+          </Grid>
+        </Grid>
+      )}
     </AppointmentTooltip.Content>
   );
 
   return (
     <React.Fragment>
       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity='success' sx={{ width: "100%" }}>
-          V-ati alaturat cu succes la aceasta clasa de fitness!
+        <Alert onClose={handleClose} severity={severity} sx={{ width: "100%" }}>
+          {mesaj}
         </Alert>
       </Snackbar>
       {loadedClassesFetch && (

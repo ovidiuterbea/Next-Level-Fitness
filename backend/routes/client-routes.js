@@ -28,10 +28,7 @@ router.patch(
 
 router.patch("/:clientid/class", clientController.giveClassByClientId);
 
-router.patch(
-  "/:clientid/classDel/:classid",
-  clientController.deleteClassByClientId
-);
+router.patch("/:clientid/classDel", clientController.deleteClassByClientId);
 
 router.patch("/:clientid/payment", clientController.deletePayment);
 

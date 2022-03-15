@@ -11,7 +11,7 @@ Client routes:
 		PATCH .../:clientid/trainer/:trainerid (Give a personal trainer to a client by the client id) (push to client and trainer) BUNA 
 		PATCH .../:clientid/trainerDel/:trainerid(Delete a personal trainer of a client by the client id) (pull from client and trainer)  BUNA 
 		PATCH .../:clientid/class/:classid (Give a client a class)  (push to client and class) BUNA CONECTATA
-		PATCH .../:clientid/classDel/:classid(Delete class from client) (pull from client and class) BUNA 
+		PATCH .../:clientid/classDel/:classid(Delete class from client) (pull from client and class) BUNA CONECTATA
 		
 
 Class routes:
