@@ -14,6 +14,7 @@ import {
 import PersonIcon from "@mui/icons-material/Person";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import RemoveIcon from "@mui/icons-material/Remove";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useHttpClient } from "../../shared/hooks/http-hook";
 import { UserContext } from "../../shared/context/user-context";
 import MuiAlert from "@mui/material/Alert";
@@ -152,7 +153,7 @@ const UserClasses = (props) => {
       {JSON.stringify(appointmentData).includes(userAuth.userId) && (
         <Grid container alignItems='center'>
           <Grid item xs={2} textAlign='center'>
-            <PersonIcon />
+            <AccountCircleIcon />
           </Grid>
           <Grid item xs={10}>
             Sunteti alocat acestei clase

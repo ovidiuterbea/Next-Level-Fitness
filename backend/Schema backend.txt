@@ -35,7 +35,7 @@ Trainer routes:
 		POST .../login (Log trainer in) BUNA CONECTATA
 		POST .../create (Insert the trainer into the database) BUNA CONECTATA
 		GET .../:trainerid (Retrieve data from a trainer by his id) BUNA 
-		DELETE .../:trainerid (Delete a trainer by id) DONE (delete the class, delete from client) BUNA 
+		DELETE .../:trainerid (Delete a trainer by id) DONE  BUNA 
 		
 
 Hiring routes:
@@ -47,4 +47,4 @@ Hiring routes:
 		GET .../:hiringid (Retrieve data from a hiring request given by the id) BUNA MERGE CONECTATA
 		DELETE .../:hiringid (Delete a hiring request given by the id) BUNA MERGE CONECTATA
 
-Rute conectate cu frontend-ul: 16/25
+Rute conectate cu frontend-ul: 17/25
