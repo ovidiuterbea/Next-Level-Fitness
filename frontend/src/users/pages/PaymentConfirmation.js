@@ -26,7 +26,7 @@ const PaymentConfirmation = (props) => {
   return (
     <React.Fragment>
       {loadedClientFetch && (
-        <div className='confirm-payment' style={{ color: "#0e1111" }}>
+        <div className='normal-card' style={{ color: "#0e1111" }}>
           <h2>
             {loadedClientFetch.name} {loadedClientFetch.surname} a achitat
             abonamentul.

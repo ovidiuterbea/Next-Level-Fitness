@@ -8,7 +8,7 @@ Client routes:
 		POST .../login (Log client in) BUNA CONECTATA
 		PATCH .../subscription/:clientid (Create a subscription for a client or create it) BUNA CONECTATA
 		PATCH .../subscriptionDel/:clientid (Delete the subscription by the user id) BUNA
-		PATCH .../:clientid/trainer/:trainerid (Give a personal trainer to a client by the client id) (push to client and trainer) BUNA 
+		PATCH .../:clientid/trainer/:trainerid (Give a personal trainer to a client by the client id) (push to client and trainer) BUNA CONECTATA
 		PATCH .../:clientid/trainerDel/:trainerid(Delete a personal trainer of a client by the client id) (pull from client and trainer)  BUNA 
 		PATCH .../:clientid/class/:classid (Give a client a class)  (push to client and class) BUNA CONECTATA
 		PATCH .../:clientid/classDel/:classid(Delete class from client) (pull from client and class) BUNA CONECTATA
@@ -47,4 +47,4 @@ Hiring routes:
 		GET .../:hiringid (Retrieve data from a hiring request given by the id) BUNA MERGE CONECTATA
 		DELETE .../:hiringid (Delete a hiring request given by the id) BUNA MERGE CONECTATA
 
-Rute conectate cu frontend-ul: 17/25
+Rute conectate cu frontend-ul: 18/25

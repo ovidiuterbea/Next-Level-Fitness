@@ -12,6 +12,7 @@ import UserClasses from "./gym-classes/pages/UserClasses";
 import Subscription from "./users/pages/Subscription";
 import AddSubscription from "./users/pages/AddSubscription";
 import UserTrainer from "./trainers/pages/UserTrainer";
+import AddPersonalTrainer from "./trainers/pages/AddPersonalTrainer";
 
 // trainer
 import TrainerClasses from "./gym-classes/pages/TrainerClasses";
@@ -91,6 +92,9 @@ const App = () => {
         </Route>
         <Route path='/:clientid/trainer' exact>
           <UserTrainer />
+        </Route>
+        <Route path='/:clientid/trainer/addtrainer' exact>
+          <AddPersonalTrainer />
         </Route>
       </Switch>
     );
