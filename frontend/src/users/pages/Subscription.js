@@ -1,11 +1,56 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { UserContext } from "../../shared/context/user-context";
 import "./Subscription.css";
 import { Button, Stack } from "@mui/material";
 import { Link } from "react-router-dom";
+import { useHttpClient } from "../../shared/hooks/http-hook";
+import MuiAlert from "@mui/material/Alert";
+import Snackbar from "@mui/material/Snackbar";
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant='filled' {...props} />;
+});
 
 const Subscription = (props) => {
   const userAuth = useContext(UserContext);
+  const { error, sendRequest } = useHttpClient();
+  const [open, setOpen] = React.useState(false);
+  const [mesaj, setMesaj] = useState("");
+  const [severity, setSeverity] = useState("success");
+
+  const handleClick = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+    userAuth.updateSubscription(null);
+    // history.push(`/${clientId}/subscription`);
+  };
+
+  const deleteSubscription = async () => {
+    try {
+      await sendRequest(
+        `http://localhost:8080/api/clients//subscriptiondel/${userAuth.userId}`,
+        "PATCH",
+        null,
+        {
+          "Content-Type": "application/json",
+        }
+      );
+      setMesaj("V-ati sters abonamentul cu success");
+      setSeverity("success");
+      handleClick();
+    } catch (err) {
+      setMesaj(error);
+      setSeverity("error");
+    }
+  };
+
   if (userAuth.subscription === null) {
     return (
       <div className='subscription-detail'>
@@ -36,15 +81,22 @@ const Subscription = (props) => {
   } else if (userAuth.subscription === "bronze") {
     return (
       <React.Fragment>
+        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+          <Alert
+            onClose={handleClose}
+            severity={severity}
+            sx={{ width: "100%" }}
+          >
+            {mesaj}
+          </Alert>
+        </Snackbar>
         <div className='subscription-detail'>
           <h1>Beneficiile tale | Abonament Bronze</h1>
           <h2>Aveti access in sala de forta si la sauna</h2>
         </div>
         <Stack alignItems='center'>
           <Button
-            onClick={() => {
-              window.scrollTo(0, 0);
-            }}
+            onClick={deleteSubscription}
             id='muibtn'
             variant='contained'
             style={{
@@ -64,6 +116,15 @@ const Subscription = (props) => {
   } else if (userAuth.subscription === "silver") {
     return (
       <React.Fragment>
+        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+          <Alert
+            onClose={handleClose}
+            severity={severity}
+            sx={{ width: "100%" }}
+          >
+            {mesaj}
+          </Alert>
+        </Snackbar>
         <div className='subscription-detail'>
           <h1>Beneficiile tale | Abonament Silver</h1>
           <h2>Aveti access in sala de forta si la sauna</h2>
@@ -71,9 +132,7 @@ const Subscription = (props) => {
         </div>
         <Stack alignItems='center'>
           <Button
-            onClick={() => {
-              window.scrollTo(0, 0);
-            }}
+            onClick={deleteSubscription}
             id='muibtn'
             variant='contained'
             style={{
@@ -93,6 +152,15 @@ const Subscription = (props) => {
   } else if (userAuth.subscription === "gold") {
     return (
       <React.Fragment>
+        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+          <Alert
+            onClose={handleClose}
+            severity={severity}
+            sx={{ width: "100%" }}
+          >
+            {mesaj}
+          </Alert>
+        </Snackbar>
         <div className='subscription-detail'>
           <h1>Beneficiile tale | Abonament Gold</h1>
           <h2>Aveti access in sala de forta si la sauna</h2>
@@ -114,9 +182,7 @@ const Subscription = (props) => {
         </div>
         <Stack alignItems='center'>
           <Button
-            onClick={() => {
-              window.scrollTo(0, 0);
-            }}
+            onClick={deleteSubscription}
             id='muibtn'
             variant='contained'
             style={{
@@ -136,6 +202,15 @@ const Subscription = (props) => {
   } else if (userAuth.subscription === "platinum") {
     return (
       <React.Fragment>
+        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+          <Alert
+            onClose={handleClose}
+            severity={severity}
+            sx={{ width: "100%" }}
+          >
+            {mesaj}
+          </Alert>
+        </Snackbar>
         <div className='subscription-detail'>
           <h1>Beneficiile tale | Abonament Platinum</h1>
           <h2>Aveti access in sala de forta si la sauna</h2>
@@ -172,9 +247,7 @@ const Subscription = (props) => {
         </div>
         <Stack alignItems='center'>
           <Button
-            onClick={() => {
-              window.scrollTo(0, 0);
-            }}
+            onClick={deleteSubscription}
             id='muibtn'
             variant='contained'
             style={{

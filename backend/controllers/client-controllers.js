@@ -192,6 +192,72 @@ const deleteSubscription = async (req, res, next) => {
     return next(error);
   }
 
+  let classes;
+  try {
+    classes = await Class.find({});
+  } catch (err) {
+    const error = new HttpError(
+      "Fetching classes failed, please try again later.",
+      500
+    );
+    return next(error);
+  }
+
+  for (let gymClass of classes) {
+    try {
+      const sess = await mongoose.startSession();
+      sess.startTransaction();
+      await gymClass.clients.pull(client);
+      await gymClass.save({ session: sess });
+      await client.classes.pull(gymClass);
+      await client.save({ session: sess });
+      await sess.commitTransaction();
+    } catch (err) {
+      const error = new HttpError(
+        "Something went wrong, could not remove the client from the classes.",
+        500
+      );
+      return next(error);
+    }
+  }
+
+  if (client.personalTrainer !== null) {
+    let trainer;
+    try {
+      trainer = await Trainer.findById(client.personalTrainer);
+    } catch (err) {
+      const error = new HttpError(
+        "Something went wrong, could not find a trainer.",
+        500
+      );
+      return next(error);
+    }
+
+    if (!trainer) {
+      const error = new HttpError(
+        "Could not find a trainer for the provided id.",
+        404
+      );
+      return next(error);
+    }
+
+    try {
+      const sess = await mongoose.startSession();
+      sess.startTransaction();
+      await trainer.clients.pull(client);
+      await trainer.save({ session: sess });
+      client.personalTrainer = null;
+      await client.save({ session: sess });
+      await sess.commitTransaction();
+    } catch (err) {
+      const error = new HttpError(
+        "Something went wrong, could not remove the client from the trainer.",
+        500
+      );
+      return next(error);
+    }
+  }
+
   res.status(200).json({ client: client.toObject({ getters: true }) });
 }; // FULLY DONE
 
