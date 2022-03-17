@@ -10,6 +10,8 @@ router.get("/:classid", classesControllers.getClassById);
 
 router.get("/trainer/:trainerid", classesControllers.getClassesByTrainerId);
 
+router.get("/client/:clientid", classesControllers.getClassesByClientId);
+
 router.post("/", classesControllers.createClass);
 
 router.delete("/:classid", classesControllers.deleteClass);

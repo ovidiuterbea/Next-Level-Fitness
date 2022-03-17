@@ -48,6 +48,21 @@ const NavLinks = (props) => {
               </NavLink>
             </li>
           )}
+        {userAuth.isLoggedIn &&
+          (userAuth.subscription === "gold" ||
+            userAuth.subscription === "platinum") && (
+            <li>
+              <NavLink
+                activeClassName='activeLink'
+                to={`/${userAuth.userId}/myclasses`}
+                onClick={() => {
+                  window.scrollTo(0, 0);
+                }}
+              >
+                My classes
+              </NavLink>
+            </li>
+          )}
         {userAuth.isLoggedIn && userAuth.subscription === "platinum" && (
           <li>
             <NavLink

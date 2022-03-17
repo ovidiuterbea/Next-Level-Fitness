@@ -2,6 +2,7 @@ const { validationResult } = require("express-validator");
 const HttpError = require("../models/http-error");
 const Class = require("../models/gym-class");
 const Trainer = require("../models/trainer");
+const Client = require("../models/client");
 const mongoose = require("mongoose");
 const moment = require("moment");
 
@@ -151,6 +152,28 @@ const getClassesByTrainerId = async (req, res, next) => {
 };
 
 // MERGE
+const getClassesByClientId = async (req, res, next) => {
+  const clientId = req.params.clientid;
+
+  let clientWithClasses;
+  try {
+    clientWithClasses = await Client.findById(clientId).populate("classes");
+  } catch (err) {
+    const error = new HttpError(
+      "Fetching classes failed, please try again later",
+      500
+    );
+    return next(error);
+  }
+
+  res.json({
+    classes: clientWithClasses.classes.map((gymClass) =>
+      gymClass.toObject({ getters: true })
+    ),
+  });
+};
+
+// MERGE
 const deleteClass = async (req, res, next) => {
   const classId = req.params.classid;
 
@@ -203,5 +226,6 @@ const deleteClass = async (req, res, next) => {
 exports.createClass = createClass;
 exports.getClasses = getClasses;
 exports.getClassById = getClassById;
+exports.getClassesByClientId = getClassesByClientId;
 exports.getClassesByTrainerId = getClassesByTrainerId;
 exports.deleteClass = deleteClass;
