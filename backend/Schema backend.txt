@@ -7,7 +7,7 @@ Client routes:
 		POST .../signup (Create a new client) BUNA CONECTATA
 		POST .../login (Log client in) BUNA CONECTATA
 		PATCH .../subscription/:clientid (Create a subscription for a client or create it) BUNA CONECTATA
-		PATCH .../subscriptionDel/:clientid (Delete the subscription by the user id) BUNA
+		PATCH .../subscriptionDel/:clientid (Delete the subscription by the user id) BUNA CONECTATA
 		PATCH .../:clientid/trainer/:trainerid (Give a personal trainer to a client by the client id) (push to client and trainer) BUNA CONECTATA
 		PATCH .../:clientid/trainerDel/:trainerid(Delete a personal trainer of a client by the client id) (pull from client and trainer)  BUNA CONECTATA 
 		PATCH .../:clientid/class/:classid (Give a client a class)  (push to client and class) BUNA CONECTATA
