@@ -76,7 +76,20 @@ const Subscription = (props) => {
         <h1>Beneficiile tale | Abonament Platinum</h1>
         <h2>Aveti access in sala de forta si la sauna</h2>
         <h2>Aveti access la piscina</h2>
-        <h2>Aveti access la diversele clasele de fitness</h2>
+        <h2>
+          Aveti access la diversele {"  "}
+          <Link
+            to={`/${userAuth.userId}/classes`}
+            style={{
+              backgroundColor: "#0e1111",
+              color: "#ffef00",
+              borderRadius: "10px",
+              padding: "0.5rem",
+            }}
+          >
+            clase de fitness
+          </Link>
+        </h2>
         <h2>Va puteti alege antrenor personal, in caz ca nu aveti unul deja</h2>
       </div>
     );
