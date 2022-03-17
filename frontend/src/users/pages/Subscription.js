@@ -90,7 +90,21 @@ const Subscription = (props) => {
             clase de fitness
           </Link>
         </h2>
-        <h2>Va puteti alege antrenor personal, in caz ca nu aveti unul deja</h2>
+        <h2>
+          Va puteti alege{" "}
+          <Link
+            to={`/${userAuth.userId}/trainer`}
+            style={{
+              backgroundColor: "#0e1111",
+              color: "#ffef00",
+              borderRadius: "10px",
+              padding: "0.5rem",
+            }}
+          >
+            antrenor personal
+          </Link>{" "}
+          , in caz ca nu aveti unul deja
+        </h2>
       </div>
     );
   }
