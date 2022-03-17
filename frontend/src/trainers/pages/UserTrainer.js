@@ -19,6 +19,10 @@ const UserTrainer = (props) => {
     getClients();
   }, [clientId]);
 
+  if (loadedClientFetch) {
+    console.log(loadedClientFetch.personalTrainer);
+  }
+
   return (
     <React.Fragment>
       {loadedClientFetch && loadedClientFetch.personalTrainer === null && (
@@ -46,6 +50,25 @@ const UserTrainer = (props) => {
       {loadedClientFetch && loadedClientFetch.personalTrainer && (
         <div className='normal-card' style={{ color: "#0e1111" }}>
           <h2>Aveti antrenor personal ales.</h2>
+          <Button
+            className='btn-accept'
+            variant='contained'
+            style={{
+              height: "3rem",
+              fontSize: "1.2rem",
+              fontFamily: "inherit",
+              marginTop: "1rem",
+              backgroundColor: "green",
+            }}
+            startIcon={<FitnessCenterIcon />}
+            onClick={() => {
+              history.push(
+                `/${clientId}/trainer/${loadedClientFetch.personalTrainer}`
+              );
+            }}
+          >
+            Detalii antrenor personal
+          </Button>
         </div>
       )}
     </React.Fragment>
