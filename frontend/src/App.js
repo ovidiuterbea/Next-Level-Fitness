@@ -18,6 +18,7 @@ import UserClassesDetails from "./gym-classes/pages/UserClassesDetails";
 
 // trainer
 import TrainerClasses from "./gym-classes/pages/TrainerClasses";
+import TrainerClients from "./users/pages/TrainerClients";
 
 // admin
 import Classes from "./gym-classes/pages/Classes";
@@ -111,6 +112,9 @@ const App = () => {
       <Switch>
         <Route path='/:trainerid/classes' exact>
           <TrainerClasses />
+        </Route>
+        <Route path='/:trainerid/clients' exact>
+          <TrainerClients />
         </Route>
       </Switch>
     );

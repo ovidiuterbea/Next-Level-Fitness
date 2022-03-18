@@ -98,7 +98,20 @@ const NavLinks = (props) => {
                 window.scrollTo(0, 0);
               }}
             >
-              Clasele mele
+              My classes
+            </NavLink>
+          </li>
+        )}
+        {trainerAuth.isLoggedIn && (
+          <li>
+            <NavLink
+              activeClassName='activeLink'
+              to={`/${trainerAuth.trainerId}/clients`}
+              onClick={() => {
+                window.scrollTo(0, 0);
+              }}
+            >
+              My clients
             </NavLink>
           </li>
         )}
