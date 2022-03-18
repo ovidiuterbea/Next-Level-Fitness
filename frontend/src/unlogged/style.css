@@ -5,6 +5,7 @@
   height: 92.4vh;
   position: relative;
   color: #fff;
+  margin-top: 4rem;
 }
 .hero .content {
   display: flex;

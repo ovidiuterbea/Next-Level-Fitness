@@ -245,6 +245,7 @@ const TrainerClasses = () => {
         sx={{
           width: "80%",
           margin: "0 auto",
+          marginTop: "7rem",
         }}
       >
         <Paper sx={{ width: "100%", mb: 2 }}>
