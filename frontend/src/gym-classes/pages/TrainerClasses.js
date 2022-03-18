@@ -289,8 +289,12 @@ const TrainerClasses = () => {
                           {row.title}
                         </TableCell>
                         <TableCell>{row.difficultyLevel}</TableCell>
-                        <TableCell>{row.startDate}</TableCell>
-                        <TableCell>{row.endDate}</TableCell>
+                        <TableCell>
+                          {row.startDate.slice(0, 19).replace("T", " ")}
+                        </TableCell>
+                        <TableCell>
+                          {row.endDate.slice(0, 19).replace("T", " ")}
+                        </TableCell>
                       </TableRow>
                     );
                   })}
