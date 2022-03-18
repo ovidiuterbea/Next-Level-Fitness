@@ -1,8 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
 import { TrainerContext } from "../../shared/context/trainer-context";
-import { Button } from "@mui/material";
-import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
-import { useHistory } from "react-router-dom";
 
 import PropTypes from "prop-types";
 import { alpha } from "@mui/material/styles";
@@ -193,7 +190,6 @@ const TrainerClasses = () => {
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const trainerAuth = useContext(TrainerContext);
-  const history = useHistory();
   useEffect(() => {
     const fetchClasses = async () => {
       try {

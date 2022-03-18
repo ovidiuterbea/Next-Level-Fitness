@@ -107,7 +107,7 @@ const HiringForm = () => {
     }
 
     setOpen(false);
-    if ((severity = "success")) {
+    if (severity === "success") {
       history.push("/classes");
     }
   };
