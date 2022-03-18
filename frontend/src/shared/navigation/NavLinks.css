@@ -1,84 +1,68 @@
-.main-navigation {
-  padding-right: 1rem;
-  padding-left: 1rem;
-  display: flex;
-  width: 100%;
-  /* justify-content: space-between; */
-  color: #f3f3f3;
-  box-shadow: 3px 3px 10px 1px rgba(0, 0, 0, 0.2);
-  background-color: #0e1111;
-  position: sticky;
-  top: 0;
-  z-index: 20;
-}
-.main-navigation a {
-  text-decoration: none;
-  color: #f3f3f3;
-}
-.main-navigation a h2 {
-  align-items: center;
-  justify-content: center;
-  font-size: 1.5rem;
-  padding-top: 0.5rem;
-}
-
-.main-navigation h2 {
-  align-items: center;
-  justify-content: center;
-  font-size: 1.5rem;
-  padding-top: 0.5rem;
-}
-
-.main-navigation .btn-auth {
-  margin-left: auto;
-  padding-right: 3rem;
-}
-
-.main-navigation .btn-auth a h2 {
-  background-color: #ffef00;
-  border-radius: 20px;
-  padding: 0.5rem 0.5rem 0.5rem 0.5rem;
-  color: #0e1111;
-}
 .nav-links {
   list-style: none;
   margin: 0;
   padding: 0;
+  width: 100%;
+  height: 100%;
   display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  width: 60%;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  gap: 1rem;
-  margin-left: 6rem;
+  margin-right: 2rem;
+}
+
+.nav-links li {
+  margin: 1rem;
 }
 
 .nav-links a {
-  color: #f3f3f3;
+  border: 1px solid transparent;
+  color: #292929;
   text-decoration: none;
-  /* padding-bottom: 5px;
-  padding: 0.5rem; */
+  padding: 0.5rem;
 }
 
-.main-navigation li {
-  border: none;
-  background-color: #0e1111;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  color: #f3f3f3;
-  /* box-shadow: inset 0 0 0 0 #7c7ac2; */
-  transition: ease-out 1.2s;
-  font-size: 1.5em;
-  outline: none;
-  justify-content: center;
-  align-items: center;
-}
-
-.main-navigation li:hover {
+.nav-links button {
   cursor: pointer;
+  border: 1px solid #292929;
+  color: #292929;
+  background: transparent;
+  padding: 0.5rem;
+  font: inherit;
+}
+
+.nav-links button:focus {
+  outline: none;
 }
 
 .activeLink {
   border-bottom: 3px solid #ffef00;
   transition: border-bottom 0.5s ease-in-out;
+}
+
+@media (min-width: 768px) {
+  .nav-links {
+    flex-direction: row;
+  }
+
+  .nav-links li {
+    margin: 0 0.5rem;
+  }
+
+  .nav-links a {
+    color: white;
+    text-decoration: none;
+  }
+
+  .nav-links button {
+    border: 1px solid white;
+    color: white;
+    background: transparent;
+  }
+
+  .nav-links button:hover,
+  .nav-links button:active {
+    background: #f8df00;
+    color: #292929;
+  }
 }

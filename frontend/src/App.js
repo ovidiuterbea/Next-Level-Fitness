@@ -5,7 +5,7 @@ import PersonalTraining from "./unlogged/PersonalTraining";
 import MainPage from "./unlogged/MainPage";
 import HiringForm from "./unlogged/HiringForm";
 import Auth from "./unlogged/Auth";
-import NavLinks from "./shared/navigation/NavLinks";
+import MainNavigation from "./shared/navigation/MainNavigation";
 
 // user
 import UserClasses from "./gym-classes/pages/UserClasses";
@@ -194,7 +194,7 @@ const App = () => {
           }}
         >
           <Router>
-            <NavLinks />
+            <MainNavigation />
             {routes}
           </Router>
         </UserContext.Provider>

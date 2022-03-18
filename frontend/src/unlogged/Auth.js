@@ -174,7 +174,13 @@ const Auth = () => {
             Contul s-a creat cu succes!
           </Alert>
         </Snackbar>
-        <Typography padding='1rem' variant='h3' align='center' color='#f3f3f3'>
+        <Typography
+          padding='1rem'
+          variant='h3'
+          align='center'
+          color='#f3f3f3'
+          style={{ marginTop: "4rem" }}
+        >
           {isLoginMode && loginType === "user" && "Login"}
           {!isLoginMode && loginType === "user" && "Signup"}
           {loginType === "trainer" && "Login"}
