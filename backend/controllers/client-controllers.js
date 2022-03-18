@@ -524,6 +524,27 @@ const deletePayment = async (req, res, next) => {
   res.status(200).json({ client: client.toObject({ getters: true }) });
 };
 
+const getClientsByTrainerId = async (req, res, next) => {
+  const trainerId = req.params.trainerid;
+
+  let trainerWithClients;
+  try {
+    trainerWithClients = await Trainer.findById(trainerId).populate("clients");
+  } catch (err) {
+    const error = new HttpError(
+      "Fetching classes failed, please try again later",
+      500
+    );
+    return next(error);
+  }
+
+  res.json({
+    clients: trainerWithClients.clients.map((client) =>
+      client.toObject({ getters: true })
+    ),
+  });
+};
+
 exports.signup = signup;
 exports.login = login;
 exports.getClients = getClients;
@@ -535,3 +556,4 @@ exports.deleteTrainerByClientId = deleteTrainerByClientId;
 exports.giveClassByClientId = giveClassByClientId;
 exports.deleteClassByClientId = deleteClassByClientId;
 exports.deletePayment = deletePayment;
+exports.getClientsByTrainerId = getClientsByTrainerId;

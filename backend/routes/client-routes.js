@@ -8,6 +8,8 @@ router.get("/", clientController.getClients);
 
 router.get("/:clientid", clientController.getClientById);
 
+router.get("/trainer/:trainerid", clientController.getClientsByTrainerId);
+
 router.post("/signup", clientController.signup);
 
 router.post("/login", clientController.login);
