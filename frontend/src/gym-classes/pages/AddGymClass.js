@@ -20,6 +20,13 @@ import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DateTimePicker from "@mui/lab/DateTimePicker";
 import { useHistory } from "react-router-dom";
+import { useHttpClient } from "../../shared/hooks/http-hook";
+import MuiAlert from "@mui/material/Alert";
+import Snackbar from "@mui/material/Snackbar";
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant='filled' {...props} />;
+});
 
 const HiringForm = () => {
   const [enteredName, setEnteredName] = useState("");
@@ -29,7 +36,11 @@ const HiringForm = () => {
   const [trainerId, setTrainerId] = useState("");
   const [enteredDifficultyLevel, setEnteredDifficultyLevel] = useState("");
   const [loadedTrainersFetch, setLoadedTrainersFetch] = useState();
+  const [open, setOpen] = React.useState(false);
+  const [mesaj, setMesaj] = useState("");
+  const [severity, setSeverity] = useState("success");
   const history = useHistory();
+  const { sendRequest, error } = useHttpClient();
 
   useEffect(() => {
     const fetchTrainers = async () => {
@@ -86,26 +97,46 @@ const HiringForm = () => {
     setEnteredTrainer(event.target.value);
   };
 
+  const handleClick = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+    if ((severity = "success")) {
+      history.push("/classes");
+    }
+  };
+
   const formHandler = async (event) => {
     event.preventDefault();
 
     try {
-      await fetch("http://localhost:8080/api/classes/", {
-        method: "post",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
+      await sendRequest(
+        "http://localhost:8080/api/classes/",
+        "POST",
+        JSON.stringify({
           title: enteredName,
           startDate: enteredStartDate.toISOString(),
           endDate: enteredEndDate.toISOString(),
           trainer: trainerId,
           difficultyLevel: enteredDifficultyLevel,
         }),
-      });
-      history.push("/classes");
+        {
+          "Content-Type": "application/json",
+        }
+      );
+      setMesaj("Ati creat clasa de fitness cu succes");
+      setSeverity("success");
+      handleClick();
     } catch (err) {
-      console.log(err);
+      setMesaj(error);
+      setSeverity("error");
+      handleClick();
     }
   };
 
@@ -115,12 +146,13 @@ const HiringForm = () => {
     },
   });
 
-  console.log(trainerId);
-  console.log(enteredName);
-  console.log(enteredStartDate);
-
   return (
     <React.Fragment>
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity={severity} sx={{ width: "100%" }}>
+          {mesaj}
+        </Alert>
+      </Snackbar>
       {loadedTrainersFetch && (
         <div>
           <Typography

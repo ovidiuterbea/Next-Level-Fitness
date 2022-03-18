@@ -36,13 +36,13 @@ const createClass = async (req, res, next) => {
 
   let now = moment();
 
-  if (startDate < now || startDate > endDate) {
+  const sDate = new Date(startDate);
+  const eDate = new Date(endDate);
+
+  if (sDate < now || sDate > eDate) {
     const error = new HttpError("Invalid date, please try again.", 404);
     return next(error);
   }
-
-  const sDate = new Date(startDate);
-  const eDate = new Date(endDate);
 
   const hours = Math.abs(eDate - sDate) / 36e5;
 
