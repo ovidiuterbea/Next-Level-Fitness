@@ -12,17 +12,8 @@ const createHiringRequest = async (req, res, next) => {
       new HttpError("Invalid inputs passed, please check your data.", 422)
     );
   }
-  const {
-    name,
-    surname,
-    email,
-    address,
-    birthdate,
-    image,
-    experience,
-    description,
-    phone,
-  } = req.body;
+
+  const email = req.body.email;
 
   let existingHiringRequest;
   try {
@@ -45,16 +36,16 @@ const createHiringRequest = async (req, res, next) => {
   }
 
   const createdHiringRequest = new Hiring({
-    name,
-    surname,
-    email,
-    image: "https://live.staticflickr.com/7631/26849088292_36fc52ee90_b.jpg",
+    name: req.body.name,
+    surname: req.body.surname,
+    email: req.body.email,
+    image: req.file.path,
     password: null,
-    address,
-    birthdate,
-    experience,
-    description,
-    phone,
+    address: req.body.address,
+    birthdate: req.body.birthdate,
+    experience: req.body.experience,
+    description: req.body.description,
+    phone: req.body.phone,
   });
 
   try {

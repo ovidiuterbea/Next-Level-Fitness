@@ -1,12 +1,13 @@
 const express = require("express");
 
 const hiringController = require("../controllers/hiring-controllers");
+const upload = require("../middleware/upload");
 
 const router = express.Router();
 
 router.get("/", hiringController.getHiringRequests);
 
-router.post("/", hiringController.createHiringRequest);
+router.post("/", upload.single("image"), hiringController.createHiringRequest);
 
 router.get("/:hiringid", hiringController.getHiringRequestById);
 
