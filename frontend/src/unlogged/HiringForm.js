@@ -35,6 +35,7 @@ const HiringForm = () => {
   const [enteredDescription, setEnteredDescription] = useState("");
   const [enteredPhone, setEnteredPhone] = useState("");
   const [open, setOpen] = useState(false);
+  const [image, setImage] = useState();
 
   const handleClose = () => {
     setOpen(false);
@@ -74,23 +75,21 @@ const HiringForm = () => {
 
   const formHandler = async (event) => {
     event.preventDefault();
+    const data = new FormData();
+    data.append("name", enteredName);
+    data.append("surname", enteredSurname);
+    data.append("address", enteredAddress);
+    data.append("description", enteredDescription);
+    data.append("birthdate", enteredBirthday);
+    data.append("email", enteredEmail);
+    data.append("experience", enteredExperience);
+    data.append("phone", enteredPhone);
+    data.append("image", image);
 
     try {
       await fetch("http://localhost:8080/api/hiring/", {
         method: "post",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: enteredName,
-          surname: enteredSurname,
-          address: enteredAddress,
-          description: enteredDescription,
-          birthdate: enteredBirthday,
-          email: enteredEmail,
-          experience: enteredExperience,
-          phone: enteredPhone,
-        }),
+        body: data,
       });
     } catch (err) {
       console.log(err);
@@ -274,6 +273,18 @@ const HiringForm = () => {
                       onChange={descriptionChangeHandler}
                       value={enteredDescription}
                     />
+                  </Grid>
+                  <Grid xs={10} item>
+                    <label htmlFor='file'>Profile picture </label>
+                    <input
+                      type='file'
+                      id='file'
+                      accept='.jpg,.png,.jpeg'
+                      onChange={(event) => {
+                        const file = event.target.files[0];
+                        setImage(file);
+                      }}
+                    ></input>
                   </Grid>
                   <Grid item xs={4}>
                     <Button

@@ -2,7 +2,6 @@ import "./HiringRequestDetails.css";
 import { Button } from "@mui/material";
 import { useParams } from "react-router";
 import React, { useEffect, useState } from "react";
-import imgHolder from "../../media/trainer-bazat.jpeg";
 import { useHistory } from "react-router-dom";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -94,6 +93,8 @@ const HiringRequestDetails = (props) => {
     setOpen(true);
   };
 
+  console.log(loadedHiringRequestFetch);
+
   return (
     <React.Fragment>
       {open && (
@@ -160,7 +161,7 @@ const HiringRequestDetails = (props) => {
               <img
                 alt='Canditate'
                 className='image-center'
-                src={imgHolder}
+                src={`http://localhost:8080/${loadedHiringRequestFetch.hiringRequest.image}`}
               ></img>
             </div>
           </div>

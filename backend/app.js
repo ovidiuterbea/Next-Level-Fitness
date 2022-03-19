@@ -1,11 +1,14 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const path = require("path");
 
 const clientsRoutes = require("./routes/client-routes");
 const hiringRoutes = require("./routes/hiring-routes");
 const trainerRoutes = require("./routes/trainer-routes");
 const classesRoutes = require("./routes/classes-routes");
 const HttpError = require("./models/http-error");
+
+const fs = require("fs");
 
 const app = express();
 
@@ -37,6 +40,11 @@ app.use((req, res, next) => {
 });
 
 app.use((error, req, res, next) => {
+  if (req.file) {
+    fs.unlink(req.file.path, (err) => {
+      console.log(err);
+    });
+  }
   if (res.headerSent) {
     return next(error);
   }
