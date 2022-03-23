@@ -161,7 +161,7 @@ const NavLinks = (props) => {
         </li>
       )}
       {adminAuth.isLoggedIn && (
-        <div className='btn-auth'>
+        <div>
           <NavLink
             to='/'
             onClick={() => {

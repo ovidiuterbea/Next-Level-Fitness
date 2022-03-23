@@ -10,3 +10,17 @@
   align-items: center;
   margin-top: 7rem;
 }
+
+.normal-card-black {
+  background-color: #f3f3f3;
+  border-radius: 10px;
+  width: 50%;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  margin: 2rem auto;
+  justify-content: center;
+  align-items: center;
+  margin-top: 7rem;
+  color: #0e1111;
+}

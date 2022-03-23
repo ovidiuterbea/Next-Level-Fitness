@@ -171,7 +171,7 @@ const UserClasses = (props) => {
         </Alert>
       </Snackbar>
       {loadedClassesFetch && (
-        <Paper>
+        <Paper style={{ marginTop: "4rem" }}>
           <Scheduler height='auto' data={loadedClassesFetch}>
             <ViewState />
             <EditingState />

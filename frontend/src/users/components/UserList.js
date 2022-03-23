@@ -3,27 +3,34 @@ import UserItem from "./UserItem";
 import "./UserList.css";
 
 const UserList = (props) => {
-  return (
-    <ul className='card-user'>
-      {props.items.clients
-        .filter((client) => client.mustPay === true)
-        .map((client) => {
-          return (
-            <UserItem
-              key={client.id}
-              id={client.id}
-              name={client.name}
-              surname={client.surname}
-              mustPay={client.mustPay}
-              image={client.image}
-              birthdate={client.birthdate}
-              address={client.address}
-              subscription={client.subscription}
-            />
-          );
-        })}
-    </ul>
-  );
+  if (
+    props.items.clients.filter((client) => client.mustPay === true).length === 0
+  ) {
+    return (
+      <div className='normal-card-black'>Nicio plata nu trebuie efectuata.</div>
+    );
+  } else
+    return (
+      <ul className='card-user'>
+        {props.items.clients
+          .filter((client) => client.mustPay === true)
+          .map((client) => {
+            return (
+              <UserItem
+                key={client.id}
+                id={client.id}
+                name={client.name}
+                surname={client.surname}
+                mustPay={client.mustPay}
+                image={client.image}
+                birthdate={client.birthdate}
+                address={client.address}
+                subscription={client.subscription}
+              />
+            );
+          })}
+      </ul>
+    );
 };
 
 export default UserList;
