@@ -88,6 +88,7 @@ const HiringRequestDetails = (props) => {
         address: loadedHiringRequestFetch.hiringRequest.address,
         birthdate: loadedHiringRequestFetch.hiringRequest.birthdate,
         experience: loadedHiringRequestFetch.hiringRequest.experience,
+        image: loadedHiringRequestFetch.hiringRequest.image,
       }),
     });
     setOpen(true);

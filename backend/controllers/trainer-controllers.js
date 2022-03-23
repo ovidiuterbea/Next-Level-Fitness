@@ -69,6 +69,7 @@ const createTrainer = async (req, res, next) => {
     address,
     birthdate,
     experience,
+    image,
   });
 
   try {

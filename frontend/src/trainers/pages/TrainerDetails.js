@@ -73,6 +73,11 @@ const TrainerDetails = (props) => {
       </Snackbar>
       {loadedTrainerFetch && (
         <div className='normal-card' style={{ color: "#0e1111" }}>
+          <img
+            alt='Canditate'
+            className='image-center'
+            src={`http://localhost:8080/${loadedTrainerFetch.image}`}
+          ></img>
           <h2>
             Antrenorul tau este {loadedTrainerFetch.name}{" "}
             {loadedTrainerFetch.surname}.
