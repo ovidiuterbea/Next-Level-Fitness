@@ -82,7 +82,8 @@ const Classes = (props) => {
             .replace('"""', " ")
             .replace('""', "")
             .replace(':"', "")
-            .replace('":', "")}
+            .replace('":', "")
+            .replace('"', "")}
         </Grid>
       </Grid>
     </AppointmentTooltip.Content>
@@ -92,7 +93,7 @@ const Classes = (props) => {
     <React.Fragment>
       {loadedClassesFetch && (
         <Paper>
-          <Stack alignItems='center'>
+          <Stack alignItems='center' style={{ marginTop: "5rem" }}>
             <Link to={"/newclass"}>
               <Button
                 variant='outlined'
