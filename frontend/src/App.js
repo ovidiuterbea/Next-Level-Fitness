@@ -26,6 +26,7 @@ import HiringRequests from "./hiring/pages/HiringRequests";
 import AddGymClass from "./gym-classes/pages/AddGymClass";
 import UsersPayment from "./users/pages/UsersPayment";
 import PaymentConfirmation from "./users/pages/PaymentConfirmation";
+import Statistics from "./users/pages/Statistics";
 
 import {
   BrowserRouter as Router,
@@ -138,6 +139,9 @@ const App = () => {
         </Route>
         <Route path='/payments/:clientid' exact>
           <PaymentConfirmation />
+        </Route>
+        <Route path='/statistics' exact>
+          <Statistics />
         </Route>
       </Switch>
     );
