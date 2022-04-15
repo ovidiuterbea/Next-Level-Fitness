@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Pie } from "react-chartjs-2";
 import { Button, ButtonGroup } from "@mui/material";
+import PieChart from "../../graphs/PieChart";
 
 const Statistics = (props) => {
   const [loadedTrainersFetch, setLoadedTrainersFetch] = useState();
@@ -104,57 +104,14 @@ const Statistics = (props) => {
         </Button>
       </ButtonGroup>
       {statisticsType === "user" && (
-        <Pie
-          data={{
-            labels: ["Bronze", "Silver", "Gold", "Platinum"],
-            datasets: [
-              {
-                label: "# of votes",
-                data: [
-                  numberOfBronzeSubs,
-                  numberOfSilverSubs,
-                  numberOfGoldSubs,
-                  numberOfPlatinumSubs,
-                ],
-                backgroundColor: [
-                  "rgba(205, 127, 50, 0.5)",
-                  "rgba(192, 192, 192, 0.5)",
-                  "rgba(255, 215, 0, 0.5)",
-                  "rgba(185, 242, 255, 0.5)",
-                  "rgba(153, 102, 255, 0.5)",
-                  "rgba(255, 159, 64, 0.5)",
-                ],
-                borderColor: [
-                  "rgba(205, 127, 50, 1)",
-                  "rgba(192, 192, 192, 1)",
-                  "rgba(255, 215, 0, 1)",
-                  "rgba(185, 242, 255, 1)",
-                  "rgba(153, 102, 255, 1)",
-                  "rgba(255, 159, 64, 1)",
-                ],
-                borderWidth: 1,
-              },
-            ],
-          }}
-          height={200}
-          width={300}
-          options={{
-            maintainAspectRatio: false,
-            scales: {
-              yAxes: [
-                {
-                  ticks: {
-                    beginAtZero: true,
-                  },
-                },
-              ],
-            },
-            legend: {
-              labels: {
-                fontSize: 25,
-              },
-            },
-          }}
+        <PieChart
+          labels={["Bronze", "Silver", "Gold", "Platinum"]}
+          data={[
+            numberOfBronzeSubs,
+            numberOfSilverSubs,
+            numberOfGoldSubs,
+            numberOfPlatinumSubs,
+          ]}
         />
       )}
     </div>
