@@ -84,7 +84,7 @@ const Statistics = (props) => {
             document.getElementById("btnTrainer").style.color = "#f3f3f3";
           }}
         >
-          Client
+          Clients
         </Button>
         <Button
           id='btnTrainer'
@@ -100,7 +100,7 @@ const Statistics = (props) => {
             document.getElementById("btnUser").style.color = "#f3f3f3";
           }}
         >
-          Trainer
+          Trainers
         </Button>
       </ButtonGroup>
       {statisticsType === "user" && (

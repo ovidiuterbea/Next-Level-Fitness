@@ -32,7 +32,8 @@ const PieChart = (props) => {
       height={200}
       width={300}
       options={{
-        maintainAspectRatio: false,
+        maintainAspectRatio: true,
+        responsive: true,
         scales: {
           yAxes: [
             {
