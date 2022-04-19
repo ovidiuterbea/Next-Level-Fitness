@@ -13,6 +13,10 @@ const Statistics = (props) => {
   const [numberOfSilverSubs, setNumberOfSilverSubs] = useState(0);
   const [numberOfGoldSubs, setNumberOfGoldSubs] = useState(0);
   const [numberOfPlatinumSubs, setNumberOfPlatinumSubs] = useState(0);
+  const [numberOfEasyClasses, setNumberOfEasyClasses] = useState(0);
+  const [numberOfIntermediateClasses, setNumberOfIntermediateClasses] =
+    useState(0);
+  const [numberOfHardClasses, setNumberOfHardClasses] = useState(0);
 
   useEffect(() => {
     const fetchTrainers = async () => {
@@ -28,6 +32,17 @@ const Statistics = (props) => {
         const response = await fetch(`http://localhost:8080/api/classes/`);
         const data = await response.json();
         setLoadedClassesFetch(data.classes);
+        for (let gymClass of data.classes) {
+          if (gymClass.difficultyLevel === "Easy") {
+            setNumberOfEasyClasses((n) => n + 1);
+          }
+          if (gymClass.difficultyLevel === "Intermediate") {
+            setNumberOfIntermediateClasses((n) => n + 1);
+          }
+          if (gymClass.difficultyLevel === "Hard") {
+            setNumberOfHardClasses((n) => n + 1);
+          }
+        }
       } catch (err) {}
     };
     fetchClasses();
@@ -54,12 +69,6 @@ const Statistics = (props) => {
     };
     fetchClients();
   }, []);
-
-  if (loadedTrainersFetch && loadedClassesFetch && loadedClientsFetch) {
-    console.log(loadedTrainersFetch);
-    console.log(loadedClassesFetch);
-    console.log(loadedClientsFetch);
-  }
 
   return (
     <div
@@ -88,13 +97,13 @@ const Statistics = (props) => {
           onClick={() => {
             setStatisticsType("user");
             document.getElementById("btnUser").style.color = "#ffef00";
-            document.getElementById("btnTrainer").style.color = "#f3f3f3";
+            document.getElementById("btnClasses").style.color = "#f3f3f3";
           }}
         >
           Clients
         </Button>
         <Button
-          id='btnTrainer'
+          id='btnClasses'
           style={{
             fontFamily: "inherit",
             fontSize: "1.2rem",
@@ -102,12 +111,12 @@ const Statistics = (props) => {
             color: "#f3f3f3",
           }}
           onClick={() => {
-            setStatisticsType("trainer");
-            document.getElementById("btnTrainer").style.color = "#ffef00";
+            setStatisticsType("class");
+            document.getElementById("btnClasses").style.color = "#ffef00";
             document.getElementById("btnUser").style.color = "#f3f3f3";
           }}
         >
-          Trainers
+          Classes
         </Button>
       </ButtonGroup>
       <ButtonGroup
@@ -200,6 +209,46 @@ const Statistics = (props) => {
             "rgba(192, 192, 192, 1)",
             "rgba(255, 215, 0, 1)",
             "rgba(185, 242, 255, 1)",
+          ]}
+        />
+      )}
+      {statisticsType === "class" && chartType === "pie" && (
+        <PieChart
+          labels={["Easy", "Intermediate", "Hard"]}
+          data={[
+            numberOfEasyClasses,
+            numberOfIntermediateClasses,
+            numberOfHardClasses,
+          ]}
+          backgroundColor={[
+            "rgba(124, 252, 0, 0.5)",
+            "rgba(255, 127, 80, 0.5)",
+            "rgba(255, 69, 0, 0.5)",
+          ]}
+          borderColor={[
+            "rgba(124, 252, 0, 1)",
+            "rgba(255, 127, 80, 1)",
+            "rgba(255, 69, 0, 1)",
+          ]}
+        />
+      )}
+      {statisticsType === "class" && chartType === "doughnut" && (
+        <DoughnutChart
+          labels={["Easy", "Intermediate", "Hard"]}
+          data={[
+            numberOfEasyClasses,
+            numberOfIntermediateClasses,
+            numberOfHardClasses,
+          ]}
+          backgroundColor={[
+            "rgba(124, 252, 0, 0.5)",
+            "rgba(255, 127, 80, 0.5)",
+            "rgba(255, 69, 0, 0.5)",
+          ]}
+          borderColor={[
+            "rgba(124, 252, 0, 1)",
+            "rgba(255, 127, 80, 1)",
+            "rgba(255, 69, 0, 1)",
           ]}
         />
       )}
