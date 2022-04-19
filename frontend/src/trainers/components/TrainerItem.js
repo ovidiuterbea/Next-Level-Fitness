@@ -61,6 +61,7 @@ const TrainerItem = (props) => {
         <h1 className='hiring-name'>
           {props.name} {props.surname}
         </h1>
+        <h2>Experienta: {props.experience}</h2>
 
         <div className='user__buttons'>
           <Button
@@ -68,7 +69,7 @@ const TrainerItem = (props) => {
             variant='contained'
             style={{
               height: "3rem",
-              fontSize: "1.2rem",
+              fontSize: "2vh",
               fontFamily: "inherit",
               marginTop: "1rem",
               backgroundColor: "green",

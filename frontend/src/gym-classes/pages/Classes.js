@@ -83,6 +83,7 @@ const Classes = (props) => {
             .replace('""', "")
             .replace(':"', "")
             .replace('":', "")
+            .replace('"', "")
             .replace('"', "")}
         </Grid>
       </Grid>

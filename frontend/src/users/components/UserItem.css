@@ -6,6 +6,8 @@
   background-color: #0e1111;
   /* padding: 1.2rem; */
   border-radius: 10px;
+  justify-content: center;
+  align-items: center;
 }
 
 .user__buttons {

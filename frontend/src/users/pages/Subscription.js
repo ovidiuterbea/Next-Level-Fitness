@@ -174,6 +174,7 @@ const Subscription = (props) => {
                 color: "#ffef00",
                 borderRadius: "10px",
                 padding: "0.5rem",
+                display: "inline-block",
               }}
             >
               clase de fitness
@@ -224,6 +225,7 @@ const Subscription = (props) => {
                 color: "#ffef00",
                 borderRadius: "10px",
                 padding: "0.5rem",
+                display: "inline-block",
               }}
             >
               clase de fitness
@@ -238,6 +240,7 @@ const Subscription = (props) => {
                 color: "#ffef00",
                 borderRadius: "10px",
                 padding: "0.5rem",
+                display: "inline-block",
               }}
             >
               antrenor personal
