@@ -7,7 +7,9 @@ const UserList = (props) => {
     props.items.clients.filter((client) => client.mustPay === true).length === 0
   ) {
     return (
-      <div className='normal-card-black'>Nicio plata nu trebuie efectuata.</div>
+      <div className='normal-card-black'>
+        <h2>Nicio plata nu trebuie efectuata.</h2>
+      </div>
     );
   } else
     return (

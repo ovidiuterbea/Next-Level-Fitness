@@ -6,7 +6,7 @@ const HiringList = (props) => {
   if (props.items.hirings.length === 0) {
     return (
       <div className='subscription-detail'>
-        <h2>No Hiring Requests found!</h2>
+        <h2>Nicio cerere de angajare gasita.</h2>
       </div>
     );
   }
