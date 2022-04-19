@@ -36,7 +36,7 @@ const PaymentConfirmation = (props) => {
             variant='contained'
             style={{
               height: "3rem",
-              fontSize: "1.2rem",
+              fontSize: "2vh",
               fontFamily: "inherit",
               marginTop: "1rem",
               backgroundColor: "green",

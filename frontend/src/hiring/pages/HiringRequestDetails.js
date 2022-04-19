@@ -172,7 +172,7 @@ const HiringRequestDetails = (props) => {
               variant='contained'
               style={{
                 height: "3rem",
-                fontSize: "1.2rem",
+                fontSize: "3vh",
                 fontFamily: "inherit",
                 marginTop: "1rem",
               }}
@@ -186,7 +186,7 @@ const HiringRequestDetails = (props) => {
               onClick={deleteHiringRequest}
               style={{
                 height: "3rem",
-                fontSize: "1.2rem",
+                fontSize: "3vh",
                 fontFamily: "inherit",
                 marginTop: "1rem",
               }}

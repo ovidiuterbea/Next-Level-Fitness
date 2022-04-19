@@ -137,7 +137,7 @@ const Statistics = (props) => {
           id='btnPie'
           style={{
             fontFamily: "inherit",
-            fontSize: "1.2rem",
+            fontSize: "1.5vh",
             backgroundColor: "#0e1111",
             color: "#ffef00",
           }}
@@ -153,7 +153,7 @@ const Statistics = (props) => {
           id='btnDoughnut'
           style={{
             fontFamily: "inherit",
-            fontSize: "1.2rem",
+            fontSize: "1.5vh",
             backgroundColor: "#0e1111",
             color: "#f3f3f3",
           }}

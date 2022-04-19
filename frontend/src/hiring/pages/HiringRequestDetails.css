@@ -9,6 +9,7 @@
   box-shadow: 3px 3px 10px 1px rgba(0, 0, 0, 0.3);
   color: #181d01;
   margin-top: 7rem;
+  min-width: 300px;
 }
 
 .hiring-flex-container {
@@ -99,4 +100,18 @@
 .hiring-buttons .btn-decline:hover {
   background-color: #181d01;
   color: crimson;
+}
+
+@media (max-width: 768px) {
+  .hiring-flex-container {
+    flex-direction: column;
+  }
+
+  .hiring-information {
+    width: 100%;
+  }
+
+  .hiring-photo {
+    width: 100%;
+  }
 }
