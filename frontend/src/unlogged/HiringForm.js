@@ -105,8 +105,6 @@ const HiringForm = () => {
     setEnteredPhone("");
 
     setOpen(true);
-
-    // console.log(hiringRequest);
   };
 
   const theme = createTheme({

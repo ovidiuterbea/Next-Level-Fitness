@@ -94,8 +94,6 @@ const HiringRequestDetails = (props) => {
     setOpen(true);
   };
 
-  console.log(loadedHiringRequestFetch);
-
   return (
     <React.Fragment>
       {open && (

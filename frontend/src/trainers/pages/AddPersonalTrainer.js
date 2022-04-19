@@ -13,9 +13,7 @@ const AddPersonalTrainer = () => {
     };
     fetchTrainers();
   }, []);
-  if (loadedTrainersFetch) {
-    console.log(loadedTrainersFetch);
-  }
+
   return (
     <React.Fragment>
       {loadedTrainersFetch && <TrainerList items={loadedTrainersFetch} />}

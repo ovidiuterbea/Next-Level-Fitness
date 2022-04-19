@@ -20,9 +20,6 @@ const PaymentConfirmation = (props) => {
     getClient();
   }, [clientId]);
 
-  if (loadedClientFetch) {
-    console.log(loadedClientFetch);
-  }
   return (
     <React.Fragment>
       {loadedClientFetch && (
