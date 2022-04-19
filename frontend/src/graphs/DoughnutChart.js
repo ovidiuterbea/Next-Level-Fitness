@@ -1,8 +1,8 @@
-import { Pie } from "react-chartjs-2";
+import { Doughnut } from "react-chartjs-2";
 
-const PieChart = (props) => {
+const DoughnutChart = (props) => {
   return (
-    <Pie
+    <Doughnut
       data={{
         labels: props.labels,
         datasets: [
@@ -40,4 +40,4 @@ const PieChart = (props) => {
   );
 };
 
-export default PieChart;
+export default DoughnutChart;
