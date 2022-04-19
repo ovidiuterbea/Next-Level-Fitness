@@ -27,7 +27,7 @@ const PersonalTraining = () => {
           <img src='personal-training.png' alt='Trainer bazat'></img>
         </div>
         <div className='container-secundar__white'>
-          <h1>Personal trainer</h1>
+          <h1 className='center'>Personal trainer</h1>
           <p className='center'>
             Un antrenor personal te poate ajuta catre definirea scopului in
             sport. Antrenorul personal, in functie de nivelul tau de fitness,

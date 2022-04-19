@@ -192,7 +192,7 @@ const Auth = () => {
             style={{
               backgroundColor: "#f3f3f3",
               borderRadius: "10px",
-              width: "30%",
+              width: "50%",
               padding: "1rem",
               margin: "0 auto",
             }}
@@ -211,7 +211,7 @@ const Auth = () => {
                         id='btnUser'
                         style={{
                           fontFamily: "inherit",
-                          fontSize: "1.2rem",
+                          fontSize: "2.5vh",
                           backgroundColor: "#0e1111",
                           color: "#ffef00",
                         }}
@@ -231,7 +231,7 @@ const Auth = () => {
                         id='btnTrainer'
                         style={{
                           fontFamily: "inherit",
-                          fontSize: "1.2rem",
+                          fontSize: "2.5vh",
                           backgroundColor: "#0e1111",
                           color: "#f3f3f3",
                         }}
@@ -252,7 +252,7 @@ const Auth = () => {
                         id='btnAdmin'
                         style={{
                           fontFamily: "inherit",
-                          fontSize: "1.2rem",
+                          fontSize: "2.5vh",
                           backgroundColor: "#0e1111",
                           color: "#f3f3f3",
                         }}
@@ -359,7 +359,7 @@ const Auth = () => {
                         backgroundColor: "#0e1111",
                         color: "#f3f3f3",
                         height: "3rem",
-                        fontSize: "1.2rem",
+                        fontSize: "2.5vh",
                         fontFamily: "inherit",
                         marginTop: "1rem",
                       }}
@@ -379,7 +379,11 @@ const Auth = () => {
                 variant='contained'
                 color='primary'
                 onClick={userLoginChangeHandler}
-                style={{ backgroundColor: "#ffef00", color: "#0e1111" }}
+                style={{
+                  backgroundColor: "#ffef00",
+                  color: "#0e1111",
+                  fontSize: "2.5vh",
+                }}
               >
                 {isLoginMode ? "Sign Up" : "Login"}
               </Button>

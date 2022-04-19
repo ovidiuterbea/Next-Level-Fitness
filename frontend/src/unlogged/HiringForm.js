@@ -295,7 +295,7 @@ const HiringForm = () => {
                       style={{
                         backgroundColor: "#0e1111",
                         height: "4rem",
-                        fontSize: "1.5rem",
+                        fontSize: "3vw",
                         fontFamily: "inherit",
                         color: "#ffef00",
                         marginTop: "2rem",

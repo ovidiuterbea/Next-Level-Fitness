@@ -1,5 +1,5 @@
 import React from "react";
-import "./style.css";
+import "./MainPage.css";
 import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import ReactPlayer from "react-player";
@@ -13,12 +13,12 @@ const MainPage = () => {
           <p>Be the best version of yourself</p>
         </div>
       </header>
-      <div className='container-principal__black'>
+      <div className='container-main__black'>
         <div className='container-secundar1'>
           <h3>
             Atinge-ti scopurile cu abonamentul{" "}
             <span
-              style={{ display: "block", fontSize: "9rem", color: "#FFEF00" }}
+              style={{ display: "block", fontSize: "9vh", color: "#FFEF00" }}
             >
               POTRIVIT!
             </span>
@@ -38,7 +38,7 @@ const MainPage = () => {
           </Link>
         </div>
       </div>
-      <div className='container-principal__white'>
+      <div className='container-main__white'>
         <div className='container-secundar1'>
           <h2>De ce sa te alaturi comunitatii noastre?</h2>
           <h4>
@@ -61,10 +61,10 @@ const MainPage = () => {
           />
         </div>
       </div>
-      <div className='container-principal__black'>
+      <div className='container-main__black'>
         <div className='container-secundar1'>
           <h3 className='center'>
-            Oferim diversitate in clasele noastre de fitness in grup
+            Oferim diversitate in clasele noastre de fitness
           </h3>
           <Link to='/activitati'>
             <Button
