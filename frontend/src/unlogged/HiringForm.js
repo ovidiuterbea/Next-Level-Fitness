@@ -20,10 +20,21 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import Slide from "@mui/material/Slide";
+import { useHttpClient } from "../shared/hooks/http-hook";
+import MuiAlert from "@mui/material/Alert";
+import Snackbar from "@mui/material/Snackbar";
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant='filled' {...props} />;
+});
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction='up' ref={ref} {...props} />;
 });
+
+function onlyLetters(str) {
+  return /^[a-zA-Z]+$/.test(str);
+}
 
 const HiringForm = () => {
   const [enteredName, setEnteredName] = useState("");
@@ -36,6 +47,10 @@ const HiringForm = () => {
   const [enteredPhone, setEnteredPhone] = useState("");
   const [open, setOpen] = useState(false);
   const [image, setImage] = useState();
+  const { sendRequest, error } = useHttpClient();
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [mesaj, setMesaj] = useState("");
+  const [severity, setSeverity] = useState("success");
 
   const handleClose = () => {
     setOpen(false);
@@ -86,25 +101,49 @@ const HiringForm = () => {
     data.append("phone", enteredPhone);
     data.append("image", image);
 
-    try {
-      await fetch("http://localhost:8080/api/hiring/", {
-        method: "post",
-        body: data,
-      });
-    } catch (err) {
-      console.log(err);
+    if (enteredPhone.length !== 10 || onlyLetters(enteredPhone) === true) {
+      setMesaj("Numar de telefon invalid.");
+      setSeverity("error");
+      handleClick();
+      return;
     }
 
-    setEnteredName("");
-    setEnteredSurname("");
-    setEnteredAddress("");
-    setEnteredDescription("");
-    setEnteredBirthday("");
-    setEnteredEmail("");
-    setEnteredExperience("");
-    setEnteredPhone("");
+    let currentDate = new Date();
+    const birthdayDate = new Date(enteredBirthday);
+    const diffTime = Math.abs(currentDate - birthdayDate);
+    const diffYears = Math.floor(diffTime / (1000 * 60 * 60 * 24 * 365));
+    if (diffYears < 18) {
+      setMesaj("Varsta insuficient de mare pentru a fi antrenor.");
+      setSeverity("error");
+      handleClick();
+      return;
+    }
 
-    setOpen(true);
+    try {
+      await sendRequest("http://localhost:8080/api/hiring/", "POST", data);
+      setEnteredName("");
+      setEnteredSurname("");
+      setEnteredAddress("");
+      setEnteredDescription("");
+      setEnteredBirthday("");
+      setEnteredEmail("");
+      setEnteredExperience("");
+      setEnteredPhone("");
+
+      setOpen(true);
+    } catch (err) {}
+  };
+
+  const handleClick = () => {
+    setOpenSnackbar(true);
+  };
+
+  const handleCloseSnackbar = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpenSnackbar(false);
   };
 
   const theme = createTheme({
@@ -132,6 +171,19 @@ const HiringForm = () => {
           </DialogActions>
         </Dialog>
       )}
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={6000}
+        onClose={handleCloseSnackbar}
+      >
+        <Alert
+          onClose={handleCloseSnackbar}
+          severity={severity}
+          sx={{ width: "100%" }}
+        >
+          {mesaj}
+        </Alert>
+      </Snackbar>
       <Typography
         padding='1rem'
         variant='h3'
