@@ -23,6 +23,7 @@ import { useHistory } from "react-router-dom";
 import { useHttpClient } from "../../shared/hooks/http-hook";
 import MuiAlert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
+const moment = require("moment");
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant='filled' {...props} />;
@@ -115,6 +116,27 @@ const HiringForm = () => {
   const formHandler = async (event) => {
     event.preventDefault();
 
+    let now = moment();
+
+    const sDate = new Date(enteredStartDate);
+    const eDate = new Date(enteredEndDate);
+
+    if (sDate < now || sDate > eDate) {
+      setMesaj("Data inceperii clasei este in trecut");
+      setSeverity("error");
+      handleClick();
+      return;
+    }
+
+    const hours = Math.abs(eDate - sDate) / 36e5;
+
+    if (hours > 2) {
+      setMesaj("Durata clasei este mai mare de 2 ore!");
+      setSeverity("error");
+      handleClick();
+      return;
+    }
+
     try {
       await sendRequest(
         "http://localhost:8080/api/classes/",
@@ -133,11 +155,7 @@ const HiringForm = () => {
       setMesaj("Ati creat clasa de fitness cu succes");
       setSeverity("success");
       handleClick();
-    } catch (err) {
-      setMesaj(error);
-      setSeverity("error");
-      handleClick();
-    }
+    } catch (err) {}
   };
 
   const theme = createTheme({

@@ -40,14 +40,14 @@ const createClass = async (req, res, next) => {
   const eDate = new Date(endDate);
 
   if (sDate < now || sDate > eDate) {
-    const error = new HttpError("Invalid date, please try again.", 404);
+    const error = new HttpError("Data inceperii clasei este in trecut", 404);
     return next(error);
   }
 
   const hours = Math.abs(eDate - sDate) / 36e5;
 
   if (hours > 2) {
-    const error = new HttpError("Duration too long!", 404);
+    const error = new HttpError("Durata clasei este mai mare de 2 ore!", 404);
     return next(error);
   }
 

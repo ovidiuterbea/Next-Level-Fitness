@@ -143,6 +143,7 @@ const App = () => {
         <Route path='/statistics' exact>
           <Statistics />
         </Route>
+        <Redirect to='/classes' />
       </Switch>
     );
   } else {
