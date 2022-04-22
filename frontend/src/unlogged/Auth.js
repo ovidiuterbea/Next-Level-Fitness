@@ -20,6 +20,7 @@ import { AdminContext } from "../shared/context/admin-context";
 // import { grey } from "@mui/material/colors";
 import MuiAlert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
+import { useHttpClient } from "../shared/hooks/http-hook";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant='filled' {...props} />;
@@ -38,6 +39,9 @@ const Auth = () => {
   const [enteredAddress, setEnteredAddress] = useState("");
   const [loginType, setLoginType] = useState("user");
   const [open, setOpen] = React.useState(false);
+  const [mesaj, setMesaj] = useState("");
+  const [severity, setSeverity] = useState("success");
+  const { sendRequest } = useHttpClient();
 
   const handleClick = () => {
     setOpen(true);
@@ -87,24 +91,20 @@ const Auth = () => {
     event.preventDefault();
     if (loginType === "user" && isLoginMode === true) {
       try {
-        const response = await fetch(
+        const responseData = await sendRequest(
           `http://localhost:8080/api/clients/login`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              email: enteredEmail,
-              password: enteredPassword,
-            }),
-          }
+          "POST",
+          JSON.stringify({ email: enteredEmail, password: enteredPassword }),
+          { "Content-Type": "application/json" }
         );
-        const data = await response.json();
-        if (data.clientId) {
-          userAuth.login(data.clientId, data.subscription);
+        if (responseData.clientId) {
+          userAuth.login(responseData.clientId, responseData.subscription);
         }
-      } catch (err) {}
+      } catch (err) {
+        setMesaj("E-mail sau parola invalida.");
+        setSeverity("error");
+        handleClick();
+      }
     }
     if (loginType === "user" && isLoginMode === false) {
       await fetch(`http://localhost:8080/api/clients/signup`, {
@@ -122,29 +122,27 @@ const Auth = () => {
         }),
       });
       // const data = await response.json();
+      setMesaj("Cont creat cu success");
+      setSeverity("success");
       handleClick();
       setIsLoginMode(true);
     }
     if (loginType === "trainer") {
       try {
-        const response = await fetch(
+        const responseData = await sendRequest(
           `http://localhost:8080/api/trainers/login`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              email: enteredEmail,
-              password: enteredPassword,
-            }),
-          }
+          "POST",
+          JSON.stringify({ email: enteredEmail, password: enteredPassword }),
+          { "Content-Type": "application/json" }
         );
-        const data = await response.json();
-        if (data.trainerId) {
-          trainerAuth.login(data.trainerId);
+        if (responseData.trainerId) {
+          trainerAuth.login(responseData.trainerId);
         }
-      } catch (err) {}
+      } catch (err) {
+        setMesaj("E-mail sau parola invalida.");
+        setSeverity("error");
+        handleClick();
+      }
     }
     if (loginType === "admin") {
       if (
@@ -168,10 +166,10 @@ const Auth = () => {
         <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
           <Alert
             onClose={handleClose}
-            severity='success'
+            severity={severity}
             sx={{ width: "100%" }}
           >
-            Contul s-a creat cu succes!
+            {mesaj}
           </Alert>
         </Snackbar>
         <Typography
