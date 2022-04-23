@@ -163,6 +163,29 @@ const UserClasses = (props) => {
     </AppointmentTooltip.Content>
   );
 
+  const Appointment = ({ children, style, data, ...restProps }) => (
+    <Appointments.Appointment
+      data={data}
+      onDoubleClick={() => {
+        console.log(data);
+      }}
+      {...restProps}
+      style={{
+        ...style,
+        backgroundColor:
+          data.difficultyLevel === "Easy"
+            ? "#097969"
+            : data.difficultyLevel === "Intermediate"
+            ? "#FFBF00"
+            : data.difficultyLevel === "Hard"
+            ? "#E74C3C "
+            : null,
+      }}
+    >
+      {children}
+    </Appointments.Appointment>
+  );
+
   return (
     <React.Fragment>
       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
@@ -179,7 +202,7 @@ const UserClasses = (props) => {
             <Toolbar />
             <DateNavigator />
             <TodayButton />
-            <Appointments />
+            <Appointments appointmentComponent={Appointment} />
             <AppointmentTooltip
               showCloseButton
               headerComponent={Header}

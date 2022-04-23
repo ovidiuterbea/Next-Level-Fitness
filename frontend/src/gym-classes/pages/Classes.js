@@ -90,6 +90,29 @@ const Classes = (props) => {
     </AppointmentTooltip.Content>
   );
 
+  const Appointment = ({ children, style, data, ...restProps }) => (
+    <Appointments.Appointment
+      data={data}
+      onDoubleClick={() => {
+        console.log(data);
+      }}
+      {...restProps}
+      style={{
+        ...style,
+        backgroundColor:
+          data.difficultyLevel === "Easy"
+            ? "#097969"
+            : data.difficultyLevel === "Intermediate"
+            ? "#FFBF00"
+            : data.difficultyLevel === "Hard"
+            ? "#E74C3C "
+            : null,
+      }}
+    >
+      {children}
+    </Appointments.Appointment>
+  );
+
   return (
     <React.Fragment>
       {loadedClassesFetch && (
@@ -116,7 +139,7 @@ const Classes = (props) => {
             <Toolbar />
             <DateNavigator />
             <TodayButton />
-            <Appointments />
+            <Appointments appointmentComponent={Appointment} />
             <AppointmentTooltip
               showCloseButton
               showDeleteButton
