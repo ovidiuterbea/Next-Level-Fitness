@@ -187,7 +187,7 @@ a {
   background: rgba(0, 0, 0, 0.4);
 }
 .container-pt-photo * {
-  z-index: 10;
+  z-index: 0;
 }
 
 .container-pt-photo .content {
@@ -316,7 +316,7 @@ a {
   background: rgba(0, 0, 0, 0.4);
 }
 .container-activitati-photo * {
-  z-index: 10;
+  z-index: 0;
 }
 
 .container-activitati-photo .content {
