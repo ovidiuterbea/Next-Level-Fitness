@@ -8,6 +8,20 @@ body {
   color: #f3f3f3;
 }
 
+body::-webkit-scrollbar {
+  width: 7px;
+}
+
+body::-webkit-scrollbar-track {
+  background: #ccc;
+  border-radius: 50px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: #ffef00;
+  border-radius: 50px;
+}
+
 .center {
   text-align: center;
   display: flex;

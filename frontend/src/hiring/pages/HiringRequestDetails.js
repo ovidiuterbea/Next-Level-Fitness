@@ -161,6 +161,7 @@ const HiringRequestDetails = (props) => {
                 alt='Canditate'
                 className='image-center-hiring'
                 src={`http://localhost:8080/${loadedHiringRequestFetch.hiringRequest.image}`}
+                loading='lazy'
               ></img>
             </div>
           </div>

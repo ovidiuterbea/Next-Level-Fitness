@@ -19,12 +19,20 @@ const PersonalTraining = () => {
           </p>
         </div>
         <div className='container-secundar2'>
-          <img src='trainer-bazat.jpeg' alt='Trainer bazat'></img>
+          <img
+            src='trainer-bazat.jpeg'
+            alt='Trainer bazat'
+            loading='lazy'
+          ></img>
         </div>
       </div>
       <div className='container-principal__black'>
         <div className='container-secundar1'>
-          <img src='personal-training.png' alt='Trainer bazat'></img>
+          <img
+            src='personal-training.png'
+            alt='Trainer bazat'
+            loading='lazy'
+          ></img>
         </div>
         <div className='container-secundar__white'>
           <h1 className='center'>Personal trainer</h1>
