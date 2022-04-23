@@ -19,10 +19,6 @@ const UserTrainer = (props) => {
     getClients();
   }, [clientId]);
 
-  if (loadedClientFetch) {
-    console.log(loadedClientFetch.personalTrainer);
-  }
-
   return (
     <React.Fragment>
       {loadedClientFetch && loadedClientFetch.personalTrainer === null && (

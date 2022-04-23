@@ -23,7 +23,6 @@ const createHiringRequest = async (req, res, next) => {
       "Create hiring request failed, please try again later.",
       500
     );
-    console.log(err);
     return next(error);
   }
 
@@ -55,7 +54,6 @@ const createHiringRequest = async (req, res, next) => {
       "Creating hiring request failed, please try again.",
       500
     );
-    console.log(err);
     return next(error);
   }
 

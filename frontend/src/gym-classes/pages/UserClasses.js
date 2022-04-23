@@ -73,6 +73,7 @@ const UserClasses = (props) => {
     <AppointmentTooltip.Header {...restProps} appointmentData={appointmentData}>
       <IconButton
         onClick={async () => {
+          event.preventDefault();
           try {
             await sendRequest(
               `http://localhost:8080/api/clients/${userAuth.userId}/class`,
@@ -166,9 +167,6 @@ const UserClasses = (props) => {
   const Appointment = ({ children, style, data, ...restProps }) => (
     <Appointments.Appointment
       data={data}
-      onDoubleClick={() => {
-        console.log(data);
-      }}
       {...restProps}
       style={{
         ...style,
@@ -193,7 +191,7 @@ const UserClasses = (props) => {
           {mesaj}
         </Alert>
       </Snackbar>
-      {loadedClassesFetch && (
+      {loadedClassesFetch && loadedTrainersFetch && (
         <Paper style={{ marginTop: "4rem" }}>
           <Scheduler height='auto' data={loadedClassesFetch}>
             <ViewState />

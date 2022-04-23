@@ -87,7 +87,6 @@ const createClass = async (req, res, next) => {
       "Creating gym class failed, please try again.",
       500
     );
-    console.log(err);
     return next(error);
   }
 
@@ -207,7 +206,6 @@ const deleteClass = async (req, res, next) => {
     }
     await sess.commitTransaction();
   } catch (err) {
-    console.log(err);
     const error = new HttpError(
       "Something went wrong, could not delete the class.",
       500

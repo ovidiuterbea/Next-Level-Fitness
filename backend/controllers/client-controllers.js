@@ -95,7 +95,6 @@ const signup = async (req, res, next) => {
     await createdClient.save();
   } catch (err) {
     const error = new HttpError("Signing up failed, please try again.", 500);
-    console.log(err);
     return next(error);
   }
 
@@ -115,7 +114,6 @@ const login = async (req, res, next) => {
     existingClient = await Client.findOne({ email: email });
   } catch (err) {
     const error = new HttpError("Couldn't find this email address!", 500);
-    console.log(err);
     return next(error);
   }
 

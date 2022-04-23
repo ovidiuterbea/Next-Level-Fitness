@@ -93,9 +93,6 @@ const Classes = (props) => {
   const Appointment = ({ children, style, data, ...restProps }) => (
     <Appointments.Appointment
       data={data}
-      onDoubleClick={() => {
-        console.log(data);
-      }}
       {...restProps}
       style={{
         ...style,

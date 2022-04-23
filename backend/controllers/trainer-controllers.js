@@ -79,7 +79,6 @@ const createTrainer = async (req, res, next) => {
       "Creating trainer failed, please try again.",
       500
     );
-    console.log(err);
     return next(error);
   }
 
@@ -179,7 +178,6 @@ const deleteTrainer = async (req, res, next) => {
       "Something went wrong, could not delete the trainer.",
       500
     );
-    console.log(err);
     return next(error);
   }
 
