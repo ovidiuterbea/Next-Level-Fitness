@@ -73,7 +73,6 @@ const UserClasses = (props) => {
     <AppointmentTooltip.Header {...restProps} appointmentData={appointmentData}>
       <IconButton
         onClick={async () => {
-          event.preventDefault();
           try {
             await sendRequest(
               `http://localhost:8080/api/clients/${userAuth.userId}/class`,

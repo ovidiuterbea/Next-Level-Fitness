@@ -1,5 +1,6 @@
 const { validationResult } = require("express-validator");
 const mongoose = require("mongoose");
+const nodeMailer = require("nodemailer");
 
 const HttpError = require("../models/http-error");
 const Trainer = require("../models/trainer");
@@ -81,6 +82,29 @@ const createTrainer = async (req, res, next) => {
     );
     return next(error);
   }
+
+  var transporter = nodeMailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: "nextlevelfitness9000@gmail.com",
+      pass: "nextlevel",
+    },
+  });
+
+  var mailOptions = {
+    from: "nextlevelfitness9000@gmail.com",
+    to: email,
+    subject: "Ati fost acceptat ca antrenor!",
+    text: `Va puteti conecta la contul tau de antrenor folosind email-ul cererii de angajare cu parola ${password}.`,
+  };
+
+  transporter.sendMail(mailOptions, function (error, info) {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log("Email sent: " + info.response);
+    }
+  });
 
   res.status(201).json({ trainer: createdTrainer.toObject({ getters: true }) });
 };

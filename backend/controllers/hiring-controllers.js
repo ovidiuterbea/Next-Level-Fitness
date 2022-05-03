@@ -1,5 +1,6 @@
 const { validationResult } = require("express-validator");
 const mongoose = require("mongoose");
+const nodeMailer = require("nodemailer");
 
 const HttpError = require("../models/http-error");
 const Hiring = require("../models/hiring-request");
@@ -137,6 +138,29 @@ const deleteHiringRequest = async (req, res, next) => {
     );
     return next(error);
   }
+
+  var transporter = nodeMailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: "nextlevelfitness9000@gmail.com",
+      pass: "nextlevel",
+    },
+  });
+
+  var mailOptions = {
+    from: "nextlevelfitness9000@gmail.com",
+    to: hiringRequest.email,
+    subject: "Detalii cerere angajare",
+    text: `Din pacate profilul tau nu ne-a surprins. Iti uram succes in cariera ta fiindca arati mult potential!`,
+  };
+
+  transporter.sendMail(mailOptions, function (error, info) {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log("Email sent: " + info.response);
+    }
+  });
 
   res.status(200).json({ message: "Deleted the hiring request." });
 };
