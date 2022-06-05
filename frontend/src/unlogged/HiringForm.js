@@ -47,7 +47,7 @@ const HiringForm = () => {
   const [enteredPhone, setEnteredPhone] = useState("");
   const [open, setOpen] = useState(false);
   const [image, setImage] = useState();
-  const { sendRequest, error } = useHttpClient();
+  const { sendRequest } = useHttpClient();
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [mesaj, setMesaj] = useState("");
   const [severity, setSeverity] = useState("success");
@@ -252,6 +252,7 @@ const HiringForm = () => {
                       required
                       onChange={phoneChangeHandler}
                       value={enteredPhone}
+                      type='number'
                     />
                   </Grid>
                   <Grid xs={10} item>

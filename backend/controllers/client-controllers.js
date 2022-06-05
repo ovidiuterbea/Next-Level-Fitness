@@ -501,7 +501,7 @@ const deletePayment = async (req, res, next) => {
     client = await Client.findById(clientId);
   } catch (err) {
     const error = new HttpError(
-      "Something went wrong, could not create subscription",
+      "Something went wrong, could not find client.",
       500
     );
     return next(error);
@@ -513,7 +513,7 @@ const deletePayment = async (req, res, next) => {
     await client.save();
   } catch (err) {
     const error = new HttpError(
-      "Something went wrong, could not create the subscription.",
+      "Something went wrong, could not delete de payment.",
       500
     );
     return next(error);
