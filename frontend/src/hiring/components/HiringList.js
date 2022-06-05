@@ -20,6 +20,7 @@ const HiringList = (props) => {
             id={hiring.id}
             name={hiring.name}
             surname={hiring.surname}
+            image={hiring.image}
           />
         );
       })}

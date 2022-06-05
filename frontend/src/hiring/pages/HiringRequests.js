@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import HiringList from "../components/HiringList";
+import { Typography } from "@mui/material";
 
 const HiringRequests = (props) => {
   const [loadedHiringRequestsFetch, setLoadedHiringRequestsFetch] = useState();
@@ -17,6 +18,16 @@ const HiringRequests = (props) => {
 
   return (
     <React.Fragment>
+      <Typography
+        padding='1rem'
+        variant='h3'
+        align='center'
+        color='#ffef00'
+        style={{ marginTop: "5rem" }}
+        fontFamily='inherit'
+      >
+        Cereri de angajare antrenori
+      </Typography>
       {loadedHiringRequestsFetch && (
         <HiringList items={loadedHiringRequestsFetch} />
       )}
