@@ -11,6 +11,7 @@ const clientSchema = new Schema({
   birthdate: { type: Date, required: true },
   address: { type: String, required: true },
   subscription: { type: String, required: false },
+  subscriptionDate: { type: Date, required: false },
   mustPay: { type: Boolean, required: false },
   personalTrainer: {
     type: mongoose.Types.ObjectId,

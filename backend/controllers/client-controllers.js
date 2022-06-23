@@ -89,6 +89,7 @@ const signup = async (req, res, next) => {
     mustPay: false,
     subscription: null,
     personalTrainer: null,
+    subscriptionDate: null,
   });
 
   try {
@@ -125,6 +126,90 @@ const login = async (req, res, next) => {
     return next(error);
   }
 
+  if (existingClient.subscription) {
+    let now = new Date();
+    let subscriptionDate = new Date(existingClient.subscriptionDate);
+    var difference = now.getTime() - subscriptionDate.getTime();
+    var differenceInDays = difference / (1000 * 3600 * 24);
+    if (differenceInDays > 30) {
+      let classes;
+      try {
+        classes = await Class.find({});
+      } catch (err) {
+        const error = new HttpError(
+          "Fetching classes failed, please try again later.",
+          500
+        );
+        return next(error);
+      }
+
+      for (let gymClass of classes) {
+        try {
+          const sess = await mongoose.startSession();
+          sess.startTransaction();
+          await gymClass.clients.pull(existingClient);
+          await gymClass.save({ session: sess });
+          await existingClient.classes.pull(gymClass);
+          await existingClient.save({ session: sess });
+          await sess.commitTransaction();
+        } catch (err) {
+          const error = new HttpError(
+            "Something went wrong, could not remove the client from the classes.",
+            500
+          );
+          return next(error);
+        }
+      }
+      if (existingClient.personalTrainer !== null) {
+        let trainer;
+        try {
+          trainer = await Trainer.findById(existingClient.personalTrainer);
+        } catch (err) {
+          const error = new HttpError(
+            "Something went wrong, could not find a trainer.",
+            500
+          );
+          return next(error);
+        }
+
+        if (!trainer) {
+          const error = new HttpError(
+            "Could not find a trainer for the provided id.",
+            404
+          );
+          return next(error);
+        }
+
+        try {
+          const sess = await mongoose.startSession();
+          sess.startTransaction();
+          await trainer.clients.pull(existingClient);
+          await trainer.save({ session: sess });
+          existingClient.personalTrainer = null;
+          await existingClient.save({ session: sess });
+          await sess.commitTransaction();
+        } catch (err) {
+          const error = new HttpError(
+            "Something went wrong, could not remove the client from the trainer.",
+            500
+          );
+          return next(error);
+        }
+      }
+      existingClient.subscription = null;
+      existingClient.subscriptionDate = null;
+      try {
+        await existingClient.save();
+      } catch (err) {
+        const error = new HttpError(
+          "Something went wrong, could not reset the subscription.",
+          500
+        );
+        return next(error);
+      }
+    }
+  }
+
   res.json({
     clientId: existingClient.id,
     subscription: existingClient.subscription,
@@ -148,6 +233,7 @@ const createSubscription = async (req, res, next) => {
   }
 
   client.subscription = subscription;
+  client.subscriptionDate = new Date();
   client.mustPay = true;
 
   try {
@@ -179,6 +265,7 @@ const deleteSubscription = async (req, res, next) => {
   }
 
   client.subscription = null;
+  client.subscriptionDate = null;
 
   try {
     await client.save();
