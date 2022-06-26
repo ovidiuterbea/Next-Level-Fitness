@@ -15,10 +15,12 @@ import PersonIcon from "@mui/icons-material/Person";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import RemoveIcon from "@mui/icons-material/Remove";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import InfoIcon from "@mui/icons-material/Info";
 import { useHttpClient } from "../../shared/hooks/http-hook";
 import { UserContext } from "../../shared/context/user-context";
 import MuiAlert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
+import ClassDetails from "./ClassDetails";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant='filled' {...props} />;
@@ -32,6 +34,14 @@ const UserClasses = (props) => {
   const [severity, setSeverity] = useState("success");
   const { sendRequest, error } = useHttpClient();
   const userAuth = useContext(UserContext);
+
+  const [openDialog, setOpenDialog] = React.useState(false);
+  const [classTitle, setClassTitle] = useState("");
+  const [difficultyLevel, setDifficultyLevel] = useState("");
+
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
+  };
 
   const handleClick = () => {
     setOpen(true);
@@ -121,6 +131,15 @@ const UserClasses = (props) => {
       >
         <RemoveIcon />
       </IconButton>
+      <IconButton
+        onClick={() => {
+          setOpenDialog(true);
+          setClassTitle(appointmentData.title);
+          setDifficultyLevel(appointmentData.difficultyLevel);
+        }}
+      >
+        <InfoIcon />
+      </IconButton>
     </AppointmentTooltip.Header>
   );
 
@@ -137,17 +156,14 @@ const UserClasses = (props) => {
           {JSON.stringify(
             loadedTrainersFetch.trainers.find(
               (trainer) => trainer.id === appointmentData.trainer
-            )
+            ).name +
+              " " +
+              loadedTrainersFetch.trainers.find(
+                (trainer) => trainer.id === appointmentData.trainer
+              ).surname
           )
-            .slice(42, 80)
-            .replace("address", "")
-            .replace("surname", "")
-            .replace(",", "")
-            .replace(",", "")
-            .replace('"""', " ")
-            .replace('""', "")
-            .replace(':"', "")
-            .replace('":', "")}
+            .replace('"', "")
+            .replace('"', "")}
         </Grid>
       </Grid>
       {JSON.stringify(appointmentData).includes(userAuth.userId) && (
@@ -185,6 +201,12 @@ const UserClasses = (props) => {
 
   return (
     <React.Fragment>
+      <ClassDetails
+        open={openDialog}
+        close={handleCloseDialog}
+        title={classTitle}
+        difficultyLevel={difficultyLevel}
+      />
       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
         <Alert onClose={handleClose} severity={severity} sx={{ width: "100%" }}>
           {mesaj}

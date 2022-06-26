@@ -72,17 +72,12 @@ const Classes = (props) => {
           {JSON.stringify(
             loadedTrainersFetch.trainers.find(
               (trainer) => trainer.id === appointmentData.trainer
-            )
+            ).name +
+              " " +
+              loadedTrainersFetch.trainers.find(
+                (trainer) => trainer.id === appointmentData.trainer
+              ).surname
           )
-            .slice(42, 80)
-            .replace("address", "")
-            .replace("surname", "")
-            .replace(",", "")
-            .replace(",", "")
-            .replace('"""', " ")
-            .replace('""', "")
-            .replace(':"', "")
-            .replace('":', "")
             .replace('"', "")
             .replace('"', "")}
         </Grid>
