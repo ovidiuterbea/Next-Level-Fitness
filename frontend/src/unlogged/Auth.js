@@ -98,7 +98,13 @@ const Auth = () => {
           { "Content-Type": "application/json" }
         );
         if (responseData.clientId) {
-          userAuth.login(responseData.clientId, responseData.subscription);
+          userAuth.login(
+            responseData.clientId,
+            responseData.subscription,
+            responseData.name,
+            responseData.surname
+          );
+          userAuth.openWelcomeDialog();
         }
       } catch (err) {
         setMesaj("E-mail sau parola invalida.");

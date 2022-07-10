@@ -213,6 +213,8 @@ const login = async (req, res, next) => {
   res.json({
     clientId: existingClient.id,
     subscription: existingClient.subscription,
+    name: existingClient.name,
+    surname: existingClient.surname,
   });
 }; // FULLY DONE
 

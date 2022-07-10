@@ -41,18 +41,43 @@ import { useState, useCallback } from "react";
 import React from "react";
 import HiringRequestDetails from "./hiring/pages/HiringRequestDetails";
 
+// mui
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import Slide from "@mui/material/Slide";
+import Button from "@mui/material/Button";
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction='up' ref={ref} {...props} />;
+});
+
 const App = () => {
   const [userIsLoggedIn, setUserIsLoggedIn] = useState(false);
   const [trainerIsLoggedIn, setTrainerIsLoggedIn] = useState(false);
   const [adminIsLoggedIn, setAdminIsLoggedIn] = useState(false);
   const [clientId, setClientId] = useState("");
   const [clientSubScription, setClientSubscription] = useState(null);
+  const [clientName, setClientName] = useState(null);
+  const [clientSurname, setClientSurname] = useState(null);
   const [trainerId, setTrainerId] = useState("");
+  const [openWelcomeUser, setOpenWelcomeUser] = useState(false);
 
-  const loginUser = useCallback((cId, subscription) => {
+  const handleCloseWelcomeUser = () => {
+    setOpenWelcomeUser(false);
+  };
+
+  const handleOpenWelcomeUser = () => {
+    setOpenWelcomeUser(true);
+  };
+
+  const loginUser = useCallback((cId, subscription, name, surname) => {
     setUserIsLoggedIn(true);
     setClientId(cId);
     setClientSubscription(subscription);
+    setClientName(name);
+    setClientSurname(surname);
   }, []);
 
   const updateSubscription = useCallback((subscription) => {
@@ -173,38 +198,59 @@ const App = () => {
   }
 
   return (
-    <AdminContext.Provider
-      value={{
-        isLoggedIn: adminIsLoggedIn,
-        login: loginAdmin,
-        logout: logoutAdmin,
-      }}
-    >
-      <TrainerContext.Provider
+    <React.Fragment>
+      {openWelcomeUser && (
+        <Dialog
+          open={openWelcomeUser}
+          TransitionComponent={Transition}
+          onClose={handleCloseWelcomeUser}
+        >
+          <DialogContent>
+            <DialogContentText id='alert-dialog-slide-description'>
+              Bine ai revenit, {clientName} {clientSurname}!
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleCloseWelcomeUser}>Catre profilul tau</Button>
+          </DialogActions>
+        </Dialog>
+      )}
+      <AdminContext.Provider
         value={{
-          isLoggedIn: trainerIsLoggedIn,
-          login: loginTrainer,
-          logout: logoutTrainer,
-          trainerId: trainerId,
+          isLoggedIn: adminIsLoggedIn,
+          login: loginAdmin,
+          logout: logoutAdmin,
         }}
       >
-        <UserContext.Provider
+        <TrainerContext.Provider
           value={{
-            isLoggedIn: userIsLoggedIn,
-            login: loginUser,
-            logout: logoutUser,
-            userId: clientId,
-            subscription: clientSubScription,
-            updateSubscription: updateSubscription,
+            isLoggedIn: trainerIsLoggedIn,
+            login: loginTrainer,
+            logout: logoutTrainer,
+            trainerId: trainerId,
           }}
         >
-          <Router>
-            <MainNavigation />
-            {routes}
-          </Router>
-        </UserContext.Provider>
-      </TrainerContext.Provider>
-    </AdminContext.Provider>
+          <UserContext.Provider
+            value={{
+              isLoggedIn: userIsLoggedIn,
+              login: loginUser,
+              logout: logoutUser,
+              userId: clientId,
+              subscription: clientSubScription,
+              name: clientName,
+              surname: clientSurname,
+              openWelcomeDialog: handleOpenWelcomeUser,
+              updateSubscription: updateSubscription,
+            }}
+          >
+            <Router>
+              <MainNavigation />
+              {routes}
+            </Router>
+          </UserContext.Provider>
+        </TrainerContext.Provider>
+      </AdminContext.Provider>
+    </React.Fragment>
   );
 };
 
