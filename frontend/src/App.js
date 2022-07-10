@@ -73,11 +73,11 @@ const App = () => {
   };
 
   const loginUser = useCallback((cId, subscription, name, surname) => {
-    setUserIsLoggedIn(true);
     setClientId(cId);
     setClientSubscription(subscription);
     setClientName(name);
     setClientSurname(surname);
+    setUserIsLoggedIn(true);
   }, []);
 
   const updateSubscription = useCallback((subscription) => {
@@ -89,8 +89,8 @@ const App = () => {
   }, []);
 
   const loginTrainer = useCallback((tId) => {
-    setTrainerIsLoggedIn(true);
     setTrainerId(tId);
+    setTrainerIsLoggedIn(true);
   }, []);
 
   const logoutTrainer = useCallback(() => {
@@ -131,6 +131,7 @@ const App = () => {
         <Route path='/:clientid/myclasses' exact>
           <UserClassesDetails />
         </Route>
+        <Redirect to={`/${clientId}/subscription`} />
       </Switch>
     );
   } else if (trainerIsLoggedIn) {
@@ -142,6 +143,7 @@ const App = () => {
         <Route path='/:trainerid/clients' exact>
           <TrainerClients />
         </Route>
+        <Redirect to={`/${trainerId}/classes`} />
       </Switch>
     );
   } else if (adminIsLoggedIn) {
