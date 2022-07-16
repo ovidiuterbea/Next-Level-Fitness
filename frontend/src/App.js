@@ -37,7 +37,7 @@ import {
 import { UserContext } from "./shared/context/user-context";
 import { TrainerContext } from "./shared/context/trainer-context";
 import { AdminContext } from "./shared/context/admin-context";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import React from "react";
 import HiringRequestDetails from "./hiring/pages/HiringRequestDetails";
 
@@ -78,7 +78,49 @@ const App = () => {
     setClientName(name);
     setClientSurname(surname);
     setUserIsLoggedIn(true);
+    localStorage.setItem(
+      "clientData",
+      JSON.stringify({
+        clientId: cId,
+        subscription: subscription,
+        name: name,
+        surname: surname,
+      })
+    );
   }, []);
+
+  const loginTrainer = useCallback((tId) => {
+    setTrainerId(tId);
+    setTrainerIsLoggedIn(true);
+    localStorage.setItem(
+      "trainerData",
+      JSON.stringify({
+        trainerId: tId,
+      })
+    );
+  }, []);
+
+  const logoutTrainer = useCallback(() => {
+    setTrainerIsLoggedIn(false);
+    localStorage.removeItem("trainerData");
+  }, []);
+
+  useEffect(() => {
+    const storedDataClient = JSON.parse(localStorage.getItem("clientData"));
+    const storedDataTrainer = JSON.parse(localStorage.getItem("trainerData"));
+    if (storedDataClient) {
+      loginUser(
+        storedDataClient.clientId,
+        storedDataClient.subscription,
+        storedDataClient.name,
+        storedDataClient.surname
+      );
+      setOpenWelcomeUser(true);
+    }
+    if (storedDataTrainer) {
+      loginTrainer(storedDataTrainer.trainerId);
+    }
+  }, [loginUser, loginTrainer]);
 
   const updateSubscription = useCallback((subscription) => {
     setClientSubscription(subscription);
@@ -86,15 +128,7 @@ const App = () => {
 
   const logoutUser = useCallback(() => {
     setUserIsLoggedIn(false);
-  }, []);
-
-  const loginTrainer = useCallback((tId) => {
-    setTrainerId(tId);
-    setTrainerIsLoggedIn(true);
-  }, []);
-
-  const logoutTrainer = useCallback(() => {
-    setTrainerIsLoggedIn(false);
+    localStorage.removeItem("clientData");
   }, []);
 
   const loginAdmin = useCallback(() => {
