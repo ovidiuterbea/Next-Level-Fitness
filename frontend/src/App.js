@@ -53,6 +53,8 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction='up' ref={ref} {...props} />;
 });
 
+let logoutTimer;
+
 const App = () => {
   const [userIsLoggedIn, setUserIsLoggedIn] = useState(false);
   const [trainerIsLoggedIn, setTrainerIsLoggedIn] = useState(false);
@@ -63,6 +65,7 @@ const App = () => {
   const [clientSurname, setClientSurname] = useState(null);
   const [trainerId, setTrainerId] = useState("");
   const [openWelcomeUser, setOpenWelcomeUser] = useState(false);
+  const [sessionExpirationDate, setSessionExpirationDate] = useState();
 
   const handleCloseWelcomeUser = () => {
     setOpenWelcomeUser(false);
@@ -78,6 +81,10 @@ const App = () => {
     setClientName(name);
     setClientSurname(surname);
     setUserIsLoggedIn(true);
+    const sessionExpirationDate = new Date(
+      new Date().getTime() + 1000 * 60 * 60
+    );
+    setSessionExpirationDate(sessionExpirationDate);
     localStorage.setItem(
       "clientData",
       JSON.stringify({
@@ -85,6 +92,7 @@ const App = () => {
         subscription: subscription,
         name: name,
         surname: surname,
+        expiration: sessionExpirationDate.toISOString(),
       })
     );
   }, []);
@@ -92,23 +100,38 @@ const App = () => {
   const loginTrainer = useCallback((tId) => {
     setTrainerId(tId);
     setTrainerIsLoggedIn(true);
+    const sessionExpirationDate = new Date(
+      new Date().getTime() + 1000 * 60 * 60
+    );
+    setSessionExpirationDate(sessionExpirationDate);
     localStorage.setItem(
       "trainerData",
       JSON.stringify({
         trainerId: tId,
+        expiration: sessionExpirationDate.toISOString(),
       })
     );
   }, []);
 
   const logoutTrainer = useCallback(() => {
     setTrainerIsLoggedIn(false);
+    setSessionExpirationDate(null);
     localStorage.removeItem("trainerData");
+  }, []);
+
+  const logoutUser = useCallback(() => {
+    setUserIsLoggedIn(false);
+    setSessionExpirationDate(null);
+    localStorage.removeItem("clientData");
   }, []);
 
   useEffect(() => {
     const storedDataClient = JSON.parse(localStorage.getItem("clientData"));
     const storedDataTrainer = JSON.parse(localStorage.getItem("trainerData"));
-    if (storedDataClient) {
+    if (
+      storedDataClient &&
+      new Date(storedDataClient.expiration) > new Date()
+    ) {
       loginUser(
         storedDataClient.clientId,
         storedDataClient.subscription,
@@ -117,18 +140,16 @@ const App = () => {
       );
       setOpenWelcomeUser(true);
     }
-    if (storedDataTrainer) {
+    if (
+      storedDataTrainer &&
+      new Date(storedDataTrainer.expiration) > new Date()
+    ) {
       loginTrainer(storedDataTrainer.trainerId);
     }
   }, [loginUser, loginTrainer]);
 
   const updateSubscription = useCallback((subscription) => {
     setClientSubscription(subscription);
-  }, []);
-
-  const logoutUser = useCallback(() => {
-    setUserIsLoggedIn(false);
-    localStorage.removeItem("clientData");
   }, []);
 
   const loginAdmin = useCallback(() => {
@@ -138,6 +159,30 @@ const App = () => {
   const logoutAdmin = useCallback(() => {
     setAdminIsLoggedIn(false);
   }, []);
+
+  useEffect(() => {
+    if (sessionExpirationDate && userIsLoggedIn) {
+      const remainingTime =
+        sessionExpirationDate.getTime() - new Date().getTime();
+      logoutTimer = setTimeout(logoutUser, remainingTime);
+    } else {
+      clearTimeout(logoutTimer);
+    }
+
+    if (sessionExpirationDate && trainerIsLoggedIn) {
+      const remainingTime =
+        sessionExpirationDate.getTime() - new Date().getTime();
+      logoutTimer = setTimeout(logoutTrainer, remainingTime);
+    } else {
+      clearTimeout(logoutTimer);
+    }
+  }, [
+    logoutUser,
+    logoutTrainer,
+    sessionExpirationDate,
+    userIsLoggedIn,
+    trainerIsLoggedIn,
+  ]);
 
   let routes;
 
