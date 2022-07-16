@@ -209,7 +209,7 @@ const App = () => {
         >
           <DialogContent>
             <DialogContentText id='alert-dialog-slide-description'>
-              Bine ai revenit, {clientName} {clientSurname}!
+              Gata de antrenament {clientName} {clientSurname}?
             </DialogContentText>
           </DialogContent>
           <DialogActions>
