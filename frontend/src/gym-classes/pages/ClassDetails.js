@@ -28,7 +28,7 @@ import zumba from "../../media/clase/zumba.jpg";
 const ClassDetails = (props) => {
   return (
     <React.Fragment>
-      <Dialog open={props.open} onClose fullWidth>
+      <Dialog open={props.open} fullWidth>
         <DialogTitle>Detalii clasa de fitness</DialogTitle>
         <DialogContent>
           <Card>
