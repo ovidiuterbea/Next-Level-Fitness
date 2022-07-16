@@ -1,5 +1,6 @@
 const { validationResult } = require("express-validator");
 const mongoose = require("mongoose");
+const jwt = require("jsonwebtoken");
 
 const HttpError = require("../models/http-error");
 const Client = require("../models/client");
@@ -210,11 +211,24 @@ const login = async (req, res, next) => {
     }
   }
 
+  let token;
+  try {
+    token = jwt.sign(
+      { clientId: existingClient.id, email: existingClient.email },
+      "supersecret",
+      { expiresIn: "1h" }
+    );
+  } catch (err) {
+    const error = new HttpError("Something went wrong with the token.", 500);
+    return next(error);
+  }
+
   res.json({
     clientId: existingClient.id,
     subscription: existingClient.subscription,
     name: existingClient.name,
     surname: existingClient.surname,
+    token: token,
   });
 }; // FULLY DONE
 
