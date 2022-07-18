@@ -88,6 +88,19 @@ const HiringForm = () => {
     setEnteredPhone(event.target.value);
   };
 
+  const demoHandler = () => {
+    setEnteredName("Terbea");
+    setEnteredSurname("Ovidiu Cristian");
+    setEnteredAddress("Aleea Stanila nr. 2");
+    setEnteredDescription(
+      "Mereu pasionat de fitness si sa ajut oameni, consider ca acest rol mi se potriveste la perfectie!"
+    );
+    setEnteredBirthday("2000-05-09");
+    setEnteredEmail("terbeaovidiu19@stud.ase.ro");
+    setEnteredExperience("Senior Level");
+    setEnteredPhone("0734350652");
+  };
+
   const formHandler = async (event) => {
     event.preventDefault();
     const data = new FormData();
@@ -213,6 +226,23 @@ const HiringForm = () => {
           }}
         >
           <CardContent>
+            <Button
+              type='button'
+              variant='contained'
+              color='primary'
+              style={{
+                backgroundColor: "#f3f3f3",
+                height: "4rem",
+                fontSize: "3vw",
+                fontFamily: "inherit",
+                color: "#0e1111",
+                position: "absolute",
+                right: "0.5rem",
+              }}
+              onClick={demoHandler}
+            >
+              Demo
+            </Button>
             <form onSubmit={formHandler}>
               <Grid
                 container

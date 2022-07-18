@@ -160,11 +160,14 @@ const Auth = () => {
     }
   };
 
-  // const theme = createTheme({
-  //   palette: {
-  //     primary: grey,
-  //   },
-  // });
+  const demoHandler = () => {
+    setEnteredName("Popescu");
+    setEnteredSurname("Ion");
+    setEnteredBirthday("2000-07-07");
+    setEnteredAddress("Calea Potcoavei nr. 3");
+    setEnteredEmail("popescu@gmail.com");
+    setEnteredPassword("parola123");
+  };
 
   return (
     <React.Fragment>
@@ -202,6 +205,25 @@ const Auth = () => {
             }}
           >
             <CardContent>
+              {!isLoginMode && (
+                <Button
+                  type='button'
+                  variant='contained'
+                  color='primary'
+                  style={{
+                    backgroundColor: "#f3f3f3",
+                    height: "4rem",
+                    fontSize: "3vw",
+                    fontFamily: "inherit",
+                    color: "#0e1111",
+                    position: "absolute",
+                    right: "0.5rem",
+                  }}
+                  onClick={demoHandler}
+                >
+                  Demo
+                </Button>
+              )}
               <form onSubmit={authSubmitHandler}>
                 <Grid
                   container
@@ -286,6 +308,7 @@ const Auth = () => {
                         fullWidth
                         required
                         onChange={nameChangeHandler}
+                        value={enteredName}
                       />
                     </Grid>
                   )}
@@ -300,6 +323,7 @@ const Auth = () => {
                         fullWidth
                         required
                         onChange={surnameChangeHandler}
+                        value={enteredSurname}
                       />
                     </Grid>
                   )}
@@ -314,6 +338,7 @@ const Auth = () => {
                         }}
                         fullWidth
                         onChange={birthdayChangeHandler}
+                        value={enteredBirthday}
                       />
                     </Grid>
                   )}
@@ -326,6 +351,7 @@ const Auth = () => {
                         fullWidth
                         required
                         onChange={addressChangeHandler}
+                        value={enteredAddress}
                       />
                     </Grid>
                   )}
@@ -339,6 +365,7 @@ const Auth = () => {
                       fullWidth
                       required
                       onChange={emailChangeHandler}
+                      value={enteredEmail}
                     />
                   </Grid>
                   <Grid xs={12} sm={6} item>
@@ -351,6 +378,7 @@ const Auth = () => {
                       fullWidth
                       required
                       onChange={passwordChangeHandler}
+                      value={enteredPassword}
                     />
                   </Grid>
                   <Grid item xs={4}>
