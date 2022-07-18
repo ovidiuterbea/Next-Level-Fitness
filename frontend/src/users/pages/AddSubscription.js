@@ -78,6 +78,19 @@ const AddSubscription = (props) => {
                   }
                 );
                 userAuth.updateSubscription(selectedSubscription.toLowerCase());
+                const storedDataClient = JSON.parse(
+                  localStorage.getItem("clientData")
+                );
+                localStorage.setItem(
+                  "clientData",
+                  JSON.stringify({
+                    clientId: storedDataClient.clientId,
+                    subscription: selectedSubscription.toLowerCase(),
+                    name: storedDataClient.name,
+                    surname: storedDataClient.surname,
+                    expiration: storedDataClient.expiration,
+                  })
+                );
                 handleClick();
               } catch (err) {}
             }}
