@@ -130,7 +130,7 @@ const NavLinks = (props) => {
               window.scrollTo(0, 0);
             }}
           >
-            Clase de fitness
+            Fitness classes
           </NavLink>
         </li>
       )}
@@ -197,7 +197,7 @@ const NavLinks = (props) => {
                 window.scrollTo(0, 0);
               }}
             >
-              Tarife
+              Pricing
             </NavLink>
           </li>
         )}
@@ -231,7 +231,7 @@ const NavLinks = (props) => {
               }}
               exact
             >
-              Activitati
+              Activities
             </NavLink>
           </li>
         )}
@@ -263,7 +263,7 @@ const NavLinks = (props) => {
               }}
               exact
             >
-              Contul tau
+              Sign in
             </NavLink>
           </li>
         )}

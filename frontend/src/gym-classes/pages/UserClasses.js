@@ -83,11 +83,8 @@ const UserClasses = (props) => {
     <AppointmentTooltip.Header {...restProps} appointmentData={appointmentData}>
       <IconButton
         onClick={async () => {
-          console.log(appointmentData.startDate.toISOString());
           const today = new Date();
           const classDate = new Date(appointmentData.startDate.toISOString());
-          console.log(today);
-          console.log(classDate);
           if (today.getTime() > classDate.getTime()) {
             setMesaj("Nu va puteti alatura, clasa este in trecut!");
             setSeverity("error");
