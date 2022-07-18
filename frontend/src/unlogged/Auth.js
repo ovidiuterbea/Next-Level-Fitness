@@ -156,6 +156,10 @@ const Auth = () => {
         enteredPassword === "admin123"
       ) {
         adminAuth.login();
+      } else {
+        setMesaj("Credentiale invalide ca administrator.");
+        setSeverity("error");
+        handleClick();
       }
     }
   };
