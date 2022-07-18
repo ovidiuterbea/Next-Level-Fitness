@@ -142,13 +142,13 @@ const deleteHiringRequest = async (req, res, next) => {
   var transporter = nodeMailer.createTransport({
     service: "gmail",
     auth: {
-      user: "nextlevelfitness9000@gmail.com",
-      pass: "nextlevel",
+      user: "licentaovidiu@gmail.com",
+      pass: "nhlpivlxncgmtfpu",
     },
   });
 
   var mailOptions = {
-    from: "nextlevelfitness9000@gmail.com",
+    from: "licentaovidiu@gmail.com",
     to: hiringRequest.email,
     subject: "Detalii cerere angajare",
     text: `Din pacate profilul tau nu ne-a surprins. Iti uram succes in cariera ta fiindca arati mult potential!`,
