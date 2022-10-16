@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { useHttpClient } from "../../shared/hooks/http-hook";
 import MuiAlert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
+import { useParams } from "react-router-dom";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant='filled' {...props} />;
@@ -17,6 +18,7 @@ const Subscription = (props) => {
   const [open, setOpen] = React.useState(false);
   const [mesaj, setMesaj] = useState("");
   const [severity, setSeverity] = useState("success");
+  const clientId = useParams().clientid;
 
   const handleClick = () => {
     setOpen(true);
@@ -35,7 +37,7 @@ const Subscription = (props) => {
   const deleteSubscription = async () => {
     try {
       await sendRequest(
-        `http://localhost:8080/api/clients//subscriptiondel/${userAuth.userId}`,
+        `http://localhost:8000/api/clients//subscriptiondel/${userAuth.userId}`,
         "PATCH",
         null,
         {
@@ -162,6 +164,10 @@ const Subscription = (props) => {
           </Alert>
         </Snackbar>
         <div className='subscription-detail'>
+          <img
+            src={`http://localhost:8000/subscriptionsQR/${clientId}.png`}
+            alt='QR Code'
+          ></img>
           <h1>Beneficiile tale | Abonament Gold</h1>
           <h2>Aveti access in sala de forta si la sauna</h2>
           <h2>Aveti access la piscina</h2>

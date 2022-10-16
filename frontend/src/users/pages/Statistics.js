@@ -4,9 +4,6 @@ import PieChart from "../../graphs/PieChart";
 import DoughnutChart from "../../graphs/DoughnutChart";
 
 const Statistics = (props) => {
-  const [loadedTrainersFetch, setLoadedTrainersFetch] = useState();
-  const [loadedClassesFetch, setLoadedClassesFetch] = useState();
-  const [loadedClientsFetch, setLoadedClientsFetch] = useState();
   const [statisticsType, setStatisticsType] = useState("user");
   const [chartType, setChartType] = useState("pie");
   const [numberOfBronzeSubs, setNumberOfBronzeSubs] = useState(0);
@@ -19,19 +16,10 @@ const Statistics = (props) => {
   const [numberOfHardClasses, setNumberOfHardClasses] = useState(0);
 
   useEffect(() => {
-    const fetchTrainers = async () => {
-      try {
-        const response = await fetch(`http://localhost:8080/api/trainers/`);
-        const data = await response.json();
-        setLoadedTrainersFetch(data.trainers);
-      } catch (err) {}
-    };
-    fetchTrainers();
     const fetchClasses = async () => {
       try {
-        const response = await fetch(`http://localhost:8080/api/classes/`);
+        const response = await fetch(`http://localhost:8000/api/classes/`);
         const data = await response.json();
-        setLoadedClassesFetch(data.classes);
         for (let gymClass of data.classes) {
           if (gymClass.difficultyLevel === "Easy") {
             setNumberOfEasyClasses((n) => n + 1);
@@ -48,9 +36,8 @@ const Statistics = (props) => {
     fetchClasses();
     const fetchClients = async () => {
       try {
-        const response = await fetch(`http://localhost:8080/api/clients/`);
+        const response = await fetch(`http://localhost:8000/api/clients/`);
         const data = await response.json();
-        setLoadedClientsFetch(data.clients);
         for (let client of data.clients) {
           if (client.subscription === "bronze") {
             setNumberOfBronzeSubs((n) => n + 1);

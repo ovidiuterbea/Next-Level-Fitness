@@ -6,7 +6,7 @@ const AddPersonalTrainer = () => {
   useEffect(() => {
     const fetchTrainers = async () => {
       try {
-        const response = await fetch(`http://localhost:8080/api/trainers/`);
+        const response = await fetch(`http://localhost:8000/api/trainers/`);
         const data = await response.json();
         setLoadedTrainersFetch(data.trainers);
       } catch (err) {}

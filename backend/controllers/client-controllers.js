@@ -1,5 +1,6 @@
 const { validationResult } = require("express-validator");
 const mongoose = require("mongoose");
+const qr = require("qrcode");
 
 const HttpError = require("../models/http-error");
 const Client = require("../models/client");
@@ -226,6 +227,17 @@ const createSubscription = async (req, res, next) => {
   let client;
   try {
     client = await Client.findById(clientId);
+    const qrData = {
+      name: client.name,
+      surname: client.surname,
+      image: client.image,
+      email: client.email,
+      subscription: subscription,
+    };
+    const qrJSON = JSON.stringify(qrData);
+    qr.toFile(`./subscriptionsQR/${client.id}.png`, qrJSON, (err) => {
+      if (err) return console.log(err);
+    });
   } catch (err) {
     const error = new HttpError(
       "Something went wrong, could not create subscription",

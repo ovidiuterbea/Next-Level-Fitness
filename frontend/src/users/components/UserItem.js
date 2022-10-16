@@ -18,7 +18,7 @@ const UserItem = (props) => {
   const deletePaymentHandler = async () => {
     try {
       await sendRequest(
-        `http://localhost:8080/api/clients/${props.id}/payment`,
+        `http://localhost:8000/api/clients/${props.id}/payment`,
         "PATCH",
         null,
         {

@@ -194,7 +194,7 @@ const TrainerClasses = () => {
     const fetchClasses = async () => {
       try {
         const response = await fetch(
-          `http://localhost:8080/api/classes/trainer/${trainerAuth.trainerId}`
+          `http://localhost:8000/api/classes/trainer/${trainerAuth.trainerId}`
         );
         const data = await response.json();
         setLoadedClassesFetch(data.classes);

@@ -41,12 +41,12 @@ const HiringForm = () => {
   const [mesaj, setMesaj] = useState("");
   const [severity, setSeverity] = useState("success");
   const history = useHistory();
-  const { sendRequest, error } = useHttpClient();
+  const { sendRequest } = useHttpClient();
 
   useEffect(() => {
     const fetchTrainers = async () => {
       try {
-        const response = await fetch(`http://localhost:8080/api/trainers/`);
+        const response = await fetch(`http://localhost:8000/api/trainers/`);
         const data = await response.json();
         setLoadedTrainersFetch(data);
       } catch (err) {}
@@ -139,7 +139,7 @@ const HiringForm = () => {
 
     try {
       await sendRequest(
-        "http://localhost:8080/api/classes/",
+        "http://localhost:8000/api/classes/",
         "POST",
         JSON.stringify({
           title: enteredName,

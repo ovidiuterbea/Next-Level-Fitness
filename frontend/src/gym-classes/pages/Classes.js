@@ -20,7 +20,7 @@ const Classes = (props) => {
 
   useEffect(() => {
     const getClasses = async () => {
-      const response = await fetch(`http://localhost:8080/api/classes/`);
+      const response = await fetch(`http://localhost:8000/api/classes/`);
       const data = await response.json();
       for (const gymClass of data.classes) {
         gymClass.startDate = new Date(gymClass.startDate);
@@ -34,7 +34,7 @@ const Classes = (props) => {
   useEffect(() => {
     const fetchTrainers = async () => {
       try {
-        const response = await fetch(`http://localhost:8080/api/trainers/`);
+        const response = await fetch(`http://localhost:8000/api/trainers/`);
         const data = await response.json();
         setLoadedTrainersFetch(data);
       } catch (err) {}
@@ -47,7 +47,7 @@ const Classes = (props) => {
       {...restProps}
       appointmentData={appointmentData}
       onDeleteButtonClick={async () => {
-        await fetch(`http://localhost:8080/api/classes/${appointmentData.id}`, {
+        await fetch(`http://localhost:8000/api/classes/${appointmentData.id}`, {
           method: "DELETE",
         });
         setLoadedClassesFetch(

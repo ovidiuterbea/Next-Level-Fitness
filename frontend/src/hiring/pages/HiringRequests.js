@@ -7,7 +7,7 @@ const HiringRequests = (props) => {
   const [loadedHiringRequestsFetch, setLoadedHiringRequestsFetch] = useState();
 
   const getHiringRequests = async () => {
-    const response = await fetch(`http://localhost:8080/api/hiring/`);
+    const response = await fetch(`http://localhost:8000/api/hiring/`);
     const data = await response.json();
     setLoadedHiringRequestsFetch(data);
   };

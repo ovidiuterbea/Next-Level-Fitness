@@ -15,6 +15,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/uploads", express.static("uploads"));
+app.use("/subscriptionsQR", express.static("subscriptionsQR"));
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -57,7 +58,7 @@ mongoose
     "mongodb+srv://ovidiuterb:licenta@licenta.eqdsd.mongodb.net/?retryWrites=true&w=majority"
   )
   .then(() => {
-    app.listen(8080);
+    app.listen(8000);
     console.log("Connected to the gym database.");
   })
   .catch((err) => {

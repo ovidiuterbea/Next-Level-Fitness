@@ -92,7 +92,7 @@ const Auth = () => {
     if (loginType === "user" && isLoginMode === true) {
       try {
         const responseData = await sendRequest(
-          `http://localhost:8080/api/clients/login`,
+          `http://localhost:8000/api/clients/login`,
           "POST",
           JSON.stringify({ email: enteredEmail, password: enteredPassword }),
           { "Content-Type": "application/json" }
@@ -113,7 +113,7 @@ const Auth = () => {
       }
     }
     if (loginType === "user" && isLoginMode === false) {
-      await fetch(`http://localhost:8080/api/clients/signup`, {
+      await fetch(`http://localhost:8000/api/clients/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -136,7 +136,7 @@ const Auth = () => {
     if (loginType === "trainer") {
       try {
         const responseData = await sendRequest(
-          `http://localhost:8080/api/trainers/login`,
+          `http://localhost:8000/api/trainers/login`,
           "POST",
           JSON.stringify({ email: enteredEmail, password: enteredPassword }),
           { "Content-Type": "application/json" }

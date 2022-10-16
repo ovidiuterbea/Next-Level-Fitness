@@ -12,7 +12,7 @@ const PaymentConfirmation = (props) => {
   useEffect(() => {
     const getClient = async () => {
       const response = await fetch(
-        `http://localhost:8080/api/clients/${clientId}`
+        `http://localhost:8000/api/clients/${clientId}`
       );
       const data = await response.json();
       setLoadedClientFetch(data.client);

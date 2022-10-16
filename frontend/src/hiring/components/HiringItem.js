@@ -20,7 +20,7 @@ const HiringItem = (props) => {
         </h1>
         <Avatar
           alt='Potential trainer photo'
-          src={`http://localhost:8080/${props.image}`}
+          src={`http://localhost:8000/${props.image}`}
           sx={{ height: 50, width: 50 }}
         />
       </div>

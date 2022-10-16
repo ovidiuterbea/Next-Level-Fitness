@@ -198,7 +198,7 @@ const UserClassesDetails = () => {
     const fetchClasses = async () => {
       try {
         const response = await fetch(
-          `http://localhost:8080/api/classes/client/${userAuth.userId}`
+          `http://localhost:8000/api/classes/client/${userAuth.userId}`
         );
         const data = await response.json();
         setLoadedClassesFetch(data.classes);

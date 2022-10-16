@@ -22,7 +22,7 @@ const TrainerItem = (props) => {
   const alocatePersonalTrainer = async () => {
     try {
       await sendRequest(
-        `http://localhost:8080/api/clients/${clientId}/trainer/${props.id}`,
+        `http://localhost:8000/api/clients/${clientId}/trainer/${props.id}`,
         "PATCH",
         null,
         {

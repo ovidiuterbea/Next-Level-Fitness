@@ -6,7 +6,7 @@ const UsersPayment = (props) => {
   const [loadedClientsFetch, setLoadedClientsFetch] = useState();
 
   const getClients = async () => {
-    const response = await fetch(`http://localhost:8080/api/clients/`);
+    const response = await fetch(`http://localhost:8000/api/clients/`);
     const data = await response.json();
     setLoadedClientsFetch(data);
   };

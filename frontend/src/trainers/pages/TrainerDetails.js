@@ -36,7 +36,7 @@ const TrainerDetails = (props) => {
   useEffect(() => {
     const getTrainer = async () => {
       const response = await fetch(
-        `http://localhost:8080/api/trainers/${trainerId}`
+        `http://localhost:8000/api/trainers/${trainerId}`
       );
       const data = await response.json();
       setLoadedTrainerFetch(data.trainer);
@@ -47,7 +47,7 @@ const TrainerDetails = (props) => {
   const deletePersonalTrainer = async () => {
     try {
       await sendRequest(
-        `http://localhost:8080/api/clients/${clientId}/trainerDel/${trainerId}`,
+        `http://localhost:8000/api/clients/${clientId}/trainerDel/${trainerId}`,
         "PATCH",
         null,
         {
@@ -76,7 +76,7 @@ const TrainerDetails = (props) => {
           <img
             alt='Canditate'
             className='image-center'
-            src={`http://localhost:8080/${loadedTrainerFetch.image}`}
+            src={`http://localhost:8000/${loadedTrainerFetch.image}`}
           ></img>
           <h2>
             Antrenorul tau este {loadedTrainerFetch.name}{" "}

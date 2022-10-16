@@ -38,7 +38,7 @@ const HiringRequestDetails = (props) => {
   useEffect(() => {
     const getHiringRequest = async () => {
       const response = await fetch(
-        `http://localhost:8080/api/hiring/${hiringRequestId}`
+        `http://localhost:8000/api/hiring/${hiringRequestId}`
       );
       const data = await response.json();
       setLoadedHiringRequestFetch(data);
@@ -58,14 +58,14 @@ const HiringRequestDetails = (props) => {
   }, [loadedHiringRequestFetch]);
 
   const deleteHiringRequest = async () => {
-    await fetch(`http://localhost:8080/api/hiring/${hiringRequestId}`, {
+    await fetch(`http://localhost:8000/api/hiring/${hiringRequestId}`, {
       method: "DELETE",
     });
     history.push("/hiringrequests");
   };
 
   const deleteHiringRequestWithoutRedirect = async () => {
-    await fetch(`http://localhost:8080/api/hiring/${hiringRequestId}`, {
+    await fetch(`http://localhost:8000/api/hiring/${hiringRequestId}`, {
       method: "DELETE",
     });
     setOpen(false);
@@ -75,7 +75,7 @@ const HiringRequestDetails = (props) => {
   const createTrainerHandler = async () => {
     const password = generatePassword();
     setGeneratedPassword(password);
-    await fetch(`http://localhost:8080/api/trainers/create`, {
+    await fetch(`http://localhost:8000/api/trainers/create`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -160,7 +160,7 @@ const HiringRequestDetails = (props) => {
               <img
                 alt='Canditate'
                 className='image-center-hiring'
-                src={`http://localhost:8080/${loadedHiringRequestFetch.hiringRequest.image}`}
+                src={`http://localhost:8000/${loadedHiringRequestFetch.hiringRequest.image}`}
                 loading='lazy'
               ></img>
             </div>

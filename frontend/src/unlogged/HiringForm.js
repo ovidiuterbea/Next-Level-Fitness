@@ -133,7 +133,7 @@ const HiringForm = () => {
     }
 
     try {
-      await sendRequest("http://localhost:8080/api/hiring/", "POST", data);
+      await sendRequest("http://localhost:8000/api/hiring/", "POST", data);
       setEnteredName("");
       setEnteredSurname("");
       setEnteredAddress("");

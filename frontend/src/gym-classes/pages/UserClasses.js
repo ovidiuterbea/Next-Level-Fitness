@@ -57,7 +57,7 @@ const UserClasses = (props) => {
 
   useEffect(() => {
     const getClasses = async () => {
-      const response = await fetch(`http://localhost:8080/api/classes/`);
+      const response = await fetch(`http://localhost:8000/api/classes/`);
       const data = await response.json();
       for (const gymClass of data.classes) {
         gymClass.startDate = new Date(gymClass.startDate);
@@ -71,7 +71,7 @@ const UserClasses = (props) => {
   useEffect(() => {
     const fetchTrainers = async () => {
       try {
-        const response = await fetch(`http://localhost:8080/api/trainers/`);
+        const response = await fetch(`http://localhost:8000/api/trainers/`);
         const data = await response.json();
         setLoadedTrainersFetch(data);
       } catch (err) {}
@@ -93,7 +93,7 @@ const UserClasses = (props) => {
           }
           try {
             await sendRequest(
-              `http://localhost:8080/api/clients/${userAuth.userId}/class`,
+              `http://localhost:8000/api/clients/${userAuth.userId}/class`,
               "PATCH",
               JSON.stringify({
                 classId: appointmentData.id,
@@ -118,7 +118,7 @@ const UserClasses = (props) => {
         onClick={async () => {
           try {
             await sendRequest(
-              `http://localhost:8080/api/clients/${userAuth.userId}/classDel`,
+              `http://localhost:8000/api/clients/${userAuth.userId}/classDel`,
               "PATCH",
               JSON.stringify({
                 classId: appointmentData.id,

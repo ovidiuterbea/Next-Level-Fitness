@@ -68,7 +68,7 @@ const AddSubscription = (props) => {
               event.preventDefault();
               try {
                 await sendRequest(
-                  `http://localhost:8080/api/clients/subscription/${clientId}`,
+                  `http://localhost:8000/api/clients/subscription/${clientId}`,
                   "PATCH",
                   JSON.stringify({
                     subscription: selectedSubscription.toLowerCase(),
