@@ -93,6 +93,10 @@ const Subscription = (props) => {
           </Alert>
         </Snackbar>
         <div className='subscription-detail'>
+          <img
+            src={`http://localhost:8000/subscriptionsQR/${clientId}.png`}
+            alt='QR Code'
+          ></img>
           <h1>Beneficiile tale | Abonament Bronze</h1>
           <h2>Aveti access in sala de forta si la sauna</h2>
         </div>
@@ -128,6 +132,10 @@ const Subscription = (props) => {
           </Alert>
         </Snackbar>
         <div className='subscription-detail'>
+          <img
+            src={`http://localhost:8000/subscriptionsQR/${clientId}.png`}
+            alt='QR Code'
+          ></img>
           <h1>Beneficiile tale | Abonament Silver</h1>
           <h2>Aveti access in sala de forta si la sauna</h2>
           <h2>Aveti access la piscina</h2>
@@ -219,6 +227,10 @@ const Subscription = (props) => {
           </Alert>
         </Snackbar>
         <div className='subscription-detail'>
+          <img
+            src={`http://localhost:8000/subscriptionsQR/${clientId}.png`}
+            alt='QR Code'
+          ></img>
           <h1>Beneficiile tale | Abonament Platinum</h1>
           <h2>Aveti access in sala de forta si la sauna</h2>
           <h2>Aveti access la piscina</h2>
