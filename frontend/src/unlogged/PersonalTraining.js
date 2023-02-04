@@ -1,5 +1,7 @@
 import React from "react";
 
+import trainerphoto from "../media/trainerphoto.jpeg";
+
 const PersonalTraining = () => {
   return (
     <React.Fragment>
@@ -19,11 +21,7 @@ const PersonalTraining = () => {
           </p>
         </div>
         <div className='container-secundar2'>
-          <img
-            src='trainer-bazat.jpeg'
-            alt='Trainer bazat'
-            loading='lazy'
-          ></img>
+          <img src={trainerphoto} alt='Trainer bazat' loading='lazy'></img>
         </div>
       </div>
       <div className='container-principal__black'>
