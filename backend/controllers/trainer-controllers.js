@@ -86,8 +86,8 @@ const createTrainer = async (req, res, next) => {
   var transporter = nodeMailer.createTransport({
     service: "gmail",
     auth: {
-      user: "nextlevelfitness9000@gmail.com",
-      pass: "nextlevel",
+      user: "licentaovidiu@gmail.com",
+      pass: "nhlpivlxncgmtfpu",
     },
   });
 

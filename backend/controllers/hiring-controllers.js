@@ -139,28 +139,42 @@ const deleteHiringRequest = async (req, res, next) => {
     return next(error);
   }
 
-  var transporter = nodeMailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: "licentaovidiu@gmail.com",
-      pass: "nhlpivlxncgmtfpu",
-    },
-  });
+  let existingTrainer;
 
-  var mailOptions = {
-    from: "licentaovidiu@gmail.com",
-    to: hiringRequest.email,
-    subject: "Detalii cerere angajare",
-    text: `Din pacate profilul tau nu ne-a surprins. Iti uram succes in cariera ta fiindca arati mult potential!`,
-  };
+  try {
+    existingTrainer = await Trainer.findOne({ email: hiringRequest.email });
+  } catch (err) {
+    const error = new HttpError(
+      "Logging in failed, please try again later.",
+      500
+    );
+    return next(error);
+  }
 
-  transporter.sendMail(mailOptions, function (error, info) {
-    if (error) {
-      console.log(error);
-    } else {
-      console.log("Email sent: " + info.response);
-    }
-  });
+  if (!existingTrainer) {
+    var transporter = nodeMailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: "licentaovidiu@gmail.com",
+        pass: "nhlpivlxncgmtfpu",
+      },
+    });
+
+    var mailOptions = {
+      from: "licentaovidiu@gmail.com",
+      to: hiringRequest.email,
+      subject: "Detalii cerere angajare",
+      text: `Din pacate profilul tau nu ne-a surprins. Iti uram succes in cariera ta fiindca arati mult potential!`,
+    };
+
+    transporter.sendMail(mailOptions, function (error, info) {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log("Email sent: " + info.response);
+      }
+    });
+  }
 
   res.status(200).json({ message: "Deleted the hiring request." });
 };
